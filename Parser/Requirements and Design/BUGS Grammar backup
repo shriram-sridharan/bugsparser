@@ -1,0 +1,252 @@
+grammar BUGS ;
+tokens {
+	MODEL = 'model';
+	LOGOPENBRACKET = 'log(';
+	LOGITOPENBRACKET = 'logit(';
+	CLOGLOGOPENBRACKET = 'cloglog(';
+	PROBITOPENBRACKET = 'probit(';
+	ABSOPENBRACKET = 'abs(';
+	INVERSEOPENBRACKET = 'inverse('
+
+	BERNOULLIOPENBRACKET = 'dbern('
+	BETAOPENBRACKET = 'dbeta('
+	MUTLTINOMIALOPENBRACKET = 'dmulti('
+	DIRICHLETOPENBRACKET = 	'ddirich('
+
+	FORSTART = 'for';
+	IN = 'in';
+
+	OPENBRACE = '{';
+	CLOSEBRACE = '}';
+	TILDE = '~';
+	CENSORBEGIN = 'C(';
+	TRUNCATIONBEGIN = 'T(';
+	OPENBRACKET = '(';
+	CLOSEBRACKET = ')';
+	COMMA =  ',';
+	OPENSQUAREBRACE = '[';
+	CLOSESQUAREBRACKET = ']';
+	LEFTPOINTER = '<-';
+	PLUS = '+';
+	MINUS = '-';
+	MULT = '*';
+	DIV = '/';
+	COLON = ':';	
+}
+
+@members {
+    public static void main(String[] args) throws Exception {
+        BUGSLexer lex = new BUGSLexer(new ANTLRFileStream("a"));
+        CommonTokenStream tokens = new CommonTokenStream(lex);
+ 
+        BUGSParser parser = new BUGSParser(tokens);
+ 
+        try {
+            parser.prog();
+        } catch (RecognitionException e)  {
+            e.printStackTrace();
+        }
+    }
+}
+/* Parser Rules*/
+prog : MODEL OPENBRACE statements CLOSEBRACE;
+statements : (stochasticNodeExpr? (startFor statements endFor)? logicalNodeExpr?)+;
+
+stochasticNodeExpr 
+	:uvStochasticNodeExpr 
+	| uvStochasticNodeExpr censor 
+	| uvStochasticNodeExpr truncation 
+	| mvStochasticNodeExpr
+	;
+
+uvStochasticNodeExpr
+	:uvNode TILDE uvDistribution
+	;
+mvStochasticNodeExpr 
+	:mvNode TILDE mvDistribution
+	;
+	
+censor
+	 : CENSORBEGIN lowerWithOptionalUpper CLOSEBRACKET 
+	 | CENSORBEGIN upperWithOptionalLower CLOSEBRACKET
+	 ;
+truncation 
+	: TRUNCATIONBEGIN lowerWithOptionalUpper CLOSEBRACKET 
+	| TRUNCATIONBEGIN upperWithOptionalLower CLOSEBRACKET
+	;
+	
+lowerWithOptionalUpper 
+	:  (uvNode|CONSTANTVALUE) COMMA (uvNode|CONSTANTVALUE)?
+	;
+	
+upperWithOptionalLower 
+	:  (uvNode|CONSTANTVALUE)? COMMA (uvNode|CONSTANTVALUE)
+	;
+
+logicalNodeExpr 
+	: uvNode LEFTPOINTER exprWithNodesFunctions
+	| linkFunction LEFTPOINTER exprWithNodesFunctions
+	| mvNode LEFTPOINTER exprWithVectorFunctions
+	;
+
+linkFunction 
+	: LOGOPENBRACKET uvNode CLOSEBRACE 
+	| LOGITOPENBRACKET uvNode CLOSEBRACE
+	| CLOGLOGOPENBRACKET uvNode CLOSEBRACE
+	| PROBITOPENBRACKET uvNode CLOSEBRACE
+	;
+
+exprWithNodesFunctions 
+	: exprWithNodesFunctions 
+	| expression 
+	| scalarFunctions 
+	| vectorFunctions
+	;
+
+exprWithVectorFunctions 
+	: exprWithVectorFunctions 
+	| expression 
+	| vectorFunctions
+	;
+
+uvNode 
+	: NODENAME | nodeSingleIndexedArray
+	;
+mvNode 
+	: nodeMultiIndexedArray
+	;
+
+nodeSingleIndexedArray 
+	: NODENAME OPENSQUAREBRACE indices CLOSESQUAREBRACKET
+	;
+indices 
+	: indexExpression (COMMA indexExpression)* 
+	;
+	
+indexExpression 
+	: NODENAME 
+	| CONSTANTINT 
+	| nodeSingleIndexedArray 
+	| expression
+	;
+
+expression 
+	: OPENBRACE expression PLUS expression CLOSEBRACE 
+	| OPENBRACE expression MINUS expression CLOSEBRACE 
+	| OPENBRACE expression MULT expression CLOSEBRACE 
+	| OPENBRACE expression DIV expression CLOSEBRACE
+	| expression PLUS expression 
+	| expression MINUS expression 
+	| expression MULT expression 
+	| expression DIV expression
+	| uvNode | CONSTANTINT
+	;
+
+nodeMultiIndexedArray 
+	: NODENAME OPENSQUAREBRACE multiIndices CLOSESQUAREBRACKET
+	;
+
+multiIndices 
+	: (indices COMMA)? multiDimIndex (COMMA indices)? 
+	;
+
+multiDimIndex 
+	: OPENBRACKET? uvNode COLON uvNode CLOSEBRACKET?
+	;
+
+array 
+	: NODENAME CLOSESQUAREBRACKET dimensions CLOSESQUAREBRACKET
+	;
+
+dimensions 
+	: ((indices COMMA)? multiDimIndex? (COMMA indices)?)+  
+	| array
+	;
+
+startFor 
+	: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE 
+	;
+
+endFor 
+	: CLOSEBRACE
+	;
+
+loopVariable 
+	: NODENAME
+	;
+
+loopBegin 
+	: uvNode 
+	| CONSTANTINT
+	;
+
+loopEnd 
+	: uvNode 
+	| CONSTANTINT
+	;
+
+CONSTANTINT
+	: ('0'..'9')+
+	;
+	
+NODENAME 
+	: ('a'..'z'| 'A'..'Z'| '0'..'9'| '.')+
+	;
+
+CONSTANTVALUE 
+	: ('+'|'-')?('0'..'9')+('.'('0'..'9')+)?('E'('+'|'-')?('0'..'9')+)? 	
+	;
+
+WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+    { $channel = HIDDEN; } ;
+
+scalarFunctions 
+	: ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET
+	;
+
+vectorFunctions 
+	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
+	;
+	
+uvDistribution 
+	: discreteUnivariate 
+	| continuousUnivariate
+	;
+
+mvDistribution 
+	: discreteMultivariate 
+	| continuousMultivariate
+	;
+
+discreteUnivariate 
+	: bernoulli 
+	;
+
+continuousUnivariate 
+	: beta 
+	;
+
+discreteMultivariate 
+	: multinomial
+	;
+
+continuousMultivariate 
+	: dirichlet
+	;
+
+bernoulli 
+	: BERNOULLIOPENBRACKET uvNode CLOSEBRACKET
+	;
+
+beta 
+	: BETAOPENBRACKET uvNode COMMA uvNode CLOSEBRACKET
+	;
+
+multinomial 
+	: MUTLTINOMIALOPENBRACKET uvNode OPENSQUAREBRACE CLOSESQUAREBRACKET COMMA uvNode CLOSEBRACKET
+	;
+
+dirichlet 
+	: DIRICHLETOPENBRACKET uvNode OPENSQUAREBRACE CLOSESQUAREBRACKET COMMA
+	;
+
+

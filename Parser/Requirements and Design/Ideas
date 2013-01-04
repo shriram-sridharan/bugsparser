@@ -1,0 +1,20 @@
+Done (but with doubts):
+Logical Nodes: mvnode on left side -> Matching everything on the right hand side
+Matching ; as WHITESPACE
+
+To Do:
+Remove + from model beginning
+(uvNode | CONSTANTVALUE) for all distribution
+Take a look at the functions too once again
+Take a look at the grammar once again thoroughly
+Test Driven Development ??
+
+
+multiIndices 
+	:  (expression (COMMA expression)* COMMA)? multiDimIndex (COMMA expression (COMMA expression)*)?
+	;
+
+multiDimIndex 
+	:  (OPENBRACKET expression COLON) => OPENBRACKET expression COLON expression CLOSEBRACKET
+	| expression COLON expression
+	;

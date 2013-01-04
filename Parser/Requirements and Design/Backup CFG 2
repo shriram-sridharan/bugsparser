@@ -1,0 +1,222 @@
+grammar BUGS ;
+
+tokens {
+	MODEL = 'model';
+	LOGOPENBRACKET = 'log(';
+	LOGITOPENBRACKET = 'logit(';
+	CLOGLOGOPENBRACKET = 'cloglog(';
+	PROBITOPENBRACKET = 'probit(';
+	ABSOPENBRACKET = 'abs(';
+	INVERSEOPENBRACKET = 'inverse(';
+
+	BERNOULLIOPENBRACKET = 'dbern(';
+	BETAOPENBRACKET = 'dbeta(';
+	MUTLTINOMIALOPENBRACKET = 'dmulti(';
+	DIRICHLETOPENBRACKET = 'ddirich(';
+
+	FORSTART = 'for';
+	IN = 'in';
+
+	OPENBRACE = '{';
+	CLOSEBRACE = '}';
+	TILDE = '~';
+	CENSORBEGIN = 'C(';
+	TRUNCATIONBEGIN = 'T(';
+	OPENBRACKET = '(';
+	CLOSEBRACKET = ')';
+	COMMA =  ',';
+	OPENSQUAREBRACKET = '[';
+	CLOSESQUAREBRACKET = ']';
+	LEFTPOINTER = '<-';
+	PLUS = '+';
+	MINUS = '-';
+	MULT = '*';
+	DIV = '/';
+	COLON = ':';	
+}
+
+@members {
+    public static void main(String[] args) throws Exception {
+        BUGSLexer lex = new BUGSLexer(new ANTLRFileStream("a"));
+        CommonTokenStream tokens = new CommonTokenStream(lex);
+ 
+        BUGSParser parser = new BUGSParser(tokens);
+ 
+        try {
+            parser.prog();
+        } catch (RecognitionException e)  {
+            e.printStackTrace();
+        }
+    }
+}
+/* Parser Rules*/
+prog : MODEL OPENBRACE statements CLOSEBRACE;
+
+statements :  (startFor statements endFor)
+	| (stochasticNodeExpr | logicalNodeExpr) statements*
+	;
+
+stochasticNodeExpr 
+	: (NODENAME OPENSQUAREBRACKET multiIndices) => mvStochasticNodeExpr 
+	| uvStochasticNodeExpr (censor | truncation)?
+	;
+
+uvStochasticNodeExpr
+	:uvNode TILDE uvDistribution
+	;
+mvStochasticNodeExpr 
+	:mvNode TILDE mvDistribution
+	;
+	
+censor
+	 : CENSORBEGIN (lowerWithOptionalUpper CLOSEBRACKET  | upperWithOptionalLower CLOSEBRACKET)
+	 ;
+truncation 
+	: TRUNCATIONBEGIN (lowerWithOptionalUpper CLOSEBRACKET | upperWithOptionalLower CLOSEBRACKET)
+	;
+	
+lowerWithOptionalUpper 
+	:  (uvNode|CONSTANTVALUE) COMMA (uvNode|CONSTANTVALUE)?
+	;
+	
+upperWithOptionalLower 
+	:  (uvNode|CONSTANTVALUE)? COMMA (uvNode|CONSTANTVALUE)
+	;
+
+logicalNodeExpr 
+	:  (NODENAME OPENSQUAREBRACKET multiIndices) => mvNode LEFTPOINTER exprWithVectorFunctions
+	| (uvNode | linkFunction) LEFTPOINTER exprWithNodesFunctions
+	;
+
+linkFunction 
+	: LOGOPENBRACKET uvNode CLOSEBRACE 
+	| LOGITOPENBRACKET uvNode CLOSEBRACE
+	| CLOGLOGOPENBRACKET uvNode CLOSEBRACE
+	| PROBITOPENBRACKET uvNode CLOSEBRACE
+	;
+
+exprWithNodesFunctions 
+	: (expression | scalarFunctions | vectorFunctions)
+	;
+
+exprWithVectorFunctions 
+	: (expression | vectorFunctions)
+	;
+
+uvNode 
+	: (NODENAME OPENSQUAREBRACKET) => nodeSingleIndexedArray
+	| NODENAME 
+	;
+mvNode 
+	: nodeMultiIndexedArray
+	;
+
+nodeSingleIndexedArray 
+	: NODENAME OPENSQUAREBRACKET indices CLOSESQUAREBRACKET
+	;
+indices 
+	: expression (COMMA expression)* 
+	;
+
+expression 
+	: (CONSTANTINT |  uvNode | OPENBRACKET expression (PLUS|MINUS|MULT|DIV) expression CLOSEBRACKET) 
+	((PLUS|MINUS|MULT|DIV) expression)*
+	;
+	
+nodeMultiIndexedArray 
+	: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
+	;
+
+multiIndices 
+	: (indices COMMA)? multiDimIndex (COMMA indices)? 
+	;
+
+multiDimIndex 
+	: OPENBRACKET? uvNode COLON uvNode CLOSEBRACKET?
+	;
+
+startFor 
+	: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE 
+	;
+
+endFor 
+	: CLOSEBRACE
+	;
+
+loopVariable 
+	: NODENAME
+	;
+
+loopBegin 
+	: uvNode 
+	| CONSTANTINT
+	;
+
+loopEnd 
+	: uvNode 
+	| CONSTANTINT
+	;
+
+CONSTANTINT
+	: ('0'..'9')+
+	;
+	
+NODENAME 
+	: ('a'..'z'| 'A'..'Z'| '0'..'9'| '.')+
+	;
+
+CONSTANTVALUE 
+	: ('+'|'-')?('0'..'9')+('.'('0'..'9')+)?('E'('+'|'-')?('0'..'9')+)? 	
+	;
+
+WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+    { $channel = HIDDEN; } ;
+
+scalarFunctions 
+	: ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET
+	;
+
+vectorFunctions 
+	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
+	;
+	
+uvDistribution 
+	: discreteUnivariate 
+	| continuousUnivariate
+	;
+
+mvDistribution 
+	: discreteMultivariate 
+	| continuousMultivariate
+	;
+
+discreteUnivariate 
+	: bernoulli 
+	;
+
+continuousUnivariate 
+	: beta 
+	;
+
+discreteMultivariate 
+	: multinomial
+	;
+
+continuousMultivariate 
+	: dirichlet
+	;
+
+bernoulli 
+	: BERNOULLIOPENBRACKET uvNode CLOSEBRACKET
+	;
+
+beta 
+	: BETAOPENBRACKET uvNode COMMA uvNode CLOSEBRACKET
+	;
+
+multinomial 
+	: MUTLTINOMIALOPENBRACKET uvNode OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA uvNode CLOSEBRACKET
+	;
+
+dirichlet 
+	: DIRICHLETOPENBRACKET uvNode OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA
+	;

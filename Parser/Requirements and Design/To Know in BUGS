@@ -1,0 +1,7 @@
+To Know in BUGS:
+- Truncation and Censor  => Use?
+- Can MVNodes be truncated or censored?
+- Truncated Weibull example -> Using I?
+- S-plus format for arrays??
+
+- What distributions are we going to support in elementary?

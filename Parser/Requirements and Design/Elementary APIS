@@ -1,0 +1,18 @@
+APIs required from Elementary:
+
+- Input model specification and Check model correctness - FACTOR GRAPH CONSTRUCTION - modelCheck( string )
+- Data specification - Data for the Random variables and constants in the model -  modelData( string )
+- Model Compilation - ?? (What does compiling a model do?) -  modelCompile( int )
+- Initializing parameters in the model for every chain - modelInits( string , int ) 
+- Generating Random Initial Values for parameters - modelGenInits()
+- Updates int0 times - modelUpdate( int0 , int1, int2, string )
+- Nodes to monitor/clear - samplesSet( string ) , samplesClear( string )  
+- Range of chains for statistics calculation - samplesFirstChain( int ), samplesLastChain( int ) 
+- Every nth sample used for inference  - samplesThin( int )   
+- Nodes to compute statistics - samplesStats( string ) 
+- calculating summary statistics for nodes - summarySet( string ) , summaryStats( string )....
+- Ranks of Nodes ?? ============ Inference > Rank... > 
+- DIC stats?? ============ Inference >DIC... > 
+- Node informations?? ============ Info > Node info... > , Info > Memory,  Info > Uninitialized Nodes, Info > Updaters(by name)
+- Various plots are also generated in the Inference -> Samples menu ?? ===========
+- DLLs in use ?? ============ Info > Modules
