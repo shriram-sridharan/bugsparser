@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /u/s/h/shrirams/BUGS/BUGS.g 2013-01-04 14:31:11
+// $ANTLR 3.4 /home/shriram/BUGS/BUGS.g 2013-01-02 23:44:52
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -65,7 +65,7 @@ public class BUGSParser extends Parser {
     }
 
     public String[] getTokenNames() { return BUGSParser.tokenNames; }
-    public String getGrammarFileName() { return "/u/s/h/shrirams/BUGS/BUGS.g"; }
+    public String getGrammarFileName() { return "/home/shriram/BUGS/BUGS.g"; }
 
 
         public static void main(String[] args) throws Exception {
@@ -84,13 +84,13 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "prog"
-    // /u/s/h/shrirams/BUGS/BUGS.g:54:1: prog : ( MODEL OPENBRACE statements CLOSEBRACE )* ;
+    // /home/shriram/BUGS/BUGS.g:54:1: prog : ( MODEL OPENBRACE statements CLOSEBRACE )* ;
     public final void prog() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:54:6: ( ( MODEL OPENBRACE statements CLOSEBRACE )* )
-            // /u/s/h/shrirams/BUGS/BUGS.g:54:8: ( MODEL OPENBRACE statements CLOSEBRACE )*
+            // /home/shriram/BUGS/BUGS.g:54:6: ( ( MODEL OPENBRACE statements CLOSEBRACE )* )
+            // /home/shriram/BUGS/BUGS.g:54:8: ( MODEL OPENBRACE statements CLOSEBRACE )*
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:54:8: ( MODEL OPENBRACE statements CLOSEBRACE )*
+            // /home/shriram/BUGS/BUGS.g:54:8: ( MODEL OPENBRACE statements CLOSEBRACE )*
             loop1:
             do {
                 int alt1=2;
@@ -103,7 +103,7 @@ public class BUGSParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:54:9: MODEL OPENBRACE statements CLOSEBRACE
+            	    // /home/shriram/BUGS/BUGS.g:54:9: MODEL OPENBRACE statements CLOSEBRACE
             	    {
             	    match(input,MODEL,FOLLOW_MODEL_in_prog269); if (state.failed) return ;
 
@@ -144,13 +144,13 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "statements"
-    // /u/s/h/shrirams/BUGS/BUGS.g:56:1: statements : ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+ ;
+    // /home/shriram/BUGS/BUGS.g:56:1: statements : ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+ ;
     public final void statements() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:56:12: ( ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+ )
-            // /u/s/h/shrirams/BUGS/BUGS.g:56:15: ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+
+            // /home/shriram/BUGS/BUGS.g:56:12: ( ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+ )
+            // /home/shriram/BUGS/BUGS.g:56:15: ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:56:15: ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+
+            // /home/shriram/BUGS/BUGS.g:56:15: ( ( uvNode TILDE )=> stochasticNodeExpr | ( mvNode TILDE )=> stochasticNodeExpr | ( uvNode LEFTPOINTER )=> logicalNodeExpr | ( mvNode LEFTPOINTER )=> logicalNodeExpr | ( linkFunction LEFTPOINTER )=> logicalNodeExpr | ( startFor statements endFor ) )+
             int cnt2=0;
             loop2:
             do {
@@ -257,7 +257,7 @@ public class BUGSParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:56:16: ( uvNode TILDE )=> stochasticNodeExpr
+            	    // /home/shriram/BUGS/BUGS.g:56:16: ( uvNode TILDE )=> stochasticNodeExpr
             	    {
             	    pushFollow(FOLLOW_stochasticNodeExpr_in_statements296);
             	    stochasticNodeExpr();
@@ -268,7 +268,7 @@ public class BUGSParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:57:4: ( mvNode TILDE )=> stochasticNodeExpr
+            	    // /home/shriram/BUGS/BUGS.g:57:4: ( mvNode TILDE )=> stochasticNodeExpr
             	    {
             	    pushFollow(FOLLOW_stochasticNodeExpr_in_statements310);
             	    stochasticNodeExpr();
@@ -279,7 +279,7 @@ public class BUGSParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:58:4: ( uvNode LEFTPOINTER )=> logicalNodeExpr
+            	    // /home/shriram/BUGS/BUGS.g:58:4: ( uvNode LEFTPOINTER )=> logicalNodeExpr
             	    {
             	    pushFollow(FOLLOW_logicalNodeExpr_in_statements323);
             	    logicalNodeExpr();
@@ -290,7 +290,7 @@ public class BUGSParser extends Parser {
             	    }
             	    break;
             	case 4 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:59:4: ( mvNode LEFTPOINTER )=> logicalNodeExpr
+            	    // /home/shriram/BUGS/BUGS.g:59:4: ( mvNode LEFTPOINTER )=> logicalNodeExpr
             	    {
             	    pushFollow(FOLLOW_logicalNodeExpr_in_statements337);
             	    logicalNodeExpr();
@@ -301,7 +301,7 @@ public class BUGSParser extends Parser {
             	    }
             	    break;
             	case 5 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:60:4: ( linkFunction LEFTPOINTER )=> logicalNodeExpr
+            	    // /home/shriram/BUGS/BUGS.g:60:4: ( linkFunction LEFTPOINTER )=> logicalNodeExpr
             	    {
             	    pushFollow(FOLLOW_logicalNodeExpr_in_statements351);
             	    logicalNodeExpr();
@@ -312,10 +312,10 @@ public class BUGSParser extends Parser {
             	    }
             	    break;
             	case 6 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:61:4: ( startFor statements endFor )
+            	    // /home/shriram/BUGS/BUGS.g:61:4: ( startFor statements endFor )
             	    {
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:61:4: ( startFor statements endFor )
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:61:5: startFor statements endFor
+            	    // /home/shriram/BUGS/BUGS.g:61:4: ( startFor statements endFor )
+            	    // /home/shriram/BUGS/BUGS.g:61:5: startFor statements endFor
             	    {
             	    pushFollow(FOLLOW_startFor_in_statements358);
             	    startFor();
@@ -370,10 +370,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "stochasticNodeExpr"
-    // /u/s/h/shrirams/BUGS/BUGS.g:65:1: stochasticNodeExpr : ( ( uvNode )=> uvStochasticNodeExpr ( censor | truncation )? | mvStochasticNodeExpr );
+    // /home/shriram/BUGS/BUGS.g:65:1: stochasticNodeExpr : ( ( uvNode )=> uvStochasticNodeExpr ( censor | truncation )? | mvStochasticNodeExpr );
     public final void stochasticNodeExpr() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:66:2: ( ( uvNode )=> uvStochasticNodeExpr ( censor | truncation )? | mvStochasticNodeExpr )
+            // /home/shriram/BUGS/BUGS.g:66:2: ( ( uvNode )=> uvStochasticNodeExpr ( censor | truncation )? | mvStochasticNodeExpr )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -405,7 +405,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:66:4: ( uvNode )=> uvStochasticNodeExpr ( censor | truncation )?
+                    // /home/shriram/BUGS/BUGS.g:66:4: ( uvNode )=> uvStochasticNodeExpr ( censor | truncation )?
                     {
                     pushFollow(FOLLOW_uvStochasticNodeExpr_in_stochasticNodeExpr386);
                     uvStochasticNodeExpr();
@@ -413,7 +413,7 @@ public class BUGSParser extends Parser {
                     state._fsp--;
                     if (state.failed) return ;
 
-                    // /u/s/h/shrirams/BUGS/BUGS.g:66:37: ( censor | truncation )?
+                    // /home/shriram/BUGS/BUGS.g:66:37: ( censor | truncation )?
                     int alt3=3;
                     int LA3_0 = input.LA(1);
 
@@ -425,7 +425,7 @@ public class BUGSParser extends Parser {
                     }
                     switch (alt3) {
                         case 1 :
-                            // /u/s/h/shrirams/BUGS/BUGS.g:66:38: censor
+                            // /home/shriram/BUGS/BUGS.g:66:38: censor
                             {
                             pushFollow(FOLLOW_censor_in_stochasticNodeExpr389);
                             censor();
@@ -436,7 +436,7 @@ public class BUGSParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // /u/s/h/shrirams/BUGS/BUGS.g:66:47: truncation
+                            // /home/shriram/BUGS/BUGS.g:66:47: truncation
                             {
                             pushFollow(FOLLOW_truncation_in_stochasticNodeExpr393);
                             truncation();
@@ -453,7 +453,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:67:4: mvStochasticNodeExpr
+                    // /home/shriram/BUGS/BUGS.g:67:4: mvStochasticNodeExpr
                     {
                     pushFollow(FOLLOW_mvStochasticNodeExpr_in_stochasticNodeExpr400);
                     mvStochasticNodeExpr();
@@ -481,11 +481,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "uvStochasticNodeExpr"
-    // /u/s/h/shrirams/BUGS/BUGS.g:70:1: uvStochasticNodeExpr : uvNode TILDE uvDistribution ;
+    // /home/shriram/BUGS/BUGS.g:70:1: uvStochasticNodeExpr : uvNode TILDE uvDistribution ;
     public final void uvStochasticNodeExpr() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:71:2: ( uvNode TILDE uvDistribution )
-            // /u/s/h/shrirams/BUGS/BUGS.g:71:3: uvNode TILDE uvDistribution
+            // /home/shriram/BUGS/BUGS.g:71:2: ( uvNode TILDE uvDistribution )
+            // /home/shriram/BUGS/BUGS.g:71:3: uvNode TILDE uvDistribution
             {
             pushFollow(FOLLOW_uvNode_in_uvStochasticNodeExpr411);
             uvNode();
@@ -519,11 +519,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "mvStochasticNodeExpr"
-    // /u/s/h/shrirams/BUGS/BUGS.g:73:1: mvStochasticNodeExpr : mvNode TILDE mvDistribution ;
+    // /home/shriram/BUGS/BUGS.g:73:1: mvStochasticNodeExpr : mvNode TILDE mvDistribution ;
     public final void mvStochasticNodeExpr() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:74:2: ( mvNode TILDE mvDistribution )
-            // /u/s/h/shrirams/BUGS/BUGS.g:74:3: mvNode TILDE mvDistribution
+            // /home/shriram/BUGS/BUGS.g:74:2: ( mvNode TILDE mvDistribution )
+            // /home/shriram/BUGS/BUGS.g:74:3: mvNode TILDE mvDistribution
             {
             pushFollow(FOLLOW_mvNode_in_mvStochasticNodeExpr425);
             mvNode();
@@ -557,11 +557,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "censor"
-    // /u/s/h/shrirams/BUGS/BUGS.g:77:1: censor : ( CENSORBEGINWITHC | CENSORBEGINWITHI ) ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:77:1: censor : ( CENSORBEGINWITHC | CENSORBEGINWITHI ) ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET ;
     public final void censor() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:78:3: ( ( CENSORBEGINWITHC | CENSORBEGINWITHI ) ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:78:5: ( CENSORBEGINWITHC | CENSORBEGINWITHI ) ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:78:3: ( ( CENSORBEGINWITHC | CENSORBEGINWITHI ) ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:78:5: ( CENSORBEGINWITHC | CENSORBEGINWITHI ) ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET
             {
             if ( (input.LA(1) >= CENSORBEGINWITHC && input.LA(1) <= CENSORBEGINWITHI) ) {
                 input.consume();
@@ -575,7 +575,7 @@ public class BUGSParser extends Parser {
             }
 
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:78:41: ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower )
+            // /home/shriram/BUGS/BUGS.g:78:41: ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower )
             int alt5=2;
             switch ( input.LA(1) ) {
             case NODENAME:
@@ -634,7 +634,7 @@ public class BUGSParser extends Parser {
 
             switch (alt5) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:78:43: ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper
+                    // /home/shriram/BUGS/BUGS.g:78:43: ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper
                     {
                     pushFollow(FOLLOW_lowerWithOptionalUpper_in_censor457);
                     lowerWithOptionalUpper();
@@ -645,7 +645,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:78:94: upperWithOptionalLower
+                    // /home/shriram/BUGS/BUGS.g:78:94: upperWithOptionalLower
                     {
                     pushFollow(FOLLOW_upperWithOptionalLower_in_censor462);
                     upperWithOptionalLower();
@@ -679,15 +679,15 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "truncation"
-    // /u/s/h/shrirams/BUGS/BUGS.g:80:1: truncation : TRUNCATIONBEGIN ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:80:1: truncation : TRUNCATIONBEGIN ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET ;
     public final void truncation() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:81:2: ( TRUNCATIONBEGIN ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:81:4: TRUNCATIONBEGIN ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:81:2: ( TRUNCATIONBEGIN ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:81:4: TRUNCATIONBEGIN ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower ) CLOSEBRACKET
             {
             match(input,TRUNCATIONBEGIN,FOLLOW_TRUNCATIONBEGIN_in_truncation479); if (state.failed) return ;
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:81:20: ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower )
+            // /home/shriram/BUGS/BUGS.g:81:20: ( ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper | upperWithOptionalLower )
             int alt6=2;
             switch ( input.LA(1) ) {
             case NODENAME:
@@ -746,7 +746,7 @@ public class BUGSParser extends Parser {
 
             switch (alt6) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:81:23: ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper
+                    // /home/shriram/BUGS/BUGS.g:81:23: ( uvNode | CONSTANTVALUE )=> lowerWithOptionalUpper
                     {
                     pushFollow(FOLLOW_lowerWithOptionalUpper_in_truncation492);
                     lowerWithOptionalUpper();
@@ -757,7 +757,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:81:74: upperWithOptionalLower
+                    // /home/shriram/BUGS/BUGS.g:81:74: upperWithOptionalLower
                     {
                     pushFollow(FOLLOW_upperWithOptionalLower_in_truncation496);
                     upperWithOptionalLower();
@@ -791,13 +791,13 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "lowerWithOptionalUpper"
-    // /u/s/h/shrirams/BUGS/BUGS.g:84:1: lowerWithOptionalUpper : ( uvNode | CONSTANTVALUE ) COMMA ( uvNode | CONSTANTVALUE )? ;
+    // /home/shriram/BUGS/BUGS.g:84:1: lowerWithOptionalUpper : ( uvNode | CONSTANTVALUE ) COMMA ( uvNode | CONSTANTVALUE )? ;
     public final void lowerWithOptionalUpper() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:85:2: ( ( uvNode | CONSTANTVALUE ) COMMA ( uvNode | CONSTANTVALUE )? )
-            // /u/s/h/shrirams/BUGS/BUGS.g:85:5: ( uvNode | CONSTANTVALUE ) COMMA ( uvNode | CONSTANTVALUE )?
+            // /home/shriram/BUGS/BUGS.g:85:2: ( ( uvNode | CONSTANTVALUE ) COMMA ( uvNode | CONSTANTVALUE )? )
+            // /home/shriram/BUGS/BUGS.g:85:5: ( uvNode | CONSTANTVALUE ) COMMA ( uvNode | CONSTANTVALUE )?
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:85:5: ( uvNode | CONSTANTVALUE )
+            // /home/shriram/BUGS/BUGS.g:85:5: ( uvNode | CONSTANTVALUE )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -817,7 +817,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:85:6: uvNode
+                    // /home/shriram/BUGS/BUGS.g:85:6: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_lowerWithOptionalUpper516);
                     uvNode();
@@ -828,7 +828,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:85:13: CONSTANTVALUE
+                    // /home/shriram/BUGS/BUGS.g:85:13: CONSTANTVALUE
                     {
                     match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_lowerWithOptionalUpper518); if (state.failed) return ;
 
@@ -840,7 +840,7 @@ public class BUGSParser extends Parser {
 
             match(input,COMMA,FOLLOW_COMMA_in_lowerWithOptionalUpper521); if (state.failed) return ;
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:85:34: ( uvNode | CONSTANTVALUE )?
+            // /home/shriram/BUGS/BUGS.g:85:34: ( uvNode | CONSTANTVALUE )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -852,7 +852,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt8) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:85:35: uvNode
+                    // /home/shriram/BUGS/BUGS.g:85:35: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_lowerWithOptionalUpper524);
                     uvNode();
@@ -863,7 +863,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:85:42: CONSTANTVALUE
+                    // /home/shriram/BUGS/BUGS.g:85:42: CONSTANTVALUE
                     {
                     match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_lowerWithOptionalUpper526); if (state.failed) return ;
 
@@ -891,13 +891,13 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "upperWithOptionalLower"
-    // /u/s/h/shrirams/BUGS/BUGS.g:88:1: upperWithOptionalLower : ( uvNode | CONSTANTVALUE )? COMMA ( uvNode | CONSTANTVALUE ) ;
+    // /home/shriram/BUGS/BUGS.g:88:1: upperWithOptionalLower : ( uvNode | CONSTANTVALUE )? COMMA ( uvNode | CONSTANTVALUE ) ;
     public final void upperWithOptionalLower() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:89:2: ( ( uvNode | CONSTANTVALUE )? COMMA ( uvNode | CONSTANTVALUE ) )
-            // /u/s/h/shrirams/BUGS/BUGS.g:89:5: ( uvNode | CONSTANTVALUE )? COMMA ( uvNode | CONSTANTVALUE )
+            // /home/shriram/BUGS/BUGS.g:89:2: ( ( uvNode | CONSTANTVALUE )? COMMA ( uvNode | CONSTANTVALUE ) )
+            // /home/shriram/BUGS/BUGS.g:89:5: ( uvNode | CONSTANTVALUE )? COMMA ( uvNode | CONSTANTVALUE )
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:89:5: ( uvNode | CONSTANTVALUE )?
+            // /home/shriram/BUGS/BUGS.g:89:5: ( uvNode | CONSTANTVALUE )?
             int alt9=3;
             int LA9_0 = input.LA(1);
 
@@ -909,7 +909,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt9) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:89:6: uvNode
+                    // /home/shriram/BUGS/BUGS.g:89:6: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_upperWithOptionalLower543);
                     uvNode();
@@ -920,7 +920,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:89:13: CONSTANTVALUE
+                    // /home/shriram/BUGS/BUGS.g:89:13: CONSTANTVALUE
                     {
                     match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_upperWithOptionalLower545); if (state.failed) return ;
 
@@ -932,7 +932,7 @@ public class BUGSParser extends Parser {
 
             match(input,COMMA,FOLLOW_COMMA_in_upperWithOptionalLower549); if (state.failed) return ;
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:89:35: ( uvNode | CONSTANTVALUE )
+            // /home/shriram/BUGS/BUGS.g:89:35: ( uvNode | CONSTANTVALUE )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -952,7 +952,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:89:36: uvNode
+                    // /home/shriram/BUGS/BUGS.g:89:36: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_upperWithOptionalLower552);
                     uvNode();
@@ -963,7 +963,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:89:43: CONSTANTVALUE
+                    // /home/shriram/BUGS/BUGS.g:89:43: CONSTANTVALUE
                     {
                     match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_upperWithOptionalLower554); if (state.failed) return ;
 
@@ -991,10 +991,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "logicalNodeExpr"
-    // /u/s/h/shrirams/BUGS/BUGS.g:92:1: logicalNodeExpr : ( ( uvNode | linkFunction )=> ( uvNode | linkFunction ) LEFTPOINTER exprWithNodesFunctions | mvNode LEFTPOINTER exprWithNodesFunctions );
+    // /home/shriram/BUGS/BUGS.g:92:1: logicalNodeExpr : ( ( uvNode | linkFunction )=> ( uvNode | linkFunction ) LEFTPOINTER exprWithNodesFunctions | mvNode LEFTPOINTER exprWithNodesFunctions );
     public final void logicalNodeExpr() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:93:2: ( ( uvNode | linkFunction )=> ( uvNode | linkFunction ) LEFTPOINTER exprWithNodesFunctions | mvNode LEFTPOINTER exprWithNodesFunctions )
+            // /home/shriram/BUGS/BUGS.g:93:2: ( ( uvNode | linkFunction )=> ( uvNode | linkFunction ) LEFTPOINTER exprWithNodesFunctions | mvNode LEFTPOINTER exprWithNodesFunctions )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1038,9 +1038,9 @@ public class BUGSParser extends Parser {
             }
             switch (alt12) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:93:4: ( uvNode | linkFunction )=> ( uvNode | linkFunction ) LEFTPOINTER exprWithNodesFunctions
+                    // /home/shriram/BUGS/BUGS.g:93:4: ( uvNode | linkFunction )=> ( uvNode | linkFunction ) LEFTPOINTER exprWithNodesFunctions
                     {
-                    // /u/s/h/shrirams/BUGS/BUGS.g:93:31: ( uvNode | linkFunction )
+                    // /home/shriram/BUGS/BUGS.g:93:31: ( uvNode | linkFunction )
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1060,7 +1060,7 @@ public class BUGSParser extends Parser {
                     }
                     switch (alt11) {
                         case 1 :
-                            // /u/s/h/shrirams/BUGS/BUGS.g:93:32: uvNode
+                            // /home/shriram/BUGS/BUGS.g:93:32: uvNode
                             {
                             pushFollow(FOLLOW_uvNode_in_logicalNodeExpr578);
                             uvNode();
@@ -1071,7 +1071,7 @@ public class BUGSParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // /u/s/h/shrirams/BUGS/BUGS.g:93:41: linkFunction
+                            // /home/shriram/BUGS/BUGS.g:93:41: linkFunction
                             {
                             pushFollow(FOLLOW_linkFunction_in_logicalNodeExpr582);
                             linkFunction();
@@ -1096,7 +1096,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:94:5: mvNode LEFTPOINTER exprWithNodesFunctions
+                    // /home/shriram/BUGS/BUGS.g:94:5: mvNode LEFTPOINTER exprWithNodesFunctions
                     {
                     pushFollow(FOLLOW_mvNode_in_logicalNodeExpr593);
                     mvNode();
@@ -1132,10 +1132,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "linkFunction"
-    // /u/s/h/shrirams/BUGS/BUGS.g:97:1: linkFunction : ( LOGOPENBRACKET uvNode CLOSEBRACKET | LOGITOPENBRACKET uvNode CLOSEBRACKET | CLOGLOGOPENBRACKET uvNode CLOSEBRACKET | PROBITOPENBRACKET uvNode CLOSEBRACKET );
+    // /home/shriram/BUGS/BUGS.g:97:1: linkFunction : ( LOGOPENBRACKET uvNode CLOSEBRACKET | LOGITOPENBRACKET uvNode CLOSEBRACKET | CLOGLOGOPENBRACKET uvNode CLOSEBRACKET | PROBITOPENBRACKET uvNode CLOSEBRACKET );
     public final void linkFunction() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:98:2: ( LOGOPENBRACKET uvNode CLOSEBRACKET | LOGITOPENBRACKET uvNode CLOSEBRACKET | CLOGLOGOPENBRACKET uvNode CLOSEBRACKET | PROBITOPENBRACKET uvNode CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:98:2: ( LOGOPENBRACKET uvNode CLOSEBRACKET | LOGITOPENBRACKET uvNode CLOSEBRACKET | CLOGLOGOPENBRACKET uvNode CLOSEBRACKET | PROBITOPENBRACKET uvNode CLOSEBRACKET )
             int alt13=4;
             switch ( input.LA(1) ) {
             case LOGOPENBRACKET:
@@ -1169,7 +1169,7 @@ public class BUGSParser extends Parser {
 
             switch (alt13) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:98:4: LOGOPENBRACKET uvNode CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:98:4: LOGOPENBRACKET uvNode CLOSEBRACKET
                     {
                     match(input,LOGOPENBRACKET,FOLLOW_LOGOPENBRACKET_in_linkFunction609); if (state.failed) return ;
 
@@ -1184,7 +1184,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:99:4: LOGITOPENBRACKET uvNode CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:99:4: LOGITOPENBRACKET uvNode CLOSEBRACKET
                     {
                     match(input,LOGITOPENBRACKET,FOLLOW_LOGITOPENBRACKET_in_linkFunction619); if (state.failed) return ;
 
@@ -1199,7 +1199,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:100:4: CLOGLOGOPENBRACKET uvNode CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:100:4: CLOGLOGOPENBRACKET uvNode CLOSEBRACKET
                     {
                     match(input,CLOGLOGOPENBRACKET,FOLLOW_CLOGLOGOPENBRACKET_in_linkFunction628); if (state.failed) return ;
 
@@ -1214,7 +1214,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:101:4: PROBITOPENBRACKET uvNode CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:101:4: PROBITOPENBRACKET uvNode CLOSEBRACKET
                     {
                     match(input,PROBITOPENBRACKET,FOLLOW_PROBITOPENBRACKET_in_linkFunction637); if (state.failed) return ;
 
@@ -1246,13 +1246,13 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "exprWithNodesFunctions"
-    // /u/s/h/shrirams/BUGS/BUGS.g:104:1: exprWithNodesFunctions : ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )? ;
+    // /home/shriram/BUGS/BUGS.g:104:1: exprWithNodesFunctions : ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )? ;
     public final void exprWithNodesFunctions() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:105:2: ( ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )? )
-            // /u/s/h/shrirams/BUGS/BUGS.g:105:4: ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )?
+            // /home/shriram/BUGS/BUGS.g:105:2: ( ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )? )
+            // /home/shriram/BUGS/BUGS.g:105:4: ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )?
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:105:4: ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions )
+            // /home/shriram/BUGS/BUGS.g:105:4: ( unaryExpression | OPENBRACKET MINUS unaryExpression CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions )
             int alt14=5;
             switch ( input.LA(1) ) {
             case CONSTANTINT:
@@ -1308,7 +1308,7 @@ public class BUGSParser extends Parser {
 
             switch (alt14) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:105:5: unaryExpression
+                    // /home/shriram/BUGS/BUGS.g:105:5: unaryExpression
                     {
                     pushFollow(FOLLOW_unaryExpression_in_exprWithNodesFunctions654);
                     unaryExpression();
@@ -1319,7 +1319,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:105:23: OPENBRACKET MINUS unaryExpression CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:105:23: OPENBRACKET MINUS unaryExpression CLOSEBRACKET
                     {
                     match(input,OPENBRACKET,FOLLOW_OPENBRACKET_in_exprWithNodesFunctions658); if (state.failed) return ;
 
@@ -1336,7 +1336,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:105:73: MINUS unaryExpression
+                    // /home/shriram/BUGS/BUGS.g:105:73: MINUS unaryExpression
                     {
                     match(input,MINUS,FOLLOW_MINUS_in_exprWithNodesFunctions669); if (state.failed) return ;
 
@@ -1349,7 +1349,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:105:97: scalarFunctions
+                    // /home/shriram/BUGS/BUGS.g:105:97: scalarFunctions
                     {
                     pushFollow(FOLLOW_scalarFunctions_in_exprWithNodesFunctions675);
                     scalarFunctions();
@@ -1360,7 +1360,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:105:115: vectorFunctions
+                    // /home/shriram/BUGS/BUGS.g:105:115: vectorFunctions
                     {
                     pushFollow(FOLLOW_vectorFunctions_in_exprWithNodesFunctions679);
                     vectorFunctions();
@@ -1374,7 +1374,7 @@ public class BUGSParser extends Parser {
             }
 
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:105:133: ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )?
+            // /home/shriram/BUGS/BUGS.g:105:133: ( ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1383,7 +1383,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt15) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:105:134: ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions
+                    // /home/shriram/BUGS/BUGS.g:105:134: ( PLUS | MINUS | MULT | DIV ) exprWithNodesFunctions
                     {
                     if ( input.LA(1)==DIV||input.LA(1)==MINUS||input.LA(1)==MULT||input.LA(1)==PLUS ) {
                         input.consume();
@@ -1427,15 +1427,15 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "uvNode"
-    // /u/s/h/shrirams/BUGS/BUGS.g:108:1: uvNode : NODENAME ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )? ;
+    // /home/shriram/BUGS/BUGS.g:108:1: uvNode : NODENAME ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )? ;
     public final void uvNode() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:109:2: ( NODENAME ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )? )
-            // /u/s/h/shrirams/BUGS/BUGS.g:109:4: NODENAME ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )?
+            // /home/shriram/BUGS/BUGS.g:109:2: ( NODENAME ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )? )
+            // /home/shriram/BUGS/BUGS.g:109:4: NODENAME ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )?
             {
-            match(input,NODENAME,FOLLOW_NODENAME_in_uvNode707); if (state.failed) return ;
+            match(input,NODENAME,FOLLOW_NODENAME_in_uvNode708); if (state.failed) return ;
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:109:13: ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )?
+            // /home/shriram/BUGS/BUGS.g:109:13: ( OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1448,17 +1448,17 @@ public class BUGSParser extends Parser {
             }
             switch (alt17) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:109:14: OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET
+                    // /home/shriram/BUGS/BUGS.g:109:14: OPENSQUAREBRACKET expression ( COMMA expression )* CLOSESQUAREBRACKET
                     {
-                    match(input,OPENSQUAREBRACKET,FOLLOW_OPENSQUAREBRACKET_in_uvNode710); if (state.failed) return ;
+                    match(input,OPENSQUAREBRACKET,FOLLOW_OPENSQUAREBRACKET_in_uvNode711); if (state.failed) return ;
 
-                    pushFollow(FOLLOW_expression_in_uvNode712);
+                    pushFollow(FOLLOW_expression_in_uvNode713);
                     expression();
 
                     state._fsp--;
                     if (state.failed) return ;
 
-                    // /u/s/h/shrirams/BUGS/BUGS.g:109:43: ( COMMA expression )*
+                    // /home/shriram/BUGS/BUGS.g:109:43: ( COMMA expression )*
                     loop16:
                     do {
                         int alt16=2;
@@ -1471,11 +1471,11 @@ public class BUGSParser extends Parser {
 
                         switch (alt16) {
                     	case 1 :
-                    	    // /u/s/h/shrirams/BUGS/BUGS.g:109:44: COMMA expression
+                    	    // /home/shriram/BUGS/BUGS.g:109:44: COMMA expression
                     	    {
-                    	    match(input,COMMA,FOLLOW_COMMA_in_uvNode715); if (state.failed) return ;
+                    	    match(input,COMMA,FOLLOW_COMMA_in_uvNode716); if (state.failed) return ;
 
-                    	    pushFollow(FOLLOW_expression_in_uvNode717);
+                    	    pushFollow(FOLLOW_expression_in_uvNode718);
                     	    expression();
 
                     	    state._fsp--;
@@ -1490,7 +1490,7 @@ public class BUGSParser extends Parser {
                     } while (true);
 
 
-                    match(input,CLOSESQUAREBRACKET,FOLLOW_CLOSESQUAREBRACKET_in_uvNode722); if (state.failed) return ;
+                    match(input,CLOSESQUAREBRACKET,FOLLOW_CLOSESQUAREBRACKET_in_uvNode723); if (state.failed) return ;
 
                     }
                     break;
@@ -1516,11 +1516,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "mvNode"
-    // /u/s/h/shrirams/BUGS/BUGS.g:111:1: mvNode : NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:111:1: mvNode : NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET ;
     public final void mvNode() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:112:2: ( NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:112:4: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
+            // /home/shriram/BUGS/BUGS.g:112:2: ( NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET )
+            // /home/shriram/BUGS/BUGS.g:112:4: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
             {
             match(input,NODENAME,FOLLOW_NODENAME_in_mvNode736); if (state.failed) return ;
 
@@ -1552,11 +1552,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "expression"
-    // /u/s/h/shrirams/BUGS/BUGS.g:115:1: expression : unaryExpression ( ( PLUS | MINUS | MULT | DIV ) expression )? ;
+    // /home/shriram/BUGS/BUGS.g:115:1: expression : unaryExpression ( ( PLUS | MINUS | MULT | DIV ) expression )? ;
     public final void expression() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:116:2: ( unaryExpression ( ( PLUS | MINUS | MULT | DIV ) expression )? )
-            // /u/s/h/shrirams/BUGS/BUGS.g:116:4: unaryExpression ( ( PLUS | MINUS | MULT | DIV ) expression )?
+            // /home/shriram/BUGS/BUGS.g:116:2: ( unaryExpression ( ( PLUS | MINUS | MULT | DIV ) expression )? )
+            // /home/shriram/BUGS/BUGS.g:116:4: unaryExpression ( ( PLUS | MINUS | MULT | DIV ) expression )?
             {
             pushFollow(FOLLOW_unaryExpression_in_expression754);
             unaryExpression();
@@ -1564,7 +1564,7 @@ public class BUGSParser extends Parser {
             state._fsp--;
             if (state.failed) return ;
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:116:20: ( ( PLUS | MINUS | MULT | DIV ) expression )?
+            // /home/shriram/BUGS/BUGS.g:116:20: ( ( PLUS | MINUS | MULT | DIV ) expression )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -1573,7 +1573,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt18) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:116:21: ( PLUS | MINUS | MULT | DIV ) expression
+                    // /home/shriram/BUGS/BUGS.g:116:21: ( PLUS | MINUS | MULT | DIV ) expression
                     {
                     if ( input.LA(1)==DIV||input.LA(1)==MINUS||input.LA(1)==MULT||input.LA(1)==PLUS ) {
                         input.consume();
@@ -1617,10 +1617,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "unaryExpression"
-    // /u/s/h/shrirams/BUGS/BUGS.g:119:1: unaryExpression : ( CONSTANTINT | CONSTANTVALUE | uvNode | OPENBRACKET expression CLOSEBRACKET );
+    // /home/shriram/BUGS/BUGS.g:119:1: unaryExpression : ( CONSTANTINT | CONSTANTVALUE | uvNode | OPENBRACKET expression CLOSEBRACKET );
     public final void unaryExpression() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:120:2: ( CONSTANTINT | CONSTANTVALUE | uvNode | OPENBRACKET expression CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:120:2: ( CONSTANTINT | CONSTANTVALUE | uvNode | OPENBRACKET expression CLOSEBRACKET )
             int alt19=4;
             switch ( input.LA(1) ) {
             case CONSTANTINT:
@@ -1654,21 +1654,21 @@ public class BUGSParser extends Parser {
 
             switch (alt19) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:120:4: CONSTANTINT
+                    // /home/shriram/BUGS/BUGS.g:120:4: CONSTANTINT
                     {
                     match(input,CONSTANTINT,FOLLOW_CONSTANTINT_in_unaryExpression780); if (state.failed) return ;
 
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:121:4: CONSTANTVALUE
+                    // /home/shriram/BUGS/BUGS.g:121:4: CONSTANTVALUE
                     {
                     match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_unaryExpression787); if (state.failed) return ;
 
                     }
                     break;
                 case 3 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:122:4: uvNode
+                    // /home/shriram/BUGS/BUGS.g:122:4: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_unaryExpression792);
                     uvNode();
@@ -1679,7 +1679,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:123:4: OPENBRACKET expression CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:123:4: OPENBRACKET expression CLOSEBRACKET
                     {
                     match(input,OPENBRACKET,FOLLOW_OPENBRACKET_in_unaryExpression798); if (state.failed) return ;
 
@@ -1711,11 +1711,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "multiIndices"
-    // /u/s/h/shrirams/BUGS/BUGS.g:126:1: multiIndices : multiDimExpression ( COMMA multiDimExpression )* ;
+    // /home/shriram/BUGS/BUGS.g:126:1: multiIndices : multiDimExpression ( COMMA multiDimExpression )* ;
     public final void multiIndices() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:127:2: ( multiDimExpression ( COMMA multiDimExpression )* )
-            // /u/s/h/shrirams/BUGS/BUGS.g:127:4: multiDimExpression ( COMMA multiDimExpression )*
+            // /home/shriram/BUGS/BUGS.g:127:2: ( multiDimExpression ( COMMA multiDimExpression )* )
+            // /home/shriram/BUGS/BUGS.g:127:4: multiDimExpression ( COMMA multiDimExpression )*
             {
             pushFollow(FOLLOW_multiDimExpression_in_multiIndices814);
             multiDimExpression();
@@ -1723,7 +1723,7 @@ public class BUGSParser extends Parser {
             state._fsp--;
             if (state.failed) return ;
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:127:23: ( COMMA multiDimExpression )*
+            // /home/shriram/BUGS/BUGS.g:127:23: ( COMMA multiDimExpression )*
             loop20:
             do {
                 int alt20=2;
@@ -1736,7 +1736,7 @@ public class BUGSParser extends Parser {
 
                 switch (alt20) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:127:24: COMMA multiDimExpression
+            	    // /home/shriram/BUGS/BUGS.g:127:24: COMMA multiDimExpression
             	    {
             	    match(input,COMMA,FOLLOW_COMMA_in_multiIndices817); if (state.failed) return ;
 
@@ -1773,10 +1773,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "multiDimExpression"
-    // /u/s/h/shrirams/BUGS/BUGS.g:130:1: multiDimExpression : ( ( OPENBRACKET expression COLON )=> OPENBRACKET expression COLON expression CLOSEBRACKET | expression ( COLON expression )? );
+    // /home/shriram/BUGS/BUGS.g:130:1: multiDimExpression : ( ( OPENBRACKET expression COLON )=> OPENBRACKET expression COLON expression CLOSEBRACKET | expression ( COLON expression )? );
     public final void multiDimExpression() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:131:2: ( ( OPENBRACKET expression COLON )=> OPENBRACKET expression COLON expression CLOSEBRACKET | expression ( COLON expression )? )
+            // /home/shriram/BUGS/BUGS.g:131:2: ( ( OPENBRACKET expression COLON )=> OPENBRACKET expression COLON expression CLOSEBRACKET | expression ( COLON expression )? )
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -1811,7 +1811,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt22) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:131:4: ( OPENBRACKET expression COLON )=> OPENBRACKET expression COLON expression CLOSEBRACKET
+                    // /home/shriram/BUGS/BUGS.g:131:4: ( OPENBRACKET expression COLON )=> OPENBRACKET expression COLON expression CLOSEBRACKET
                     {
                     match(input,OPENBRACKET,FOLLOW_OPENBRACKET_in_multiDimExpression843); if (state.failed) return ;
 
@@ -1834,7 +1834,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:132:4: expression ( COLON expression )?
+                    // /home/shriram/BUGS/BUGS.g:132:4: expression ( COLON expression )?
                     {
                     pushFollow(FOLLOW_expression_in_multiDimExpression856);
                     expression();
@@ -1842,7 +1842,7 @@ public class BUGSParser extends Parser {
                     state._fsp--;
                     if (state.failed) return ;
 
-                    // /u/s/h/shrirams/BUGS/BUGS.g:132:15: ( COLON expression )?
+                    // /home/shriram/BUGS/BUGS.g:132:15: ( COLON expression )?
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
@@ -1851,7 +1851,7 @@ public class BUGSParser extends Parser {
                     }
                     switch (alt21) {
                         case 1 :
-                            // /u/s/h/shrirams/BUGS/BUGS.g:132:16: COLON expression
+                            // /home/shriram/BUGS/BUGS.g:132:16: COLON expression
                             {
                             match(input,COLON,FOLLOW_COLON_in_multiDimExpression859); if (state.failed) return ;
 
@@ -1887,11 +1887,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "startFor"
-    // /u/s/h/shrirams/BUGS/BUGS.g:135:1: startFor : FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE ;
+    // /home/shriram/BUGS/BUGS.g:135:1: startFor : FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE ;
     public final void startFor() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:136:2: ( FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE )
-            // /u/s/h/shrirams/BUGS/BUGS.g:136:4: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE
+            // /home/shriram/BUGS/BUGS.g:136:2: ( FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE )
+            // /home/shriram/BUGS/BUGS.g:136:4: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE
             {
             match(input,FORSTART,FOLLOW_FORSTART_in_startFor875); if (state.failed) return ;
 
@@ -1941,11 +1941,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "endFor"
-    // /u/s/h/shrirams/BUGS/BUGS.g:139:1: endFor : CLOSEBRACE ;
+    // /home/shriram/BUGS/BUGS.g:139:1: endFor : CLOSEBRACE ;
     public final void endFor() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:140:2: ( CLOSEBRACE )
-            // /u/s/h/shrirams/BUGS/BUGS.g:140:4: CLOSEBRACE
+            // /home/shriram/BUGS/BUGS.g:140:2: ( CLOSEBRACE )
+            // /home/shriram/BUGS/BUGS.g:140:4: CLOSEBRACE
             {
             match(input,CLOSEBRACE,FOLLOW_CLOSEBRACE_in_endFor904); if (state.failed) return ;
 
@@ -1967,11 +1967,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "loopVariable"
-    // /u/s/h/shrirams/BUGS/BUGS.g:143:1: loopVariable : NODENAME ;
+    // /home/shriram/BUGS/BUGS.g:143:1: loopVariable : NODENAME ;
     public final void loopVariable() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:144:2: ( NODENAME )
-            // /u/s/h/shrirams/BUGS/BUGS.g:144:4: NODENAME
+            // /home/shriram/BUGS/BUGS.g:144:2: ( NODENAME )
+            // /home/shriram/BUGS/BUGS.g:144:4: NODENAME
             {
             match(input,NODENAME,FOLLOW_NODENAME_in_loopVariable916); if (state.failed) return ;
 
@@ -1993,10 +1993,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "loopBegin"
-    // /u/s/h/shrirams/BUGS/BUGS.g:147:1: loopBegin : ( uvNode | CONSTANTINT );
+    // /home/shriram/BUGS/BUGS.g:147:1: loopBegin : ( uvNode | CONSTANTINT );
     public final void loopBegin() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:148:2: ( uvNode | CONSTANTINT )
+            // /home/shriram/BUGS/BUGS.g:148:2: ( uvNode | CONSTANTINT )
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -2016,7 +2016,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt23) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:148:4: uvNode
+                    // /home/shriram/BUGS/BUGS.g:148:4: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_loopBegin928);
                     uvNode();
@@ -2027,7 +2027,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:149:4: CONSTANTINT
+                    // /home/shriram/BUGS/BUGS.g:149:4: CONSTANTINT
                     {
                     match(input,CONSTANTINT,FOLLOW_CONSTANTINT_in_loopBegin934); if (state.failed) return ;
 
@@ -2051,10 +2051,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "loopEnd"
-    // /u/s/h/shrirams/BUGS/BUGS.g:152:1: loopEnd : ( uvNode | CONSTANTINT );
+    // /home/shriram/BUGS/BUGS.g:152:1: loopEnd : ( uvNode | CONSTANTINT );
     public final void loopEnd() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:153:2: ( uvNode | CONSTANTINT )
+            // /home/shriram/BUGS/BUGS.g:153:2: ( uvNode | CONSTANTINT )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2074,7 +2074,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt24) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:153:4: uvNode
+                    // /home/shriram/BUGS/BUGS.g:153:4: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_loopEnd946);
                     uvNode();
@@ -2085,7 +2085,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:154:4: CONSTANTINT
+                    // /home/shriram/BUGS/BUGS.g:154:4: CONSTANTINT
                     {
                     match(input,CONSTANTINT,FOLLOW_CONSTANTINT_in_loopEnd952); if (state.failed) return ;
 
@@ -2109,11 +2109,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "scalarFunctions"
-    // /u/s/h/shrirams/BUGS/BUGS.g:171:1: scalarFunctions : ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:171:1: scalarFunctions : ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET ;
     public final void scalarFunctions() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:172:2: ( ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:172:4: ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:172:2: ( ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:172:4: ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET
             {
             match(input,ABSOPENBRACKET,FOLLOW_ABSOPENBRACKET_in_scalarFunctions1108); if (state.failed) return ;
 
@@ -2143,11 +2143,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "vectorFunctions"
-    // /u/s/h/shrirams/BUGS/BUGS.g:175:1: vectorFunctions : INVERSEOPENBRACKET mvNode CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:175:1: vectorFunctions : INVERSEOPENBRACKET mvNode CLOSEBRACKET ;
     public final void vectorFunctions() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:176:2: ( INVERSEOPENBRACKET mvNode CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:176:4: INVERSEOPENBRACKET mvNode CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:176:2: ( INVERSEOPENBRACKET mvNode CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:176:4: INVERSEOPENBRACKET mvNode CLOSEBRACKET
             {
             match(input,INVERSEOPENBRACKET,FOLLOW_INVERSEOPENBRACKET_in_vectorFunctions1124); if (state.failed) return ;
 
@@ -2177,10 +2177,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "uvDistribution"
-    // /u/s/h/shrirams/BUGS/BUGS.g:179:1: uvDistribution : ( discreteUnivariate | continuousUnivariate );
+    // /home/shriram/BUGS/BUGS.g:179:1: uvDistribution : ( discreteUnivariate | continuousUnivariate );
     public final void uvDistribution() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:180:2: ( discreteUnivariate | continuousUnivariate )
+            // /home/shriram/BUGS/BUGS.g:180:2: ( discreteUnivariate | continuousUnivariate )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -2200,7 +2200,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt25) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:180:4: discreteUnivariate
+                    // /home/shriram/BUGS/BUGS.g:180:4: discreteUnivariate
                     {
                     pushFollow(FOLLOW_discreteUnivariate_in_uvDistribution1141);
                     discreteUnivariate();
@@ -2211,7 +2211,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:181:4: continuousUnivariate
+                    // /home/shriram/BUGS/BUGS.g:181:4: continuousUnivariate
                     {
                     pushFollow(FOLLOW_continuousUnivariate_in_uvDistribution1147);
                     continuousUnivariate();
@@ -2239,10 +2239,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "mvDistribution"
-    // /u/s/h/shrirams/BUGS/BUGS.g:184:1: mvDistribution : ( discreteMultivariate | continuousMultivariate );
+    // /home/shriram/BUGS/BUGS.g:184:1: mvDistribution : ( discreteMultivariate | continuousMultivariate );
     public final void mvDistribution() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:185:2: ( discreteMultivariate | continuousMultivariate )
+            // /home/shriram/BUGS/BUGS.g:185:2: ( discreteMultivariate | continuousMultivariate )
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -2262,7 +2262,7 @@ public class BUGSParser extends Parser {
             }
             switch (alt26) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:185:4: discreteMultivariate
+                    // /home/shriram/BUGS/BUGS.g:185:4: discreteMultivariate
                     {
                     pushFollow(FOLLOW_discreteMultivariate_in_mvDistribution1159);
                     discreteMultivariate();
@@ -2273,7 +2273,7 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:186:4: continuousMultivariate
+                    // /home/shriram/BUGS/BUGS.g:186:4: continuousMultivariate
                     {
                     pushFollow(FOLLOW_continuousMultivariate_in_mvDistribution1165);
                     continuousMultivariate();
@@ -2301,11 +2301,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "discreteUnivariate"
-    // /u/s/h/shrirams/BUGS/BUGS.g:189:1: discreteUnivariate : bernoulli ;
+    // /home/shriram/BUGS/BUGS.g:189:1: discreteUnivariate : bernoulli ;
     public final void discreteUnivariate() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:190:2: ( bernoulli )
-            // /u/s/h/shrirams/BUGS/BUGS.g:190:4: bernoulli
+            // /home/shriram/BUGS/BUGS.g:190:2: ( bernoulli )
+            // /home/shriram/BUGS/BUGS.g:190:4: bernoulli
             {
             pushFollow(FOLLOW_bernoulli_in_discreteUnivariate1177);
             bernoulli();
@@ -2331,11 +2331,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "continuousUnivariate"
-    // /u/s/h/shrirams/BUGS/BUGS.g:193:1: continuousUnivariate : beta ;
+    // /home/shriram/BUGS/BUGS.g:193:1: continuousUnivariate : beta ;
     public final void continuousUnivariate() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:194:2: ( beta )
-            // /u/s/h/shrirams/BUGS/BUGS.g:194:4: beta
+            // /home/shriram/BUGS/BUGS.g:194:2: ( beta )
+            // /home/shriram/BUGS/BUGS.g:194:4: beta
             {
             pushFollow(FOLLOW_beta_in_continuousUnivariate1190);
             beta();
@@ -2361,11 +2361,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "discreteMultivariate"
-    // /u/s/h/shrirams/BUGS/BUGS.g:197:1: discreteMultivariate : multinomial ;
+    // /home/shriram/BUGS/BUGS.g:197:1: discreteMultivariate : multinomial ;
     public final void discreteMultivariate() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:198:2: ( multinomial )
-            // /u/s/h/shrirams/BUGS/BUGS.g:198:4: multinomial
+            // /home/shriram/BUGS/BUGS.g:198:2: ( multinomial )
+            // /home/shriram/BUGS/BUGS.g:198:4: multinomial
             {
             pushFollow(FOLLOW_multinomial_in_discreteMultivariate1203);
             multinomial();
@@ -2391,11 +2391,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "continuousMultivariate"
-    // /u/s/h/shrirams/BUGS/BUGS.g:201:1: continuousMultivariate : dirichlet ;
+    // /home/shriram/BUGS/BUGS.g:201:1: continuousMultivariate : dirichlet ;
     public final void continuousMultivariate() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:202:2: ( dirichlet )
-            // /u/s/h/shrirams/BUGS/BUGS.g:202:4: dirichlet
+            // /home/shriram/BUGS/BUGS.g:202:2: ( dirichlet )
+            // /home/shriram/BUGS/BUGS.g:202:4: dirichlet
             {
             pushFollow(FOLLOW_dirichlet_in_continuousMultivariate1215);
             dirichlet();
@@ -2421,10 +2421,10 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "distributionParameter"
-    // /u/s/h/shrirams/BUGS/BUGS.g:205:1: distributionParameter : ( uvNode | CONSTANTINT | CONSTANTVALUE );
+    // /home/shriram/BUGS/BUGS.g:205:1: distributionParameter : ( uvNode | CONSTANTINT | CONSTANTVALUE );
     public final void distributionParameter() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:206:2: ( uvNode | CONSTANTINT | CONSTANTVALUE )
+            // /home/shriram/BUGS/BUGS.g:206:2: ( uvNode | CONSTANTINT | CONSTANTVALUE )
             int alt27=3;
             switch ( input.LA(1) ) {
             case NODENAME:
@@ -2453,7 +2453,7 @@ public class BUGSParser extends Parser {
 
             switch (alt27) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:206:4: uvNode
+                    // /home/shriram/BUGS/BUGS.g:206:4: uvNode
                     {
                     pushFollow(FOLLOW_uvNode_in_distributionParameter1228);
                     uvNode();
@@ -2464,14 +2464,14 @@ public class BUGSParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:206:13: CONSTANTINT
+                    // /home/shriram/BUGS/BUGS.g:206:13: CONSTANTINT
                     {
                     match(input,CONSTANTINT,FOLLOW_CONSTANTINT_in_distributionParameter1232); if (state.failed) return ;
 
                     }
                     break;
                 case 3 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:206:27: CONSTANTVALUE
+                    // /home/shriram/BUGS/BUGS.g:206:27: CONSTANTVALUE
                     {
                     match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_distributionParameter1236); if (state.failed) return ;
 
@@ -2495,11 +2495,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "bernoulli"
-    // /u/s/h/shrirams/BUGS/BUGS.g:209:1: bernoulli : BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:209:1: bernoulli : BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET ;
     public final void bernoulli() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:210:2: ( BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:210:4: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:210:2: ( BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:210:4: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET
             {
             match(input,BERNOULLIOPENBRACKET,FOLLOW_BERNOULLIOPENBRACKET_in_bernoulli1249); if (state.failed) return ;
 
@@ -2529,11 +2529,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "beta"
-    // /u/s/h/shrirams/BUGS/BUGS.g:213:1: beta : BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:213:1: beta : BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET ;
     public final void beta() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:214:2: ( BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:214:4: BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:214:2: ( BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:214:4: BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET
             {
             match(input,BETAOPENBRACKET,FOLLOW_BETAOPENBRACKET_in_beta1265); if (state.failed) return ;
 
@@ -2571,11 +2571,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "multinomial"
-    // /u/s/h/shrirams/BUGS/BUGS.g:217:1: multinomial : MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA distributionParameter CLOSEBRACKET ;
+    // /home/shriram/BUGS/BUGS.g:217:1: multinomial : MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA distributionParameter CLOSEBRACKET ;
     public final void multinomial() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:218:2: ( MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA distributionParameter CLOSEBRACKET )
-            // /u/s/h/shrirams/BUGS/BUGS.g:218:4: MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA distributionParameter CLOSEBRACKET
+            // /home/shriram/BUGS/BUGS.g:218:2: ( MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA distributionParameter CLOSEBRACKET )
+            // /home/shriram/BUGS/BUGS.g:218:4: MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA distributionParameter CLOSEBRACKET
             {
             match(input,MUTLTINOMIALOPENBRACKET,FOLLOW_MUTLTINOMIALOPENBRACKET_in_multinomial1285); if (state.failed) return ;
 
@@ -2617,11 +2617,11 @@ public class BUGSParser extends Parser {
 
 
     // $ANTLR start "dirichlet"
-    // /u/s/h/shrirams/BUGS/BUGS.g:222:1: dirichlet : DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA ;
+    // /home/shriram/BUGS/BUGS.g:222:1: dirichlet : DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA ;
     public final void dirichlet() throws RecognitionException {
         try {
-            // /u/s/h/shrirams/BUGS/BUGS.g:223:2: ( DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA )
-            // /u/s/h/shrirams/BUGS/BUGS.g:223:4: DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA
+            // /home/shriram/BUGS/BUGS.g:223:2: ( DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA )
+            // /home/shriram/BUGS/BUGS.g:223:4: DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA
             {
             match(input,DIRICHLETOPENBRACKET,FOLLOW_DIRICHLETOPENBRACKET_in_dirichlet1311); if (state.failed) return ;
 
@@ -2654,8 +2654,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred1_BUGS
     public final void synpred1_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:56:16: ( uvNode TILDE )
-        // /u/s/h/shrirams/BUGS/BUGS.g:56:17: uvNode TILDE
+        // /home/shriram/BUGS/BUGS.g:56:16: ( uvNode TILDE )
+        // /home/shriram/BUGS/BUGS.g:56:17: uvNode TILDE
         {
         pushFollow(FOLLOW_uvNode_in_synpred1_BUGS289);
         uvNode();
@@ -2672,8 +2672,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred2_BUGS
     public final void synpred2_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:57:4: ( mvNode TILDE )
-        // /u/s/h/shrirams/BUGS/BUGS.g:57:5: mvNode TILDE
+        // /home/shriram/BUGS/BUGS.g:57:4: ( mvNode TILDE )
+        // /home/shriram/BUGS/BUGS.g:57:5: mvNode TILDE
         {
         pushFollow(FOLLOW_mvNode_in_synpred2_BUGS303);
         mvNode();
@@ -2690,8 +2690,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred3_BUGS
     public final void synpred3_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:58:4: ( uvNode LEFTPOINTER )
-        // /u/s/h/shrirams/BUGS/BUGS.g:58:5: uvNode LEFTPOINTER
+        // /home/shriram/BUGS/BUGS.g:58:4: ( uvNode LEFTPOINTER )
+        // /home/shriram/BUGS/BUGS.g:58:5: uvNode LEFTPOINTER
         {
         pushFollow(FOLLOW_uvNode_in_synpred3_BUGS316);
         uvNode();
@@ -2708,8 +2708,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred4_BUGS
     public final void synpred4_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:59:4: ( mvNode LEFTPOINTER )
-        // /u/s/h/shrirams/BUGS/BUGS.g:59:5: mvNode LEFTPOINTER
+        // /home/shriram/BUGS/BUGS.g:59:4: ( mvNode LEFTPOINTER )
+        // /home/shriram/BUGS/BUGS.g:59:5: mvNode LEFTPOINTER
         {
         pushFollow(FOLLOW_mvNode_in_synpred4_BUGS330);
         mvNode();
@@ -2726,8 +2726,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred5_BUGS
     public final void synpred5_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:60:4: ( linkFunction LEFTPOINTER )
-        // /u/s/h/shrirams/BUGS/BUGS.g:60:5: linkFunction LEFTPOINTER
+        // /home/shriram/BUGS/BUGS.g:60:4: ( linkFunction LEFTPOINTER )
+        // /home/shriram/BUGS/BUGS.g:60:5: linkFunction LEFTPOINTER
         {
         pushFollow(FOLLOW_linkFunction_in_synpred5_BUGS344);
         linkFunction();
@@ -2744,8 +2744,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred6_BUGS
     public final void synpred6_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:66:4: ( uvNode )
-        // /u/s/h/shrirams/BUGS/BUGS.g:66:5: uvNode
+        // /home/shriram/BUGS/BUGS.g:66:4: ( uvNode )
+        // /home/shriram/BUGS/BUGS.g:66:5: uvNode
         {
         pushFollow(FOLLOW_uvNode_in_synpred6_BUGS381);
         uvNode();
@@ -2760,7 +2760,7 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred7_BUGS
     public final void synpred7_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:78:43: ( uvNode | CONSTANTVALUE )
+        // /home/shriram/BUGS/BUGS.g:78:43: ( uvNode | CONSTANTVALUE )
         int alt28=2;
         int LA28_0 = input.LA(1);
 
@@ -2780,7 +2780,7 @@ public class BUGSParser extends Parser {
         }
         switch (alt28) {
             case 1 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:78:44: uvNode
+                // /home/shriram/BUGS/BUGS.g:78:44: uvNode
                 {
                 pushFollow(FOLLOW_uvNode_in_synpred7_BUGS451);
                 uvNode();
@@ -2791,7 +2791,7 @@ public class BUGSParser extends Parser {
                 }
                 break;
             case 2 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:78:51: CONSTANTVALUE
+                // /home/shriram/BUGS/BUGS.g:78:51: CONSTANTVALUE
                 {
                 match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_synpred7_BUGS453); if (state.failed) return ;
 
@@ -2804,7 +2804,7 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred8_BUGS
     public final void synpred8_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:81:23: ( uvNode | CONSTANTVALUE )
+        // /home/shriram/BUGS/BUGS.g:81:23: ( uvNode | CONSTANTVALUE )
         int alt29=2;
         int LA29_0 = input.LA(1);
 
@@ -2824,7 +2824,7 @@ public class BUGSParser extends Parser {
         }
         switch (alt29) {
             case 1 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:81:24: uvNode
+                // /home/shriram/BUGS/BUGS.g:81:24: uvNode
                 {
                 pushFollow(FOLLOW_uvNode_in_synpred8_BUGS485);
                 uvNode();
@@ -2835,7 +2835,7 @@ public class BUGSParser extends Parser {
                 }
                 break;
             case 2 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:81:31: CONSTANTVALUE
+                // /home/shriram/BUGS/BUGS.g:81:31: CONSTANTVALUE
                 {
                 match(input,CONSTANTVALUE,FOLLOW_CONSTANTVALUE_in_synpred8_BUGS487); if (state.failed) return ;
 
@@ -2848,7 +2848,7 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred9_BUGS
     public final void synpred9_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:93:4: ( uvNode | linkFunction )
+        // /home/shriram/BUGS/BUGS.g:93:4: ( uvNode | linkFunction )
         int alt30=2;
         int LA30_0 = input.LA(1);
 
@@ -2868,7 +2868,7 @@ public class BUGSParser extends Parser {
         }
         switch (alt30) {
             case 1 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:93:5: uvNode
+                // /home/shriram/BUGS/BUGS.g:93:5: uvNode
                 {
                 pushFollow(FOLLOW_uvNode_in_synpred9_BUGS568);
                 uvNode();
@@ -2879,7 +2879,7 @@ public class BUGSParser extends Parser {
                 }
                 break;
             case 2 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:93:14: linkFunction
+                // /home/shriram/BUGS/BUGS.g:93:14: linkFunction
                 {
                 pushFollow(FOLLOW_linkFunction_in_synpred9_BUGS572);
                 linkFunction();
@@ -2896,8 +2896,8 @@ public class BUGSParser extends Parser {
 
     // $ANTLR start synpred10_BUGS
     public final void synpred10_BUGS_fragment() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:131:4: ( OPENBRACKET expression COLON )
-        // /u/s/h/shrirams/BUGS/BUGS.g:131:5: OPENBRACKET expression COLON
+        // /home/shriram/BUGS/BUGS.g:131:4: ( OPENBRACKET expression COLON )
+        // /home/shriram/BUGS/BUGS.g:131:5: OPENBRACKET expression COLON
         {
         match(input,OPENBRACKET,FOLLOW_OPENBRACKET_in_synpred10_BUGS834); if (state.failed) return ;
 
@@ -3130,12 +3130,12 @@ public class BUGSParser extends Parser {
     public static final BitSet FOLLOW_vectorFunctions_in_exprWithNodesFunctions679 = new BitSet(new long[]{0x000000020A040002L});
     public static final BitSet FOLLOW_set_in_exprWithNodesFunctions684 = new BitSet(new long[]{0x00000000A2218010L});
     public static final BitSet FOLLOW_exprWithNodesFunctions_in_exprWithNodesFunctions694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NODENAME_in_uvNode707 = new BitSet(new long[]{0x0000000100000002L});
-    public static final BitSet FOLLOW_OPENSQUAREBRACKET_in_uvNode710 = new BitSet(new long[]{0x00000000A0018000L});
-    public static final BitSet FOLLOW_expression_in_uvNode712 = new BitSet(new long[]{0x0000000000005000L});
-    public static final BitSet FOLLOW_COMMA_in_uvNode715 = new BitSet(new long[]{0x00000000A0018000L});
-    public static final BitSet FOLLOW_expression_in_uvNode717 = new BitSet(new long[]{0x0000000000005000L});
-    public static final BitSet FOLLOW_CLOSESQUAREBRACKET_in_uvNode722 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NODENAME_in_uvNode708 = new BitSet(new long[]{0x0000000100000002L});
+    public static final BitSet FOLLOW_OPENSQUAREBRACKET_in_uvNode711 = new BitSet(new long[]{0x00000000A0018000L});
+    public static final BitSet FOLLOW_expression_in_uvNode713 = new BitSet(new long[]{0x0000000000005000L});
+    public static final BitSet FOLLOW_COMMA_in_uvNode716 = new BitSet(new long[]{0x00000000A0018000L});
+    public static final BitSet FOLLOW_expression_in_uvNode718 = new BitSet(new long[]{0x0000000000005000L});
+    public static final BitSet FOLLOW_CLOSESQUAREBRACKET_in_uvNode723 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_NODENAME_in_mvNode736 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_OPENSQUAREBRACKET_in_mvNode738 = new BitSet(new long[]{0x00000000A0018000L});
     public static final BitSet FOLLOW_multiIndices_in_mvNode740 = new BitSet(new long[]{0x0000000000001000L});

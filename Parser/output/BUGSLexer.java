@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /u/s/h/shrirams/BUGS/BUGS.g 2013-01-04 14:31:12
+// $ANTLR 3.4 /home/shriram/BUGS/BUGS.g 2013-01-02 23:44:53
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -56,15 +56,15 @@ public class BUGSLexer extends Lexer {
     public BUGSLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "/u/s/h/shrirams/BUGS/BUGS.g"; }
+    public String getGrammarFileName() { return "/home/shriram/BUGS/BUGS.g"; }
 
     // $ANTLR start "ABSOPENBRACKET"
     public final void mABSOPENBRACKET() throws RecognitionException {
         try {
             int _type = ABSOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:2:16: ( 'abs(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:2:18: 'abs('
+            // /home/shriram/BUGS/BUGS.g:2:16: ( 'abs(' )
+            // /home/shriram/BUGS/BUGS.g:2:18: 'abs('
             {
             match("abs("); 
 
@@ -86,8 +86,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = BERNOULLIOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:3:22: ( 'dbern(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:3:24: 'dbern('
+            // /home/shriram/BUGS/BUGS.g:3:22: ( 'dbern(' )
+            // /home/shriram/BUGS/BUGS.g:3:24: 'dbern('
             {
             match("dbern("); 
 
@@ -109,8 +109,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = BETAOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:4:17: ( 'dbeta(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:4:19: 'dbeta('
+            // /home/shriram/BUGS/BUGS.g:4:17: ( 'dbeta(' )
+            // /home/shriram/BUGS/BUGS.g:4:19: 'dbeta('
             {
             match("dbeta("); 
 
@@ -132,8 +132,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CENSORBEGINWITHC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:5:18: ( 'C(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:5:20: 'C('
+            // /home/shriram/BUGS/BUGS.g:5:18: ( 'C(' )
+            // /home/shriram/BUGS/BUGS.g:5:20: 'C('
             {
             match("C("); 
 
@@ -155,8 +155,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CENSORBEGINWITHI;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:6:18: ( 'I(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:6:20: 'I('
+            // /home/shriram/BUGS/BUGS.g:6:18: ( 'I(' )
+            // /home/shriram/BUGS/BUGS.g:6:20: 'I('
             {
             match("I("); 
 
@@ -178,8 +178,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CLOGLOGOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:7:20: ( 'cloglog(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:7:22: 'cloglog('
+            // /home/shriram/BUGS/BUGS.g:7:20: ( 'cloglog(' )
+            // /home/shriram/BUGS/BUGS.g:7:22: 'cloglog('
             {
             match("cloglog("); 
 
@@ -201,8 +201,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CLOSEBRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:8:12: ( '}' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:8:14: '}'
+            // /home/shriram/BUGS/BUGS.g:8:12: ( '}' )
+            // /home/shriram/BUGS/BUGS.g:8:14: '}'
             {
             match('}'); 
 
@@ -222,8 +222,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CLOSEBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:9:14: ( ')' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:9:16: ')'
+            // /home/shriram/BUGS/BUGS.g:9:14: ( ')' )
+            // /home/shriram/BUGS/BUGS.g:9:16: ')'
             {
             match(')'); 
 
@@ -243,8 +243,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CLOSESQUAREBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:10:20: ( ']' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:10:22: ']'
+            // /home/shriram/BUGS/BUGS.g:10:20: ( ']' )
+            // /home/shriram/BUGS/BUGS.g:10:22: ']'
             {
             match(']'); 
 
@@ -264,8 +264,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = COLON;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:11:7: ( ':' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:11:9: ':'
+            // /home/shriram/BUGS/BUGS.g:11:7: ( ':' )
+            // /home/shriram/BUGS/BUGS.g:11:9: ':'
             {
             match(':'); 
 
@@ -285,8 +285,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:12:7: ( ',' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:12:9: ','
+            // /home/shriram/BUGS/BUGS.g:12:7: ( ',' )
+            // /home/shriram/BUGS/BUGS.g:12:9: ','
             {
             match(','); 
 
@@ -306,8 +306,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = DIRICHLETOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:13:22: ( 'ddirich(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:13:24: 'ddirich('
+            // /home/shriram/BUGS/BUGS.g:13:22: ( 'ddirich(' )
+            // /home/shriram/BUGS/BUGS.g:13:24: 'ddirich('
             {
             match("ddirich("); 
 
@@ -329,8 +329,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = DIV;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:14:5: ( '/' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:14:7: '/'
+            // /home/shriram/BUGS/BUGS.g:14:5: ( '/' )
+            // /home/shriram/BUGS/BUGS.g:14:7: '/'
             {
             match('/'); 
 
@@ -350,8 +350,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = FORSTART;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:15:10: ( 'for' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:15:12: 'for'
+            // /home/shriram/BUGS/BUGS.g:15:10: ( 'for' )
+            // /home/shriram/BUGS/BUGS.g:15:12: 'for'
             {
             match("for"); 
 
@@ -373,8 +373,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = IN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:16:4: ( 'in' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:16:6: 'in'
+            // /home/shriram/BUGS/BUGS.g:16:4: ( 'in' )
+            // /home/shriram/BUGS/BUGS.g:16:6: 'in'
             {
             match("in"); 
 
@@ -396,8 +396,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = INVERSEOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:17:20: ( 'inverse(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:17:22: 'inverse('
+            // /home/shriram/BUGS/BUGS.g:17:20: ( 'inverse(' )
+            // /home/shriram/BUGS/BUGS.g:17:22: 'inverse('
             {
             match("inverse("); 
 
@@ -419,8 +419,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = LEFTPOINTER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:18:13: ( '<-' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:18:15: '<-'
+            // /home/shriram/BUGS/BUGS.g:18:13: ( '<-' )
+            // /home/shriram/BUGS/BUGS.g:18:15: '<-'
             {
             match("<-"); 
 
@@ -442,8 +442,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = LOGITOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:19:18: ( 'logit(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:19:20: 'logit('
+            // /home/shriram/BUGS/BUGS.g:19:18: ( 'logit(' )
+            // /home/shriram/BUGS/BUGS.g:19:20: 'logit('
             {
             match("logit("); 
 
@@ -465,8 +465,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = LOGOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:20:16: ( 'log(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:20:18: 'log('
+            // /home/shriram/BUGS/BUGS.g:20:16: ( 'log(' )
+            // /home/shriram/BUGS/BUGS.g:20:18: 'log('
             {
             match("log("); 
 
@@ -488,8 +488,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:21:7: ( '-' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:21:9: '-'
+            // /home/shriram/BUGS/BUGS.g:21:7: ( '-' )
+            // /home/shriram/BUGS/BUGS.g:21:9: '-'
             {
             match('-'); 
 
@@ -509,8 +509,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = MODEL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:22:7: ( 'model' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:22:9: 'model'
+            // /home/shriram/BUGS/BUGS.g:22:7: ( 'model' )
+            // /home/shriram/BUGS/BUGS.g:22:9: 'model'
             {
             match("model"); 
 
@@ -532,8 +532,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = MULT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:23:6: ( '*' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:23:8: '*'
+            // /home/shriram/BUGS/BUGS.g:23:6: ( '*' )
+            // /home/shriram/BUGS/BUGS.g:23:8: '*'
             {
             match('*'); 
 
@@ -553,8 +553,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = MUTLTINOMIALOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:24:25: ( 'dmulti(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:24:27: 'dmulti('
+            // /home/shriram/BUGS/BUGS.g:24:25: ( 'dmulti(' )
+            // /home/shriram/BUGS/BUGS.g:24:27: 'dmulti('
             {
             match("dmulti("); 
 
@@ -576,8 +576,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = OPENBRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:25:11: ( '{' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:25:13: '{'
+            // /home/shriram/BUGS/BUGS.g:25:11: ( '{' )
+            // /home/shriram/BUGS/BUGS.g:25:13: '{'
             {
             match('{'); 
 
@@ -597,8 +597,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = OPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:26:13: ( '(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:26:15: '('
+            // /home/shriram/BUGS/BUGS.g:26:13: ( '(' )
+            // /home/shriram/BUGS/BUGS.g:26:15: '('
             {
             match('('); 
 
@@ -618,8 +618,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = OPENSQUAREBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:27:19: ( '[' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:27:21: '['
+            // /home/shriram/BUGS/BUGS.g:27:19: ( '[' )
+            // /home/shriram/BUGS/BUGS.g:27:21: '['
             {
             match('['); 
 
@@ -639,8 +639,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:28:6: ( '+' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:28:8: '+'
+            // /home/shriram/BUGS/BUGS.g:28:6: ( '+' )
+            // /home/shriram/BUGS/BUGS.g:28:8: '+'
             {
             match('+'); 
 
@@ -660,8 +660,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = PROBITOPENBRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:29:19: ( 'probit(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:29:21: 'probit('
+            // /home/shriram/BUGS/BUGS.g:29:19: ( 'probit(' )
+            // /home/shriram/BUGS/BUGS.g:29:21: 'probit('
             {
             match("probit("); 
 
@@ -683,8 +683,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = TILDE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:30:7: ( '~' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:30:9: '~'
+            // /home/shriram/BUGS/BUGS.g:30:7: ( '~' )
+            // /home/shriram/BUGS/BUGS.g:30:9: '~'
             {
             match('~'); 
 
@@ -704,8 +704,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = TRUNCATIONBEGIN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:31:17: ( 'T(' )
-            // /u/s/h/shrirams/BUGS/BUGS.g:31:19: 'T('
+            // /home/shriram/BUGS/BUGS.g:31:17: ( 'T(' )
+            // /home/shriram/BUGS/BUGS.g:31:19: 'T('
             {
             match("T("); 
 
@@ -727,10 +727,10 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CONSTANTINT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:158:2: ( ( '0' .. '9' )+ )
-            // /u/s/h/shrirams/BUGS/BUGS.g:158:4: ( '0' .. '9' )+
+            // /home/shriram/BUGS/BUGS.g:158:2: ( ( '0' .. '9' )+ )
+            // /home/shriram/BUGS/BUGS.g:158:4: ( '0' .. '9' )+
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:158:4: ( '0' .. '9' )+
+            // /home/shriram/BUGS/BUGS.g:158:4: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -744,7 +744,7 @@ public class BUGSLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:
+            	    // /home/shriram/BUGS/BUGS.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -785,8 +785,8 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = NODENAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:162:2: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '.' )* )
-            // /u/s/h/shrirams/BUGS/BUGS.g:162:3: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '.' )*
+            // /home/shriram/BUGS/BUGS.g:162:2: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '.' )* )
+            // /home/shriram/BUGS/BUGS.g:162:3: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '.' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -798,7 +798,7 @@ public class BUGSLexer extends Lexer {
             }
 
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:162:24: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '.' )*
+            // /home/shriram/BUGS/BUGS.g:162:24: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '.' )*
             loop2:
             do {
                 int alt2=2;
@@ -811,7 +811,7 @@ public class BUGSLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:
+            	    // /home/shriram/BUGS/BUGS.g:
             	    {
             	    if ( input.LA(1)=='.'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -848,10 +848,10 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = CONSTANTVALUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:166:2: ( ( '+' | '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'E' ( '+' | '-' )? ( '0' .. '9' )+ )? )
-            // /u/s/h/shrirams/BUGS/BUGS.g:166:4: ( '+' | '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'E' ( '+' | '-' )? ( '0' .. '9' )+ )?
+            // /home/shriram/BUGS/BUGS.g:166:2: ( ( '+' | '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'E' ( '+' | '-' )? ( '0' .. '9' )+ )? )
+            // /home/shriram/BUGS/BUGS.g:166:4: ( '+' | '-' )? ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'E' ( '+' | '-' )? ( '0' .. '9' )+ )?
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:166:4: ( '+' | '-' )?
+            // /home/shriram/BUGS/BUGS.g:166:4: ( '+' | '-' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -860,7 +860,7 @@ public class BUGSLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:
+                    // /home/shriram/BUGS/BUGS.g:
                     {
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                         input.consume();
@@ -878,7 +878,7 @@ public class BUGSLexer extends Lexer {
             }
 
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:166:14: ( '0' .. '9' )+
+            // /home/shriram/BUGS/BUGS.g:166:14: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -892,7 +892,7 @@ public class BUGSLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:
+            	    // /home/shriram/BUGS/BUGS.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -917,7 +917,7 @@ public class BUGSLexer extends Lexer {
             } while (true);
 
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:166:25: ( '.' ( '0' .. '9' )+ )?
+            // /home/shriram/BUGS/BUGS.g:166:25: ( '.' ( '0' .. '9' )+ )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -926,11 +926,11 @@ public class BUGSLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:166:26: '.' ( '0' .. '9' )+
+                    // /home/shriram/BUGS/BUGS.g:166:26: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
 
-                    // /u/s/h/shrirams/BUGS/BUGS.g:166:29: ( '0' .. '9' )+
+                    // /home/shriram/BUGS/BUGS.g:166:29: ( '0' .. '9' )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -944,7 +944,7 @@ public class BUGSLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // /u/s/h/shrirams/BUGS/BUGS.g:
+                    	    // /home/shriram/BUGS/BUGS.g:
                     	    {
                     	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
                     	        input.consume();
@@ -975,7 +975,7 @@ public class BUGSLexer extends Lexer {
             }
 
 
-            // /u/s/h/shrirams/BUGS/BUGS.g:166:42: ( 'E' ( '+' | '-' )? ( '0' .. '9' )+ )?
+            // /home/shriram/BUGS/BUGS.g:166:42: ( 'E' ( '+' | '-' )? ( '0' .. '9' )+ )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -984,11 +984,11 @@ public class BUGSLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // /u/s/h/shrirams/BUGS/BUGS.g:166:43: 'E' ( '+' | '-' )? ( '0' .. '9' )+
+                    // /home/shriram/BUGS/BUGS.g:166:43: 'E' ( '+' | '-' )? ( '0' .. '9' )+
                     {
                     match('E'); 
 
-                    // /u/s/h/shrirams/BUGS/BUGS.g:166:46: ( '+' | '-' )?
+                    // /home/shriram/BUGS/BUGS.g:166:46: ( '+' | '-' )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -997,7 +997,7 @@ public class BUGSLexer extends Lexer {
                     }
                     switch (alt7) {
                         case 1 :
-                            // /u/s/h/shrirams/BUGS/BUGS.g:
+                            // /home/shriram/BUGS/BUGS.g:
                             {
                             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                                 input.consume();
@@ -1015,7 +1015,7 @@ public class BUGSLexer extends Lexer {
                     }
 
 
-                    // /u/s/h/shrirams/BUGS/BUGS.g:166:56: ( '0' .. '9' )+
+                    // /home/shriram/BUGS/BUGS.g:166:56: ( '0' .. '9' )+
                     int cnt8=0;
                     loop8:
                     do {
@@ -1029,7 +1029,7 @@ public class BUGSLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // /u/s/h/shrirams/BUGS/BUGS.g:
+                    	    // /home/shriram/BUGS/BUGS.g:
                     	    {
                     	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
                     	        input.consume();
@@ -1076,10 +1076,10 @@ public class BUGSLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /u/s/h/shrirams/BUGS/BUGS.g:169:12: ( ( '\\t' | ' ' | '\\r' | '\\n' | ';' | '\\u000C' )+ )
-            // /u/s/h/shrirams/BUGS/BUGS.g:169:14: ( '\\t' | ' ' | '\\r' | '\\n' | ';' | '\\u000C' )+
+            // /home/shriram/BUGS/BUGS.g:169:12: ( ( '\\t' | ' ' | '\\r' | '\\n' | ';' | '\\u000C' )+ )
+            // /home/shriram/BUGS/BUGS.g:169:14: ( '\\t' | ' ' | '\\r' | '\\n' | ';' | '\\u000C' )+
             {
-            // /u/s/h/shrirams/BUGS/BUGS.g:169:14: ( '\\t' | ' ' | '\\r' | '\\n' | ';' | '\\u000C' )+
+            // /home/shriram/BUGS/BUGS.g:169:14: ( '\\t' | ' ' | '\\r' | '\\n' | ';' | '\\u000C' )+
             int cnt10=0;
             loop10:
             do {
@@ -1093,7 +1093,7 @@ public class BUGSLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // /u/s/h/shrirams/BUGS/BUGS.g:
+            	    // /home/shriram/BUGS/BUGS.g:
             	    {
             	    if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' '||input.LA(1)==';' ) {
             	        input.consume();
@@ -1132,12 +1132,12 @@ public class BUGSLexer extends Lexer {
     // $ANTLR end "WHITESPACE"
 
     public void mTokens() throws RecognitionException {
-        // /u/s/h/shrirams/BUGS/BUGS.g:1:8: ( ABSOPENBRACKET | BERNOULLIOPENBRACKET | BETAOPENBRACKET | CENSORBEGINWITHC | CENSORBEGINWITHI | CLOGLOGOPENBRACKET | CLOSEBRACE | CLOSEBRACKET | CLOSESQUAREBRACKET | COLON | COMMA | DIRICHLETOPENBRACKET | DIV | FORSTART | IN | INVERSEOPENBRACKET | LEFTPOINTER | LOGITOPENBRACKET | LOGOPENBRACKET | MINUS | MODEL | MULT | MUTLTINOMIALOPENBRACKET | OPENBRACE | OPENBRACKET | OPENSQUAREBRACKET | PLUS | PROBITOPENBRACKET | TILDE | TRUNCATIONBEGIN | CONSTANTINT | NODENAME | CONSTANTVALUE | WHITESPACE )
+        // /home/shriram/BUGS/BUGS.g:1:8: ( ABSOPENBRACKET | BERNOULLIOPENBRACKET | BETAOPENBRACKET | CENSORBEGINWITHC | CENSORBEGINWITHI | CLOGLOGOPENBRACKET | CLOSEBRACE | CLOSEBRACKET | CLOSESQUAREBRACKET | COLON | COMMA | DIRICHLETOPENBRACKET | DIV | FORSTART | IN | INVERSEOPENBRACKET | LEFTPOINTER | LOGITOPENBRACKET | LOGOPENBRACKET | MINUS | MODEL | MULT | MUTLTINOMIALOPENBRACKET | OPENBRACE | OPENBRACKET | OPENSQUAREBRACKET | PLUS | PROBITOPENBRACKET | TILDE | TRUNCATIONBEGIN | CONSTANTINT | NODENAME | CONSTANTVALUE | WHITESPACE )
         int alt11=34;
         alt11 = dfa11.predict(input);
         switch (alt11) {
             case 1 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:10: ABSOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:10: ABSOPENBRACKET
                 {
                 mABSOPENBRACKET(); 
 
@@ -1145,7 +1145,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:25: BERNOULLIOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:25: BERNOULLIOPENBRACKET
                 {
                 mBERNOULLIOPENBRACKET(); 
 
@@ -1153,7 +1153,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:46: BETAOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:46: BETAOPENBRACKET
                 {
                 mBETAOPENBRACKET(); 
 
@@ -1161,7 +1161,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:62: CENSORBEGINWITHC
+                // /home/shriram/BUGS/BUGS.g:1:62: CENSORBEGINWITHC
                 {
                 mCENSORBEGINWITHC(); 
 
@@ -1169,7 +1169,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:79: CENSORBEGINWITHI
+                // /home/shriram/BUGS/BUGS.g:1:79: CENSORBEGINWITHI
                 {
                 mCENSORBEGINWITHI(); 
 
@@ -1177,7 +1177,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:96: CLOGLOGOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:96: CLOGLOGOPENBRACKET
                 {
                 mCLOGLOGOPENBRACKET(); 
 
@@ -1185,7 +1185,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:115: CLOSEBRACE
+                // /home/shriram/BUGS/BUGS.g:1:115: CLOSEBRACE
                 {
                 mCLOSEBRACE(); 
 
@@ -1193,7 +1193,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:126: CLOSEBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:126: CLOSEBRACKET
                 {
                 mCLOSEBRACKET(); 
 
@@ -1201,7 +1201,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:139: CLOSESQUAREBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:139: CLOSESQUAREBRACKET
                 {
                 mCLOSESQUAREBRACKET(); 
 
@@ -1209,7 +1209,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:158: COLON
+                // /home/shriram/BUGS/BUGS.g:1:158: COLON
                 {
                 mCOLON(); 
 
@@ -1217,7 +1217,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:164: COMMA
+                // /home/shriram/BUGS/BUGS.g:1:164: COMMA
                 {
                 mCOMMA(); 
 
@@ -1225,7 +1225,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:170: DIRICHLETOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:170: DIRICHLETOPENBRACKET
                 {
                 mDIRICHLETOPENBRACKET(); 
 
@@ -1233,7 +1233,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:191: DIV
+                // /home/shriram/BUGS/BUGS.g:1:191: DIV
                 {
                 mDIV(); 
 
@@ -1241,7 +1241,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 14 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:195: FORSTART
+                // /home/shriram/BUGS/BUGS.g:1:195: FORSTART
                 {
                 mFORSTART(); 
 
@@ -1249,7 +1249,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 15 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:204: IN
+                // /home/shriram/BUGS/BUGS.g:1:204: IN
                 {
                 mIN(); 
 
@@ -1257,7 +1257,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 16 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:207: INVERSEOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:207: INVERSEOPENBRACKET
                 {
                 mINVERSEOPENBRACKET(); 
 
@@ -1265,7 +1265,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 17 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:226: LEFTPOINTER
+                // /home/shriram/BUGS/BUGS.g:1:226: LEFTPOINTER
                 {
                 mLEFTPOINTER(); 
 
@@ -1273,7 +1273,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 18 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:238: LOGITOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:238: LOGITOPENBRACKET
                 {
                 mLOGITOPENBRACKET(); 
 
@@ -1281,7 +1281,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 19 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:255: LOGOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:255: LOGOPENBRACKET
                 {
                 mLOGOPENBRACKET(); 
 
@@ -1289,7 +1289,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 20 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:270: MINUS
+                // /home/shriram/BUGS/BUGS.g:1:270: MINUS
                 {
                 mMINUS(); 
 
@@ -1297,7 +1297,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 21 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:276: MODEL
+                // /home/shriram/BUGS/BUGS.g:1:276: MODEL
                 {
                 mMODEL(); 
 
@@ -1305,7 +1305,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 22 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:282: MULT
+                // /home/shriram/BUGS/BUGS.g:1:282: MULT
                 {
                 mMULT(); 
 
@@ -1313,7 +1313,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 23 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:287: MUTLTINOMIALOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:287: MUTLTINOMIALOPENBRACKET
                 {
                 mMUTLTINOMIALOPENBRACKET(); 
 
@@ -1321,7 +1321,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 24 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:311: OPENBRACE
+                // /home/shriram/BUGS/BUGS.g:1:311: OPENBRACE
                 {
                 mOPENBRACE(); 
 
@@ -1329,7 +1329,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 25 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:321: OPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:321: OPENBRACKET
                 {
                 mOPENBRACKET(); 
 
@@ -1337,7 +1337,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 26 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:333: OPENSQUAREBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:333: OPENSQUAREBRACKET
                 {
                 mOPENSQUAREBRACKET(); 
 
@@ -1345,7 +1345,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 27 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:351: PLUS
+                // /home/shriram/BUGS/BUGS.g:1:351: PLUS
                 {
                 mPLUS(); 
 
@@ -1353,7 +1353,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 28 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:356: PROBITOPENBRACKET
+                // /home/shriram/BUGS/BUGS.g:1:356: PROBITOPENBRACKET
                 {
                 mPROBITOPENBRACKET(); 
 
@@ -1361,7 +1361,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 29 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:374: TILDE
+                // /home/shriram/BUGS/BUGS.g:1:374: TILDE
                 {
                 mTILDE(); 
 
@@ -1369,7 +1369,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 30 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:380: TRUNCATIONBEGIN
+                // /home/shriram/BUGS/BUGS.g:1:380: TRUNCATIONBEGIN
                 {
                 mTRUNCATIONBEGIN(); 
 
@@ -1377,7 +1377,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 31 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:396: CONSTANTINT
+                // /home/shriram/BUGS/BUGS.g:1:396: CONSTANTINT
                 {
                 mCONSTANTINT(); 
 
@@ -1385,7 +1385,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 32 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:408: NODENAME
+                // /home/shriram/BUGS/BUGS.g:1:408: NODENAME
                 {
                 mNODENAME(); 
 
@@ -1393,7 +1393,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 33 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:417: CONSTANTVALUE
+                // /home/shriram/BUGS/BUGS.g:1:417: CONSTANTVALUE
                 {
                 mCONSTANTVALUE(); 
 
@@ -1401,7 +1401,7 @@ public class BUGSLexer extends Lexer {
                 }
                 break;
             case 34 :
-                // /u/s/h/shrirams/BUGS/BUGS.g:1:431: WHITESPACE
+                // /home/shriram/BUGS/BUGS.g:1:431: WHITESPACE
                 {
                 mWHITESPACE(); 
 

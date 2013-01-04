@@ -105,8 +105,8 @@ exprWithNodesFunctions
 	: (unaryExpression | OPENBRACKET MINUS unaryExpression  CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ((PLUS|MINUS|MULT|DIV) exprWithNodesFunctions)?
 	;
 
-uvNode
-	: NODENAME (OPENSQUAREBRACKET expression (COMMA expression)*  CLOSESQUAREBRACKET)? 
+uvNode 
+	: NODENAME (OPENSQUAREBRACKET expression (COMMA expression)*  CLOSESQUAREBRACKET)?
 	;
 mvNode 
 	: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
