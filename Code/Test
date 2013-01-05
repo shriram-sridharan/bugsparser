@@ -1,0 +1,64 @@
+  model
+   {
+      for( i in 1 : N ) {
+         for( j in 1 : T ) {
+            Y[i , j] ~ dbeta(mu[i , j],tau.c)
+            mu[i , j] <- alpha[i] + beta[i] * (x[j] - xbar)
+            culmative.Y[i , j] <- abs(Y[i , j])
+            post.pv.Y[i , j] <- abs(Y[i , j])
+            prior.pv.Y[i , j] <- abs(Y[i , j])
+            replicate.post.Y[i , j] <- abs(Y[i , j])
+            pv.post.Y[i , j] <- abs(Y[i , j] - replicate.post.Y[i , j])
+            replicate.prior.Y[i , j] <- abs(Y[i , j])
+            pv.prior.Y[i , j] <- abs(Y[i , j] - replicate.prior.Y[i , j])
+         }
+         alpha[i] ~ dbeta(alpha.c,alpha.tau)
+         beta[i] ~ dbeta(beta.c,beta.tau)
+      }
+      tau.c ~ dbeta(0.001,0.001)
+      sigma <- 1 / abs(tau.c)
+      alpha.c ~ dbeta(0.0,1.0E-6)   
+      alpha.tau ~ dbeta(0.001,0.001)
+      beta.c ~ dbeta(0.0,1.0E-6)
+      beta.tau ~ dbeta(0.001,0.001)
+      alpha0 <- alpha.c - xbar * beta.c   
+   } 
+   
+    model
+   {
+      for (i in 1 : Dogs) {
+         xa[i, 1] <- 0; xs[i, 1] <- 0 p[i, 1] <- 0 
+         for (j in 2 : Trials) {
+            xa[i, j] <- inverse(Y[i, 1 : j - 1])
+            xs[i, j] <- j - 1 - xa[i, j]
+            log(p[i, j]) <- alpha * xa[i, j] + beta * xs[i, j]
+            y[i, j] <- 1 - Y[i, j]
+            y[i, j] ~ dbern(0)
+         }
+      } 
+       alpha ~ dbeta(0, 0.00001)I(, -0.00001)
+       beta ~ dbeta(0, 0.00001)I(, -0.00001)
+       A <- abs(alpha)
+       B <- abs(beta)
+   } 
+
+   model
+   {
+      for( k in 1 : P ) {
+         for( i in 1 : N ) {
+            Y[i , k] ~ dbeta(m[i , k], tau1)
+            m[i , k] <- mu + sign[T[i , k]] * phi / 2 + sign[k] * pi / 2 + delta[i]
+            T[i , k] <- group[i] * (k - 1.5) + 1.5
+         }
+      }
+      for( i in 1 : N ) {
+         delta[i] ~ dbeta(0.0, tau2)
+      }
+      tau1 ~ dbeta(0.001, 0.001) sigma1 <- 1 / abs(tau1)
+      tau2 ~ dbeta(0.001, 0.001) sigma2 <- 1 / abs(tau2)
+      mu ~ dbeta(0.0, 1.0E-6)
+      phi ~ dbeta(0.0, 1.0E-6)
+      pi ~ dbeta(0.0, 1.0E-6)
+      theta <- abs(phi)
+      equiv <- abs(theta - 0.8) - abs(theta - 1.2)
+   }
