@@ -44,7 +44,9 @@ BUGSParser.d: ../BUGSParser.cpp ../BUGSParser.hpp \
  /home/shriram/bugsparser/Parser/output/include/antlr3traits.hpp \
  /home/shriram/bugsparser/Parser/output/include/antlr3treeparser.hpp \
  /home/shriram/bugsparser/Parser/output/include/antlr3treeparser.inl \
- ../BUGSLexer.hpp
+ ../BUGSLexer.hpp ../ModelClasses/Program.hpp ../ModelClasses/Node.hpp \
+ ../ModelClasses/StochasticNode.hpp ../ModelClasses/Distribution.hpp \
+ ../ModelClasses/UnivariateNode.hpp
 
 ../BUGSParser.hpp:
 
@@ -139,3 +141,13 @@ BUGSParser.d: ../BUGSParser.cpp ../BUGSParser.hpp \
 /home/shriram/bugsparser/Parser/output/include/antlr3treeparser.inl:
 
 ../BUGSLexer.hpp:
+
+../ModelClasses/Program.hpp:
+
+../ModelClasses/Node.hpp:
+
+../ModelClasses/StochasticNode.hpp:
+
+../ModelClasses/Distribution.hpp:
+
+../ModelClasses/UnivariateNode.hpp:

@@ -9,10 +9,8 @@ CPP_SRCS += \
 ../ModelClasses/MultivariateNode.cpp \
 ../ModelClasses/Node.cpp \
 ../ModelClasses/Program.cpp \
-../ModelClasses/Statement.cpp \
 ../ModelClasses/StochasticNode.cpp \
-../ModelClasses/UnivariateNodeWithCensor.cpp \
-../ModelClasses/UnivariateNodeWithTruncation.cpp 
+../ModelClasses/UnivariateNode.cpp 
 
 OBJS += \
 ./ModelClasses/Distribution.o \
@@ -20,10 +18,8 @@ OBJS += \
 ./ModelClasses/MultivariateNode.o \
 ./ModelClasses/Node.o \
 ./ModelClasses/Program.o \
-./ModelClasses/Statement.o \
 ./ModelClasses/StochasticNode.o \
-./ModelClasses/UnivariateNodeWithCensor.o \
-./ModelClasses/UnivariateNodeWithTruncation.o 
+./ModelClasses/UnivariateNode.o 
 
 CPP_DEPS += \
 ./ModelClasses/Distribution.d \
@@ -31,10 +27,8 @@ CPP_DEPS += \
 ./ModelClasses/MultivariateNode.d \
 ./ModelClasses/Node.d \
 ./ModelClasses/Program.d \
-./ModelClasses/Statement.d \
 ./ModelClasses/StochasticNode.d \
-./ModelClasses/UnivariateNodeWithCensor.d \
-./ModelClasses/UnivariateNodeWithTruncation.d 
+./ModelClasses/UnivariateNode.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

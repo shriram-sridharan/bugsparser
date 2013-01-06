@@ -8,15 +8,17 @@
 #ifndef PROGRAM_H_
 #define PROGRAM_H_
 
-#include "Statement.hpp"
 #include <iostream>
-#include <vector>
+#include <list>
+#include "Node.hpp"
+#include "StochasticNode.hpp"
+#include "UnivariateNode.hpp"
 
 class Program {
 public:
 	Program();
 	virtual ~Program();
-	std::vector<Statement> statements;
+	std::list<Node> nodes;
 };
 
 #endif /* PROGRAM_H_ */
