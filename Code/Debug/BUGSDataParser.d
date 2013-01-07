@@ -1,4 +1,5 @@
-main.d main.o: ../main.cpp ../BUGSParser.hpp \
+BUGSDataParser.d BUGSDataParser.o: ../BUGSDataParser.cpp \
+ ../BUGSDataParser.hpp \
  /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3.hpp \
  /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3defs.hpp \
  /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3errors.hpp \
@@ -44,15 +45,10 @@ main.d main.o: ../main.cpp ../BUGSParser.hpp \
  /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3traits.hpp \
  /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3treeparser.hpp \
  /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3treeparser.inl \
- ../BUGSLexer.hpp ../ModelClasses/Program.hpp ../ModelClasses/Node.hpp \
- ../ModelClasses/StochasticNode.hpp ../ModelClasses/Distribution.hpp \
- ../ModelClasses/UnivariateNode.hpp ../ModelClasses/MultivariateNode.hpp \
- ../ModelClasses/UnivariateDistribution.hpp \
- ../ModelClasses/MultivariateDistribution.hpp ../BUGSDataParser.hpp \
  ../BUGSDataLexer.hpp ../DataClasses/IData.hpp \
  ../DataClasses/MainMemoryData.hpp ../DataClasses/IData.hpp
 
-../BUGSParser.hpp:
+../BUGSDataParser.hpp:
 
 /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3.hpp:
 
@@ -143,26 +139,6 @@ main.d main.o: ../main.cpp ../BUGSParser.hpp \
 /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3treeparser.hpp:
 
 /afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include/antlr3treeparser.inl:
-
-../BUGSLexer.hpp:
-
-../ModelClasses/Program.hpp:
-
-../ModelClasses/Node.hpp:
-
-../ModelClasses/StochasticNode.hpp:
-
-../ModelClasses/Distribution.hpp:
-
-../ModelClasses/UnivariateNode.hpp:
-
-../ModelClasses/MultivariateNode.hpp:
-
-../ModelClasses/UnivariateDistribution.hpp:
-
-../ModelClasses/MultivariateDistribution.hpp:
-
-../BUGSDataParser.hpp:
 
 ../BUGSDataLexer.hpp:
 

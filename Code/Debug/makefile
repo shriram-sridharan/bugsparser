@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include subdir.mk
 -include ModelClasses/subdir.mk
+-include DataClasses/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
