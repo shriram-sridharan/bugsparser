@@ -7,27 +7,24 @@ CPP_SRCS += \
 ../ModelClasses/Distribution.cpp \
 ../ModelClasses/LogicalNode.cpp \
 ../ModelClasses/MultivariateNode.cpp \
-../ModelClasses/Node.cpp \
 ../ModelClasses/Program.cpp \
-../ModelClasses/StochasticNode.cpp \
+../ModelClasses/UnivariateDistribution.cpp \
 ../ModelClasses/UnivariateNode.cpp 
 
 OBJS += \
 ./ModelClasses/Distribution.o \
 ./ModelClasses/LogicalNode.o \
 ./ModelClasses/MultivariateNode.o \
-./ModelClasses/Node.o \
 ./ModelClasses/Program.o \
-./ModelClasses/StochasticNode.o \
+./ModelClasses/UnivariateDistribution.o \
 ./ModelClasses/UnivariateNode.o 
 
 CPP_DEPS += \
 ./ModelClasses/Distribution.d \
 ./ModelClasses/LogicalNode.d \
 ./ModelClasses/MultivariateNode.d \
-./ModelClasses/Node.d \
 ./ModelClasses/Program.d \
-./ModelClasses/StochasticNode.d \
+./ModelClasses/UnivariateDistribution.d \
 ./ModelClasses/UnivariateNode.d 
 
 

@@ -13,12 +13,16 @@
 #include "Node.hpp"
 #include "StochasticNode.hpp"
 #include "UnivariateNode.hpp"
+#include "MultivariateNode.hpp"
+
+#include "Distribution.hpp"
+#include "UnivariateDistribution.hpp"
 
 class Program {
 public:
 	Program();
 	virtual ~Program();
-	std::list<Node> nodes;
+	std::list<Node*> nodes;
 };
 
 #endif /* PROGRAM_H_ */

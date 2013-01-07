@@ -15,3 +15,4 @@ UnivariateNode::UnivariateNode() {
 UnivariateNode::~UnivariateNode() {
 	// TODO Auto-generated destructor stub
 }
+

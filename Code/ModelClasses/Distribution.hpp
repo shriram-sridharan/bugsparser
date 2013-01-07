@@ -7,11 +7,15 @@
 
 #ifndef DISTRIBUTION_H_
 #define DISTRIBUTION_H_
+#include <string>
+#include <list>
 
 class Distribution {
 public:
 	Distribution();
 	virtual ~Distribution();
+	std::string name;
+	std::list<std::string> parameters;
 };
 
 #endif /* DISTRIBUTION_H_ */

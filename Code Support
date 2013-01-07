@@ -1,8 +1,10 @@
+Multivariate Nodes Support?
 Supporting Censor and Truncation?
 Distributions support?
 Functions support?
 
 
 Problems with Semantic Understanding:
-For loops - statements
-loop variables where we need to point them to DATA
+Array Indexing of nodenames
+For loops 
+Map Variables to DATA

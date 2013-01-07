@@ -11,8 +11,7 @@
 
 class Node {
 public:
-	Node();
-	virtual ~Node();
+	virtual ~Node() {};
 	std::string nodename;
 };
 

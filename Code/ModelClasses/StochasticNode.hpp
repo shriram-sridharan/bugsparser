@@ -13,8 +13,7 @@
 
 class StochasticNode : public Node {
 public:
-	StochasticNode();
-	virtual ~StochasticNode();
+	virtual ~StochasticNode() {};
 	Distribution distribution;
 };
 

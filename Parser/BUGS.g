@@ -65,7 +65,7 @@ using namespace std;
 prog returns [Program program]: MODEL OPENBRACE statements CLOSEBRACE {$program.nodes = $statements.nodes;}
 	;
 
-statements returns [list<Node> nodes]:  
+statements returns [list<Node* > nodes]:  
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$nodes.push_back($ste1.stochasticNode);}
 	| (mvNode TILDE) => ste2=stochasticNodeExpr {$nodes.push_back($ste2.stochasticNode);}
 	| (uvNode LEFTPOINTER) => logicalNodeExpr 
@@ -75,16 +75,16 @@ statements returns [list<Node> nodes]:
 	)+
 	;
 
-stochasticNodeExpr returns [StochasticNode stochasticNode]
-	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNode= $uvsne.univariateNode;}
+stochasticNodeExpr returns [StochasticNode* stochasticNode]
+	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNode= &$uvsne.univariateNode;}
 	| mvStochasticNodeExpr 
 	;
 
 uvStochasticNodeExpr returns[UnivariateNode univariateNode]
 	:uvNode {$univariateNode.nodename = $uvNode.text;} TILDE uvDistribution 
 	;
-mvStochasticNodeExpr 
-	:mvNode TILDE mvDistribution
+mvStochasticNodeExpr returns[MultivariateNode multivariateNode]
+	:mvNode {$multivariateNode.nodename = $mvNode.text;} TILDE mvDistribution
 	;
 	
 censor
@@ -189,8 +189,8 @@ vectorFunctions
 	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
 	;
 	
-uvDistribution 
-	: discreteUnivariate 
+uvDistribution returns [UnivariateDistribution uvdis]
+	: discreteUnivariate {$uvdis.name = $discreteUnivariate.name; $uvdis.parameters = $discreteUnivariate.parameters;}
 	| continuousUnivariate
 	;
 
@@ -199,8 +199,8 @@ mvDistribution
 	| continuousMultivariate
 	;
 
-discreteUnivariate 
-	: bernoulli 
+discreteUnivariate returns [std::string name, std::list<string> parameters]
+	: bernoulli {$name="BERNOULLI"; $parameters=$bernoulli.parameters;}
 	;
 
 continuousUnivariate 
@@ -219,8 +219,8 @@ distributionParameter
 	: uvNode | CONSTANTINT | CONSTANTVALUE
 	;
 	
-bernoulli 
-	: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET
+bernoulli returns [std::list<string> parameters]
+	: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET {$parameters.push_back($distributionParameter.text);}
 	;
 
 beta 
