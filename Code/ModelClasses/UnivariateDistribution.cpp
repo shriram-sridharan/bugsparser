@@ -13,5 +13,5 @@ UnivariateDistribution::UnivariateDistribution() {
 }
 
 UnivariateDistribution::~UnivariateDistribution() {
-	// TODO Auto-generated destructor stub
+	delete this;
 }

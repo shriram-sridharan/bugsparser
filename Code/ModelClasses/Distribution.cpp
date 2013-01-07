@@ -13,5 +13,5 @@ Distribution::Distribution() {
 }
 
 Distribution::~Distribution() {
-	// TODO Auto-generated destructor stub
+	delete this;
 }

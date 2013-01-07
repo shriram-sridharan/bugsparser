@@ -14,7 +14,7 @@
 class StochasticNode : public Node {
 public:
 	virtual ~StochasticNode() {};
-	Distribution distribution;
+	Distribution* distribution;
 };
 
 #endif /* STOCHASTICNODE_HPP_ */

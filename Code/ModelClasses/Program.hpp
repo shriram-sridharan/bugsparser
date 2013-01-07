@@ -17,6 +17,7 @@
 
 #include "Distribution.hpp"
 #include "UnivariateDistribution.hpp"
+#include "MultivariateDistribution.hpp"
 
 class Program {
 public:

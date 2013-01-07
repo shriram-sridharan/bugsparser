@@ -13,6 +13,7 @@ UnivariateNode::UnivariateNode() {
 }
 
 UnivariateNode::~UnivariateNode() {
-	// TODO Auto-generated destructor stub
+	delete distribution;
+	delete this;
 }
 

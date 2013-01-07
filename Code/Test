@@ -1,5 +1,6 @@
   model
    {
+   Y[i, 1 : j - 1] ~ ddirich(xyz[1,j:k])
       for( i in 1 : N ) {
          for( j in 1 : T ) {
             Y[i , j] ~ dbeta(mu[i , j],tau.c)

@@ -13,5 +13,5 @@ LogicalNode::LogicalNode() {
 }
 
 LogicalNode::~LogicalNode() {
-	// TODO Auto-generated destructor stub
+	delete this;
 }

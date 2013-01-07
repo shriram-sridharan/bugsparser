@@ -13,5 +13,6 @@ MultivariateNode::MultivariateNode() {
 }
 
 MultivariateNode::~MultivariateNode() {
-	// TODO Auto-generated destructor stub
+	delete distribution;
+	delete this;
 }

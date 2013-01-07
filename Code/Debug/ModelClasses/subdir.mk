@@ -6,6 +6,7 @@
 CPP_SRCS += \
 ../ModelClasses/Distribution.cpp \
 ../ModelClasses/LogicalNode.cpp \
+../ModelClasses/MultivariateDistribution.cpp \
 ../ModelClasses/MultivariateNode.cpp \
 ../ModelClasses/Program.cpp \
 ../ModelClasses/UnivariateDistribution.cpp \
@@ -14,6 +15,7 @@ CPP_SRCS += \
 OBJS += \
 ./ModelClasses/Distribution.o \
 ./ModelClasses/LogicalNode.o \
+./ModelClasses/MultivariateDistribution.o \
 ./ModelClasses/MultivariateNode.o \
 ./ModelClasses/Program.o \
 ./ModelClasses/UnivariateDistribution.o \
@@ -22,6 +24,7 @@ OBJS += \
 CPP_DEPS += \
 ./ModelClasses/Distribution.d \
 ./ModelClasses/LogicalNode.d \
+./ModelClasses/MultivariateDistribution.d \
 ./ModelClasses/MultivariateNode.d \
 ./ModelClasses/Program.d \
 ./ModelClasses/UnivariateDistribution.d \
@@ -32,7 +35,7 @@ CPP_DEPS += \
 ModelClasses/%.o: ../ModelClasses/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I/home/shriram/bugsparser/Parser/output/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	g++ -I/afs/cs.wisc.edu/u/s/h/shrirams/bugsparser/Code/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

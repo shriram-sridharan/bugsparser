@@ -13,5 +13,8 @@ Program::Program() {
 }
 
 Program::~Program() {
-	// TODO Auto-generated destructor stub
+	for (std::list<Node*>::iterator it = nodes.begin(); it!= nodes.end(); ++it){
+		delete *it;
+	}
+	delete this;
 }

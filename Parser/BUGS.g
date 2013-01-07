@@ -76,15 +76,15 @@ statements returns [list<Node* > nodes]:
 	;
 
 stochasticNodeExpr returns [StochasticNode* stochasticNode]
-	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNode= &$uvsne.univariateNode;}
-	| mvStochasticNodeExpr 
+	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNode= $uvsne.univariateNode;}
+	| mvsne=mvStochasticNodeExpr {$stochasticNode= $mvsne.multivariateNode;}
 	;
 
-uvStochasticNodeExpr returns[UnivariateNode univariateNode]
-	:uvNode {$univariateNode.nodename = $uvNode.text;} TILDE uvDistribution 
+uvStochasticNodeExpr returns[UnivariateNode* univariateNode = new UnivariateNode()]
+	:uvNode {$univariateNode->nodename = $uvNode.text;} TILDE uvDistribution  {$univariateNode->distribution = $uvDistribution.uvdis;}
 	;
-mvStochasticNodeExpr returns[MultivariateNode multivariateNode]
-	:mvNode {$multivariateNode.nodename = $mvNode.text;} TILDE mvDistribution
+mvStochasticNodeExpr returns[MultivariateNode* multivariateNode = new MultivariateNode()]
+	:mvNode {$multivariateNode->nodename = $mvNode.text;} TILDE mvDistribution {$multivariateNode->distribution = $mvDistribution.mvdis;}
 	;
 	
 censor
@@ -189,30 +189,30 @@ vectorFunctions
 	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
 	;
 	
-uvDistribution returns [UnivariateDistribution uvdis]
-	: discreteUnivariate {$uvdis.name = $discreteUnivariate.name; $uvdis.parameters = $discreteUnivariate.parameters;}
-	| continuousUnivariate
+uvDistribution returns [UnivariateDistribution* uvdis = new UnivariateDistribution()]
+	: discreteUnivariate {$uvdis->name = $discreteUnivariate.name; $uvdis->parameters = $discreteUnivariate.parameters;}
+	| continuousUnivariate {$uvdis->name = $continuousUnivariate.name; $uvdis->parameters = $continuousUnivariate.parameters;}
 	;
 
-mvDistribution 
-	: discreteMultivariate 
-	| continuousMultivariate
+mvDistribution returns [MultivariateDistribution* mvdis = new MultivariateDistribution()]
+	: discreteMultivariate {$mvdis->name = $discreteMultivariate.name; $mvdis->parameters = $discreteMultivariate.parameters;}
+	| continuousMultivariate {$mvdis->name = $continuousMultivariate.name; $mvdis->parameters = $continuousMultivariate.parameters;}
 	;
 
 discreteUnivariate returns [std::string name, std::list<string> parameters]
 	: bernoulli {$name="BERNOULLI"; $parameters=$bernoulli.parameters;}
 	;
 
-continuousUnivariate 
-	: beta 
+continuousUnivariate returns [std::string name, std::list<string> parameters]
+	: beta {$name="BETA"; $parameters=$beta.parameters;}
 	;
 
-discreteMultivariate 
-	: multinomial
+discreteMultivariate returns [std::string name, std::list<string> parameters]
+	: multinomial {$name="MULTINOMIAL"; $parameters=$multinomial.parameters;}
 	;
 
-continuousMultivariate 
-	: dirichlet
+continuousMultivariate  returns [std::string name, std::list<string> parameters]
+	: dirichlet{$name="DIRICHLET"; $parameters=$dirichlet.parameters;}
 	;
 	
 distributionParameter 
@@ -223,15 +223,15 @@ bernoulli returns [std::list<string> parameters]
 	: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET {$parameters.push_back($distributionParameter.text);}
 	;
 
-beta 
-	: BETAOPENBRACKET distributionParameter COMMA distributionParameter CLOSEBRACKET
+beta returns [std::list<string> parameters]
+	: BETAOPENBRACKET dp1=distributionParameter  COMMA dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.text); $parameters.push_back($dp2.text);}
 	;
 
-multinomial 
-	: MUTLTINOMIALOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA 
-	distributionParameter CLOSEBRACKET
+multinomial returns [std::list<string> parameters]
+	: MUTLTINOMIALOPENBRACKET dp1=mvNode COMMA 
+	dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.text); $parameters.push_back($dp2.text);}
 	;
 
-dirichlet 
-	: DIRICHLETOPENBRACKET distributionParameter OPENSQUAREBRACKET CLOSESQUAREBRACKET COMMA
+dirichlet returns [std::list<string> parameters]
+	: DIRICHLETOPENBRACKET mvNode CLOSEBRACKET {$parameters.push_back($mvNode.text);}
 	;
