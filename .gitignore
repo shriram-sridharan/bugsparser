@@ -1,3 +1,5 @@
 *~
 .metadata
-
+Code/Debug/*
+.cproject
+.project
