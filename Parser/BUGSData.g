@@ -37,13 +37,14 @@ using namespace std;
 data	returns [MainMemoryData* mmdata = new MainMemoryData()]
 scope{
 	map<std::string, float> scalars;
+	map<std::string, std::vector<float> > vectors;
 }
-	: LIST datatype (COMMA datatype)* CLOSEBRACKET {mmdata->scalars = $data::scalars;}
+	: LIST datatype (COMMA datatype)* CLOSEBRACKET {mmdata->scalars = $data::scalars; mmdata->vectors = $data::vectors;}
 	;
 	
 datatype 	
 	: scalar {$data::scalars[$scalar.nodename] = $scalar.value;}
-	| vector
+	| vector {$data::vectors[$vector.nodename] = $vector.value;}
 	| array
 	;
 	
@@ -51,12 +52,12 @@ array
 	: NODENAME EQUALTO STRUCTUREBEGIN DOTDATA EQUALTO vectordata COMMA DOTDIM EQUALTO vectordata CLOSEBRACKET
 	;
 
-vector	
-	: NODENAME EQUALTO vectordata
+vector	returns [std::string nodename, std::vector<float> value]
+	: NODENAME EQUALTO vectordata {$nodename = $NODENAME.text; $value = $vectordata.value;}
 	;
 
-vectordata 
-	: VECTORBEGIN CONSTANTVALUE (COMMA CONSTANTVALUE)* CLOSEBRACKET
+vectordata   returns [std::vector<float> value]
+	: VECTORBEGIN cv1=CONSTANTVALUE {$value.push_back(::atof($cv1.text.c_str()));} (COMMA cv2=CONSTANTVALUE {$value.push_back(::atof($cv2.text.c_str()));})* CLOSEBRACKET
 	;
 	
 

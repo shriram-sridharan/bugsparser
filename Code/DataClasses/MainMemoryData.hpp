@@ -10,6 +10,7 @@
 #include "IData.hpp"
 #include <map>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
 	MainMemoryData();
 	virtual ~MainMemoryData();
 	map<std::string, float> scalars;
+	map<std::string, vector<float> > vectors;
 	float getData(std::string variablename);
 };
 
