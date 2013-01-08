@@ -8,6 +8,7 @@
 #ifndef MAINMEMORYDATA_HPP_
 #define MAINMEMORYDATA_HPP_
 #include "IData.hpp"
+#include "BugsArray.hpp"
 #include <map>
 #include <string>
 #include <vector>
@@ -20,6 +21,8 @@ public:
 	virtual ~MainMemoryData();
 	map<std::string, float> scalars;
 	map<std::string, vector<float> > vectors;
+	map<std::string, BugsArray* > array;
+
 	float getData(std::string variablename);
 };
 

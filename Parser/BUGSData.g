@@ -38,18 +38,25 @@ data	returns [MainMemoryData* mmdata = new MainMemoryData()]
 scope{
 	map<std::string, float> scalars;
 	map<std::string, std::vector<float> > vectors;
+	map<std::string, BugsArray* > array;
 }
-	: LIST datatype (COMMA datatype)* CLOSEBRACKET {mmdata->scalars = $data::scalars; mmdata->vectors = $data::vectors;}
+	: LIST datatype (COMMA datatype)* CLOSEBRACKET 
+	{mmdata->scalars = $data::scalars; mmdata->vectors = $data::vectors; mmdata->array = $data::array;}
 	;
 	
 datatype 	
 	: scalar {$data::scalars[$scalar.nodename] = $scalar.value;}
 	| vector {$data::vectors[$vector.nodename] = $vector.value;}
-	| array
+	| array  
+	{ BugsArray* bugsarray = new BugsArray();
+	bugsarray->data=$array.value;
+	bugsarray->dimensions=$array.dimensions;
+	$data::array[$array.nodename]= bugsarray; }
 	;
 	
-array	
-	: NODENAME EQUALTO STRUCTUREBEGIN DOTDATA EQUALTO vectordata COMMA DOTDIM EQUALTO vectordata CLOSEBRACKET
+array	returns [std::string nodename, std::vector<float> value, std::vector<float> dimensions]
+	: NODENAME EQUALTO STRUCTUREBEGIN DOTDATA EQUALTO v1=vectordata COMMA DOTDIM EQUALTO v2=vectordata CLOSEBRACKET
+	{$nodename = $NODENAME.text; $value=$v1.value; $dimensions=$v2.value;}
 	;
 
 vector	returns [std::string nodename, std::vector<float> value]
