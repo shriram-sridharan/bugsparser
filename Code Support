@@ -1,17 +1,21 @@
 To Do:
+Logical Node Expression and Parent Nodes as Node Pointers??
 Delete function in destructors??
 Data passed into prog. Create Constructor instead??
+Code exiting without any information??
+Global variables?
 
 Support:
 Give Data And Init in the same file.
 Please put brackets for expressions [Does not follow BODMAS rule]
+Rectangular format for DATA === NOT SUPPORTED
+Comments not supported
+
+Support Questions:
 Multivariate Nodes Support?
 Supporting Censor and Truncation?
 Distributions support?
 Functions support?
-Rectangular format for DATA === NOT SUPPORTED
 
 Problems with Semantic Understanding:
-Array Indexing of nodenames
 For loops 
-Map Variables to DATA

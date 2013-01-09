@@ -1,6 +1,7 @@
 #include "BUGSParser.hpp"
 #include "BUGSDataParser.hpp"
 #include <iterator>
+#include <typeinfo>
 
 using namespace BUGS;
 using namespace BUGSData;
@@ -21,11 +22,23 @@ void parseProgram(IData* mmdata)
         for(std::vector<int>::iterator stit = nodeparameters.begin();stit != nodeparameters.end();++stit) {
 			cout << *stit << " ";
 		}
-        cout << ((StochasticNode*)((*it)))->distribution->name << " ";
-        list<string> parameters = ((StochasticNode*)((*it)))->distribution->parameters;
-        for(std::list<string>::iterator stit = parameters.begin();stit != parameters.end();++stit){
-            cout << *stit << " ";
+
+        if(typeid(**it) == typeid(UnivariateNode)){
+			cout << ((UnivariateNode*)((*it)))->distribution->name << " ";
+			list<string> parameters = ((UnivariateNode*)((*it)))->distribution->parameters;
+			for(std::list<string>::iterator stit = parameters.begin();stit != parameters.end();++stit){
+				cout << *stit << " ";
+			}
         }
+
+        if(typeid(**it) == typeid(LogicalNode)){
+			cout << ((LogicalNode*)(*it))->functionname << " ";
+			LogicalNode* ln = ((LogicalNode*)(*it));
+			for(std::vector<string>::iterator stit = ln->parentnodes.begin();stit != ln->parentnodes.end();++stit){
+				cout << *stit << " ";
+			}
+			cout << endl<< ln->expression ;
+		}
     }
 
     cout << endl<< "Done Parsing" << endl;
@@ -72,8 +85,16 @@ IData* parseData() {
 
 int main(int argc, char* argv[])
     {
-	IData* data = parseData();
-	parseProgram(data);
+	try{
+		IData* data = parseData();
+		parseProgram(data);
+	}
+	catch (const std::exception& ex) {
+		cout << "Exception" << ex.what() << endl;
+	}
+	catch(...){
+		cout << "Exception" << endl;
+	}
     return 1;
     }
 

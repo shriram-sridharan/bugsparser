@@ -14,6 +14,7 @@
 #include "StochasticNode.hpp"
 #include "UnivariateNode.hpp"
 #include "MultivariateNode.hpp"
+#include "LogicalNode.hpp"
 
 #include "Distribution.hpp"
 #include "UnivariateDistribution.hpp"
