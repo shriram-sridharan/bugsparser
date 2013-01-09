@@ -8,11 +8,12 @@
 #ifndef IDATA_HPP_
 #define IDATA_HPP_
 #include <string>
+#include <vector>
 
 class IData {
 	public:
 		virtual ~IData() {};
-		virtual float getData(std::string variablename) = 0;
+		virtual float getData(std::string variablename, std::vector<int> indices) = 0;
 };
 
 #endif /* IDATA_HPP_ */

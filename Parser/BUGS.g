@@ -36,6 +36,7 @@ tokens {
 	MULT = '*';
 	DIV = '/';
 	COLON = ':';	
+	DOT='.';
 }
 
 @lexer::namespace {BUGS}
@@ -56,13 +57,18 @@ using namespace std;
 @parser::includes{
 #include "BUGSLexer.hpp"
 #include "ModelClasses/Program.hpp"
+#include "DataClasses/IData.hpp"
 }
 
 @parser::members {
-
+IData* data;
 }
 /* Parser Rules*/
-prog returns [Program program]: MODEL OPENBRACE statements CLOSEBRACE {$program.nodes = $statements.nodes;}
+prog [IData* inputdata] returns [Program program]
+@init{
+	data = $inputdata;
+}
+	: MODEL OPENBRACE statements CLOSEBRACE {$program.nodes = $statements.nodes;}
 	;
 
 statements returns [list<Node* > nodes]:  
@@ -81,7 +87,9 @@ stochasticNodeExpr returns [StochasticNode* stochasticNode]
 	;
 
 uvStochasticNodeExpr returns[UnivariateNode* univariateNode = new UnivariateNode()]
-	:uvNode {$univariateNode->nodename = $uvNode.text;} TILDE uvDistribution  {$univariateNode->distribution = $uvDistribution.uvdis;}
+	:uvNode {$univariateNode->nodename = $uvNode.name; $univariateNode->parameters = $uvNode.parameters;} 
+	TILDE 
+	uvDistribution  {$univariateNode->distribution = $uvDistribution.uvdis;}
 	;
 mvStochasticNodeExpr returns[MultivariateNode* multivariateNode = new MultivariateNode()]
 	:mvNode {$multivariateNode->nodename = $mvNode.text;} TILDE mvDistribution {$multivariateNode->distribution = $mvDistribution.mvdis;}
@@ -115,25 +123,38 @@ linkFunction
 	;
 
 exprWithNodesFunctions 
-	: (unaryExpression | OPENBRACKET MINUS unaryExpression  CLOSEBRACKET | MINUS unaryExpression | scalarFunctions | vectorFunctions ) ((PLUS|MINUS|MULT|DIV) exprWithNodesFunctions)?
+	: (unaryExpression | OPENBRACKET MINUS unaryExpression  CLOSEBRACKET 
+	| MINUS unaryExpression | scalarFunctions | vectorFunctions ) 
+	((PLUS|MINUS|MULT|DIV) exprWithNodesFunctions)?
 	;
 
-uvNode 
-	: NODENAME (OPENSQUAREBRACKET expression (COMMA expression)*  CLOSESQUAREBRACKET)?
+uvNode returns [std::string name, vector<int> parameters]
+	: NODENAME {$name = $NODENAME.text;}
+	(
+	OPENSQUAREBRACKET exp1=expression {$parameters.push_back(int ($exp1.expvalue));} 
+	(
+	COMMA exp2=expression {$parameters.push_back(int ($exp2.expvalue));}
+	)* 
+	 CLOSESQUAREBRACKET
+	 )?
 	;
 mvNode 
 	: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
 	;
 
-expression 
-	: unaryExpression ((PLUS|MINUS|MULT|DIV) expression)?
+expression returns [float expvalue]
+	: unaryExpression {$expvalue=$unaryExpression.uexpvalue;} 
+	(PLUS e1=expression {$expvalue+=$e1.expvalue;}
+	|MINUS e2=expression {$expvalue-=$e2.expvalue;}
+	|MULT e3=expression {$expvalue*=$e3.expvalue;}
+	|DIV e4=expression {$expvalue/=$e4.expvalue;})?
 	;
 
-unaryExpression
-	: CONSTANTINT  
-	| CONSTANTVALUE
-	| uvNode 
-	| OPENBRACKET expression CLOSEBRACKET
+unaryExpression returns [float uexpvalue]
+	: CONSTANTINT  {$uexpvalue = ::atoi($CONSTANTINT.text.c_str());}
+	| CONSTANTVALUE {$uexpvalue = ::atof($CONSTANTVALUE.text.c_str());}
+	| uvNode {$uexpvalue = data->getData($uvNode.name, $uvNode.parameters);}
+	| OPENBRACKET expression CLOSEBRACKET {$uexpvalue = $expression.expvalue;}
 	;
 
 multiIndices 
@@ -176,7 +197,8 @@ NODENAME
 	;
 
 CONSTANTVALUE 
-	: ('+'|'-')?('0'..'9')+('.'('0'..'9')+)?('E'('+'|'-')?('0'..'9')+)? 
+	: ('0'..'9')+(DOT('0'..'9')+)?('E'(PLUS|MINUS)?('0'..'9')+)? 
+	| OPENBRACKET (PLUS|MINUS) ('0'..'9')+ CLOSEBRACKET (DOT('0'..'9')+)?('E'(PLUS|MINUS)?('0'..'9')+)? 
 	;
 
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| ';' | '\u000C' )+    { $channel = HIDDEN; } ;

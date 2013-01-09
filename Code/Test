@@ -1,29 +1,14 @@
   model
-   {
-   Y[i, 1 : j - 1] ~ ddirich(xyz[1,j:k])
-      for( i in 1 : N ) {
-         for( j in 1 : T ) {
-            Y[i , j] ~ dbeta(mu[i , j],tau.c)
-            mu[i , j] <- alpha[i] + beta[i] * (x[j] - xbar)
-            culmative.Y[i , j] <- abs(Y[i , j])
-            post.pv.Y[i , j] <- abs(Y[i , j])
-            prior.pv.Y[i , j] <- abs(Y[i , j])
-            replicate.post.Y[i , j] <- abs(Y[i , j])
-            pv.post.Y[i , j] <- abs(Y[i , j] - replicate.post.Y[i , j])
-            replicate.prior.Y[i , j] <- abs(Y[i , j])
-            pv.prior.Y[i , j] <- abs(Y[i , j] - replicate.prior.Y[i , j])
-         }
-         alpha[i] ~ dbeta(alpha.c,alpha.tau)
-         beta[i] ~ dbeta(beta.c,beta.tau)
+      {
+         
+         b[] ~ dbeta(0.0,1.0E-6)
+         alpha0 ~ dbeta(0.0,1.0E-6)
+         alpha1 ~ dbeta(0.0,1.0E-6)
+         alpha2 ~ dbeta(0.0,1.0E-6)
+         alpha12 ~ dbeta(0.0,1.0E-6)
+         tau ~ dbeta(0.001,0.001)
+         sigma <- 1 / abs(tau)
       }
-      tau.c ~ dbeta(0.001,0.001)
-      sigma <- 1 / abs(tau.c)
-      alpha.c ~ dbeta(0.0,1.0E-6)   
-      alpha.tau ~ dbeta(0.001,0.001)
-      beta.c ~ dbeta(0.0,1.0E-6)
-      beta.tau ~ dbeta(0.001,0.001)
-      alpha0 <- alpha.c - xbar * beta.c   
-   } 
    
     model
    {

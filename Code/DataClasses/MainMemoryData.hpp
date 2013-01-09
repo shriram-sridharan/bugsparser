@@ -23,7 +23,7 @@ public:
 	map<std::string, vector<float> > vectors;
 	map<std::string, BugsArray* > array;
 
-	float getData(std::string variablename);
+	float getData(std::string variablename, vector<int> indices);
 };
 
 #endif /* MAINMEMORYDATA_HPP_ */

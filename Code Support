@@ -1,7 +1,10 @@
 To Do:
 Delete function in destructors??
+Data passed into prog. Create Constructor instead??
 
 Support:
+Give Data And Init in the same file.
+Please put brackets for expressions [Does not follow BODMAS rule]
 Multivariate Nodes Support?
 Supporting Censor and Truncation?
 Distributions support?
