@@ -24,7 +24,7 @@ class Program {
 public:
 	Program();
 	virtual ~Program();
-	std::list<Node*> nodes;
+	std::vector<Node*> nodes;
 };
 
 #endif /* PROGRAM_H_ */

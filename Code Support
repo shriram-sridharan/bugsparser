@@ -2,8 +2,9 @@ To Do:
 Logical Node Expression and Parent Nodes as Node Pointers??
 Delete function in destructors??
 Data passed into prog. Create Constructor instead??
-Code exiting without any information??
+Code exiting without any information?? (Exception Handling??)
 Global variables?
+
 
 Support:
 Give Data And Init in the same file.

@@ -16,7 +16,7 @@ void parseProgram(IData* mmdata)
     cout << "Coming here" << endl;
     Program program = psr.prog(mmdata);
 
-    for(std::list<Node*>::iterator it = program.nodes.begin();it != program.nodes.end();++it){
+    for(std::vector<Node*>::iterator it = program.nodes.begin();it != program.nodes.end();++it){
         cout << endl << (*it)->nodename << " ";
         vector<int> nodeparameters = (*it)->parameters;
         for(std::vector<int>::iterator stit = nodeparameters.begin();stit != nodeparameters.end();++stit) {
@@ -34,10 +34,12 @@ void parseProgram(IData* mmdata)
         if(typeid(**it) == typeid(LogicalNode)){
 			cout << ((LogicalNode*)(*it))->functionname << " ";
 			LogicalNode* ln = ((LogicalNode*)(*it));
-			for(std::vector<string>::iterator stit = ln->parentnodes.begin();stit != ln->parentnodes.end();++stit){
-				cout << *stit << " ";
+			for(std::vector<ExpressionNode* >::iterator stit = ln->expressionnodes.begin();stit != ln->expressionnodes.end();++stit){
+				cout << (*stit)->nodename << " ";
 			}
-			cout << endl<< ln->expression ;
+			std::vector<Node*> pnodes = ln->getParentNodes(program.nodes);
+			for(std::vector<Node* >::iterator stit = pnodes.begin();stit != pnodes.end();++stit)
+				cout << (*stit)->nodename << " ";
 		}
     }
 
@@ -88,6 +90,9 @@ int main(int argc, char* argv[])
 	try{
 		IData* data = parseData();
 		parseProgram(data);
+	}
+	catch(std::string& ex){
+		cout << ex <<endl;
 	}
 	catch (const std::exception& ex) {
 		cout << "Exception" << ex.what() << endl;

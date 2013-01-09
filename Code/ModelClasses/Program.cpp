@@ -13,7 +13,7 @@ Program::Program() {
 }
 
 Program::~Program() {
-	for (std::list<Node*>::iterator it = nodes.begin(); it!= nodes.end(); ++it){
+	for (std::vector<Node*>::iterator it = nodes.begin(); it!= nodes.end(); ++it){
 		delete *it;
 	}
 	delete this;

@@ -55,6 +55,7 @@ tokens {
 using namespace std;
 }
 @parser::includes{
+#include <sstream>
 #include "BUGSLexer.hpp"
 #include "ModelClasses/Program.hpp"
 #include "DataClasses/IData.hpp"
@@ -72,7 +73,7 @@ prog [IData* inputdata] returns [Program program]
 	: MODEL OPENBRACE statements CLOSEBRACE {$program.nodes = $statements.nodes;}
 	;
 
-statements returns [list<Node* > nodes]:  
+statements returns [vector<Node* > nodes]:  
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$nodes.push_back($ste1.stochasticNode);}
 	| (mvNode TILDE) => ste2=stochasticNodeExpr {$nodes.push_back($ste2.stochasticNode);}
 	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$nodes.push_back($lne1.logicalNode);}
@@ -121,8 +122,7 @@ calculateNodeValue=true;
 	: (uvNode | linkFunction) => 
 	(uvNode {$logicalNode->nodename = $uvNode.text; } 
 	| linkFunction { $logicalNode->nodename = $linkFunction.nodename; $logicalNode->functionname = $linkFunction.fname;}) 
-	LEFTPOINTER exprWithNodesFunctions { $logicalNode->parentnodes = $exprWithNodesFunctions.pnodes;
-	$logicalNode->expression = $exprWithNodesFunctions.text;}
+	LEFTPOINTER exprWithNodesFunctions { $logicalNode->expressionnodes = $exprWithNodesFunctions.enodes;}
 	|  mvNode LEFTPOINTER exprWithNodesFunctions  {$logicalNode->nodename = $mvNode.text; } 
 	;
 
@@ -133,15 +133,16 @@ linkFunction returns[std::string fname, std::string nodename]
 	| PROBITOPENBRACKET uvNode CLOSEBRACKET {$nodename = $uvNode.text; $fname = "PROBIT";}
 	;
 
-exprWithNodesFunctions returns [std::vector<std::string>  pnodes]
-	: (unaryExpression 
-	| uvNode {$pnodes.push_back($uvNode.text);}
-	| OPENBRACKET MINUS unaryExpression  CLOSEBRACKET 
-	| MINUS unaryExpression
-	| scalarFunctions {$pnodes.push_back($scalarFunctions.text);}
-	| vectorFunctions {$pnodes.push_back($vectorFunctions.text);} ) 
-	((PLUS|MINUS|MULT|DIV) 
-	ex=exprWithNodesFunctions {$pnodes.insert($pnodes.end(),$ex.pnodes.begin(), $ex.pnodes.end());}
+exprWithNodesFunctions returns [std::vector<ExpressionNode*>  enodes]
+	: (ue1=unaryExpression {stringstream ss (stringstream::in | stringstream::out); ss<< $ue1.uexpvalue; $enodes.push_back(new ExpressionNode(ss.str(), NUMBER));}
+	| uvNode {$enodes.push_back(new ExpressionNode($uvNode.text, NODE));}
+	| OPENBRACKET MINUS ue2=unaryExpression  CLOSEBRACKET {stringstream ss (stringstream::in | stringstream::out); ss<< -$ue2.uexpvalue; $enodes.push_back(new ExpressionNode(ss.str(), NUMBER));}
+	| scalarFunctions {$enodes.push_back(new ExpressionNode($scalarFunctions.text, FUNCTION));}
+	| vectorFunctions {$enodes.push_back(new ExpressionNode($vectorFunctions.text, FUNCTION));}
+	| OPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET {$enodes.insert($enodes.end(),$ex1.enodes.begin(), $ex1.enodes.end());} ) 
+	((PLUS {$enodes.push_back(new ExpressionNode("+", OPERATOR));}|MINUS {$enodes.push_back(new ExpressionNode("-", OPERATOR));}
+	| MULT {$enodes.push_back(new ExpressionNode("*", OPERATOR));} |DIV {$enodes.push_back(new ExpressionNode("/", OPERATOR));}) 
+	ex2=exprWithNodesFunctions {$enodes.insert($enodes.end(), $ex2.enodes.begin(), $ex2.enodes.end());}
 	)?
 	;
 
@@ -161,7 +162,8 @@ mvNode
 
 expression returns [float expvalue]
 	: (unaryExpression {$expvalue=$unaryExpression.uexpvalue;} 
-	| uvNode {if(calculateNodeValue) $expvalue = data->getData($uvNode.name, $uvNode.parameters);})
+	| uvNode {if(calculateNodeValue) $expvalue = data->getData($uvNode.name, $uvNode.parameters);}
+	| OPENBRACKET e5=expression CLOSEBRACKET {$expvalue = $e5.expvalue;})
 	(PLUS e1=expression {$expvalue+=$e1.expvalue;}
 	|MINUS e2=expression {$expvalue-=$e2.expvalue;}
 	|MULT e3=expression {$expvalue*=$e3.expvalue;}
@@ -171,7 +173,6 @@ expression returns [float expvalue]
 unaryExpression returns [float uexpvalue]
 	: CONSTANTINT  {$uexpvalue = ::atoi($CONSTANTINT.text.c_str());}
 	| CONSTANTVALUE {$uexpvalue = ::atof($CONSTANTVALUE.text.c_str());}
-	| OPENBRACKET expression CLOSEBRACKET {$uexpvalue = $expression.expvalue;}
 	;
 multiIndices 
 	: multiDimExpression (COMMA multiDimExpression)*
