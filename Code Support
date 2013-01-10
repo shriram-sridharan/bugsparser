@@ -20,4 +20,4 @@ Distributions support?
 Functions support?
 
 
-$loopvariable = $loopVariable.text; $loopbegin = $loopBegin.value; $loopend = $loopEnd.value;
+

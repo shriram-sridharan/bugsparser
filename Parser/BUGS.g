@@ -81,7 +81,15 @@ statements returns [vector<Node* > nodes]:
 	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$nodes.push_back($lne1.logicalNode);}
 	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr {$nodes.push_back($lne2.logicalNode);}
 	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr {$nodes.push_back($lne3.logicalNode);}
-	| startFor statements endFor
+	| sf=startFor statements endFor
+	{loopvariable[$sf.loopvariable] = $sf.loopbegin; 
+	while(loopvariable[$sf.loopvariable] <= $sf.loopend) 
+	{
+	cout << $sf.loopvariable << " " << loopvariable[$sf.loopvariable] << endl;
+	 loopvariable[$sf.loopvariable]++; 
+	}
+	loopvariable.erase($sf.loopvariable);	
+	}
 	)+
 	;
 
@@ -187,7 +195,7 @@ multiDimExpression
 
 startFor returns [std::string loopvariable, int loopbegin, int loopend]
 	: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE 
-	{loopvariable[$loopVariable.text] = $loopBegin.value; while(loopvariable[$loopVariable.text] <= $loopEnd.value) $OPENBRACE.text;  loopvariable[$loopVariable.text]++; }
+	{$loopvariable = $loopVariable.text; $loopbegin = $loopBegin.value; $loopend = $loopEnd.value;}
 	;
 
 endFor 
