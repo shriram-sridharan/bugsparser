@@ -1,19 +1,17 @@
 /*
- * UnivariateNode.cpp
+ * Node.cpp
  *
- *  Created on: Jan 6, 2013
- *      Author: shriram
+ *  Created on: Jan 10, 2013
+ *      Author: shrirams
  */
 
 #include "UnivariateNode.hpp"
 
-UnivariateNode::UnivariateNode() {
-	// TODO Auto-generated constructor stub
-
+UnivariateNode::UnivariateNode(string nodeid, vector<Expression> indices) {
+	this->indices = indices;
+	this->nodeid = nodeid;
 }
 
 UnivariateNode::~UnivariateNode() {
-	delete distribution;
 	delete this;
 }
-

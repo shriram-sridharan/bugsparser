@@ -1,8 +1,8 @@
 /*
  * Program.cpp
  *
- *  Created on: Jan 5, 2013
- *      Author: shriram
+ *  Created on: Jan 10, 2013
+ *      Author: shrirams
  */
 
 #include "Program.hpp"
@@ -13,8 +13,5 @@ Program::Program() {
 }
 
 Program::~Program() {
-	for (std::vector<Node*>::iterator it = nodes.begin(); it!= nodes.end(); ++it){
-		delete *it;
-	}
 	delete this;
 }

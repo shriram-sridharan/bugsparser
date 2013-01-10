@@ -205,7 +205,7 @@ endFor
 loopVariable 
 	: NODENAME
 	;
-
+/*uvNode cannot be stochastic. It should be from the data only*/
 loopBegin returns [int value]
 	: uvNode {$value = data->getData($uvNode.name, $uvNode.parameters);}
 	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}

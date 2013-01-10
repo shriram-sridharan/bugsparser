@@ -1,30 +1,22 @@
 /*
- * Program.h
+ * Program.hpp
  *
- *  Created on: Jan 5, 2013
- *      Author: shriram
+ *  Created on: Jan 10, 2013
+ *      Author: shrirams
  */
 
-#ifndef PROGRAM_H_
-#define PROGRAM_H_
+#ifndef PROGRAM_HPP_
+#define PROGRAM_HPP_
+using namespace std;
 
-#include <iostream>
 #include <list>
-#include "Node.hpp"
-#include "StochasticNode.hpp"
-#include "UnivariateNode.hpp"
-#include "MultivariateNode.hpp"
-#include "LogicalNode.hpp"
-
-#include "Distribution.hpp"
-#include "UnivariateDistribution.hpp"
-#include "MultivariateDistribution.hpp"
+#include "IStatement.hpp"
 
 class Program {
 public:
 	Program();
 	virtual ~Program();
-	std::vector<Node*> nodes;
+	list<IStatement*> statements;
 };
 
-#endif /* PROGRAM_H_ */
+#endif /* PROGRAM_HPP_ */

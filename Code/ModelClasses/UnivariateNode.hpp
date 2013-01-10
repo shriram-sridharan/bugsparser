@@ -1,18 +1,24 @@
 /*
- * UnivariateNode.hpp
+ * Node.hpp
  *
- *  Created on: Jan 6, 2013
- *      Author: shriram
+ *  Created on: Jan 10, 2013
+ *      Author: shrirams
  */
 
-#ifndef UNIVARIATENODE_HPP_
-#define UNIVARIATENODE_HPP_
-#include "StochasticNode.hpp"
+#ifndef NODE_HPP_
+#define NODE_HPP_
+using namespace std;
 
-class UnivariateNode : public StochasticNode{
+#include <vector>
+#include <string>
+#include "Expression.hpp"
+#include "INode.hpp"
+
+class UnivariateNode : public INode {
 public:
-	UnivariateNode();
+	UnivariateNode(string nodeid, vector<Expression> indices);
 	virtual ~UnivariateNode();
+	vector<Expression> indices;
 };
 
-#endif /* UNIVARIATENODE_HPP_ */
+#endif /* NODE_HPP_ */
