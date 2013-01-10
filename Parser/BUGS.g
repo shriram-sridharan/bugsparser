@@ -37,6 +37,7 @@ tokens {
 	DIV = '/';
 	COLON = ':';	
 	DOT='.';
+	EQUALTO='=';
 }
 
 @lexer::namespace {BUGS}
@@ -64,6 +65,7 @@ using namespace std;
 @parser::members {
 IData* data;
 bool calculateNodeValue = true;
+map<string,int> loopvariable;
 }
 /* Parser Rules*/
 prog [IData* inputdata] returns [Program program]
@@ -79,7 +81,7 @@ statements returns [vector<Node* > nodes]:
 	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$nodes.push_back($lne1.logicalNode);}
 	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr {$nodes.push_back($lne2.logicalNode);}
 	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr {$nodes.push_back($lne3.logicalNode);}
-	| (startFor statements endFor) 
+	| startFor statements endFor
 	)+
 	;
 
@@ -183,8 +185,9 @@ multiDimExpression
 	| expression (COLON expression)?
 	;
 
-startFor 
+startFor returns [std::string loopvariable, int loopbegin, int loopend]
 	: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE 
+	{loopvariable[$loopVariable.text] = $loopBegin.value; while(loopvariable[$loopVariable.text] <= $loopEnd.value) $OPENBRACE.text;  loopvariable[$loopVariable.text]++; }
 	;
 
 endFor 
@@ -195,14 +198,14 @@ loopVariable
 	: NODENAME
 	;
 
-loopBegin 
-	: uvNode 
-	| CONSTANTINT
+loopBegin returns [int value]
+	: uvNode {$value = data->getData($uvNode.name, $uvNode.parameters);}
+	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}
 	;
 
-loopEnd 
-	: uvNode 
-	| CONSTANTINT
+loopEnd returns [int value]
+	: uvNode  {$value = data->getData($uvNode.name, $uvNode.parameters);}
+	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}
 	;
 
 CONSTANTINT
@@ -218,7 +221,7 @@ CONSTANTVALUE
 	| OPENBRACKET (PLUS|MINUS) ('0'..'9')+ CLOSEBRACKET (DOT('0'..'9')+)?('E'(PLUS|MINUS)?('0'..'9')+)? 
 	;
 
-WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| ';' | '\u000C' )+    { $channel = HIDDEN; } ;
+WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| ';' | '\u000C' )+    { $channel = HIDDEN; skip();} ;
 
 scalarFunctions 
 	: ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET

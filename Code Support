@@ -1,4 +1,5 @@
 To Do:
+Loop Variables map if outerloopvariable is in inner loop?
 Logical Node Expression and Parent Nodes as Node Pointers??
 Delete function in destructors??
 Data passed into prog. Create Constructor instead??
@@ -18,5 +19,5 @@ Supporting Censor and Truncation?
 Distributions support?
 Functions support?
 
-Problems with Semantic Understanding:
-For loops 
+
+$loopvariable = $loopVariable.text; $loopbegin = $loopBegin.value; $loopend = $loopEnd.value;

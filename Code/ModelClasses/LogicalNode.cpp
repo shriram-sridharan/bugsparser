@@ -7,7 +7,10 @@
 
 #include "LogicalNode.hpp"
 #include "../DataClasses/IData.hpp"
+#include <iterator>
+#include <sstream>
 #include <iostream>
+
 using namespace std;
 LogicalNode::LogicalNode() {
 	// TODO Auto-generated constructor stub
@@ -17,9 +20,19 @@ LogicalNode::LogicalNode() {
 LogicalNode::~LogicalNode() {
 	delete this;
 }
+
+std::vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while(std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
 /*
  * Get parent node pointers for all random variables in Expression Node.
- * To Do: Check in data nodes too.
+ * To Do: Check in data nodes if it contains parameters.
  */
 std::vector<Node*> LogicalNode::getParentNodes(std::vector<Node*> allmodelnodes){
 	std::vector<Node*> parentnodes;
@@ -29,7 +42,9 @@ std::vector<Node*> LogicalNode::getParentNodes(std::vector<Node*> allmodelnodes)
 		int sloc = name.find('[');
 		if(sloc!=-1) {
 			int eloc = name.find(']');
-			name.substr(sloc+1, eloc-sloc-1);
+			std::string paramstring = name.substr(sloc+1, eloc-sloc-1);
+			std::vector<std::string> parameters;
+			split(paramstring,',', parameters);
 			name = name.substr(0,sloc);
 		}
 
