@@ -13,5 +13,8 @@ Program::Program() {
 }
 
 Program::~Program() {
-	delete this;
+	std::list<IStatement*>::iterator it;
+	for(it = this->statements.begin(); it!=this->statements.end(); ++it){
+		delete *it;
+	}
 }

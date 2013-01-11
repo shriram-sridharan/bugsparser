@@ -6,12 +6,22 @@
  */
 
 #include "UnivariateNode.hpp"
+#include <string>
+#include <iostream>
+using namespace std;
 
-UnivariateNode::UnivariateNode(string nodeid, vector<Expression> indices) {
-	this->indices = indices;
-	this->nodeid = nodeid;
+UnivariateNode::UnivariateNode() {
+
 }
 
 UnivariateNode::~UnivariateNode() {
-	delete this;
+}
+
+string UnivariateNode::toString(){
+	string retval = "";
+	retval = retval + this->nodeid + " ";
+	for(vector<Expression*>::iterator it=this->indices.begin(); it!=this->indices.end(); ++it){
+		retval = retval + (*it)->toString() ;
+	}
+	return retval;
 }

@@ -1,5 +1,6 @@
   model
       {
+      alpha0[(b[i,j] + 1), j] ~ dbeta(0.0,1.0E-6)
         for( i in 1 : N ) {        
             r[i] ~ dbeta(p[i],n[i])
             b[i] ~ dbeta(0.0,tau)

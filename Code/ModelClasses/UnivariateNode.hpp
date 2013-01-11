@@ -16,9 +16,10 @@ using namespace std;
 
 class UnivariateNode : public INode {
 public:
-	UnivariateNode(string nodeid, vector<Expression> indices);
+	UnivariateNode();
 	virtual ~UnivariateNode();
-	vector<Expression> indices;
+	vector<Expression* > indices;
+	string toString();
 };
 
 #endif /* NODE_HPP_ */

@@ -9,6 +9,7 @@
 #define STATEMENT_HPP_
 
 class IStatement {
+public:
 	virtual ~IStatement() {};
 };
 

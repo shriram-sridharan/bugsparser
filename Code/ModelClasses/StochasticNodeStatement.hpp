@@ -9,14 +9,15 @@
 #define STOCHASTICNODESTATEMENT_HPP_
 
 #include "IStatement.hpp"
-#include "UnivariateNode.hpp"
+#include "INode.hpp"
+#include "IDistribution.hpp"
 
 class StochasticNodeStatement : public IStatement {
 public:
 	StochasticNodeStatement();
 	virtual ~StochasticNodeStatement();
-	UnivariateNode node;
-	Distribution distribution;
+	INode* node;
+	IDistribution* distribution;
 };
 
 #endif /* STOCHASTICNODESTATEMENT_HPP_ */

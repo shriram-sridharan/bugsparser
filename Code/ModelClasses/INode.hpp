@@ -5,12 +5,16 @@
  *      Author: shrirams
  */
 
-#ifndef STATEMENT_HPP_
-#define STATEMENT_HPP_
+#ifndef INODE_HPP_
+#define INODE_HPP_
+
+#include <string>
+using namespace std;
 
 class INode {
-	virtual ~INode() {};
+public:
+	virtual ~INode(){};
 	string nodeid;
 };
 
-#endif /* STATEMENT_HPP_ */
+#endif

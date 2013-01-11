@@ -56,55 +56,39 @@ tokens {
 using namespace std;
 }
 @parser::includes{
-#include <sstream>
 #include "BUGSLexer.hpp"
 #include "ModelClasses/Program.hpp"
-#include "DataClasses/IData.hpp"
+#include "ModelClasses/StochasticNodeStatement.hpp"
+#include "ModelClasses/UnivariateNode.hpp"
+#include "ModelClasses/Expression.hpp"
 }
 
-@parser::members {
-IData* data;
-bool calculateNodeValue = true;
-map<string,int> loopvariable;
-}
 /* Parser Rules*/
-prog [IData* inputdata] returns [Program program]
-@init{
-	data = $inputdata;
-}
-	: MODEL OPENBRACE statements CLOSEBRACE {$program.nodes = $statements.nodes;}
+prog returns [Program program]
+	: MODEL OPENBRACE statements CLOSEBRACE {$program.statements = $statements.stat;}
 	;
 
-statements returns [vector<Node* > nodes]:  
-	((uvNode TILDE) => ste1=stochasticNodeExpr {$nodes.push_back($ste1.stochasticNode);}
-	| (mvNode TILDE) => ste2=stochasticNodeExpr {$nodes.push_back($ste2.stochasticNode);}
-	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$nodes.push_back($lne1.logicalNode);}
-	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr {$nodes.push_back($lne2.logicalNode);}
-	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr {$nodes.push_back($lne3.logicalNode);}
-	| sf=startFor statements endFor
-	{loopvariable[$sf.loopvariable] = $sf.loopbegin; 
-	while(loopvariable[$sf.loopvariable] <= $sf.loopend) 
-	{
-	cout << $sf.loopvariable << " " << loopvariable[$sf.loopvariable] << endl;
-	 loopvariable[$sf.loopvariable]++; 
-	}
-	loopvariable.erase($sf.loopvariable);	
-	}
-	)+
+statements returns [list<IStatement* > stat]:  
+	((uvNode TILDE) => ste1=stochasticNodeExpr {$stat.push_back($ste1.stochasticNodeStatement);}
+	| (mvNode TILDE) => ste2=stochasticNodeExpr {$stat.push_back($ste2.stochasticNodeStatement);}
+	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr 
+	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr 
+	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr 
+	| sf=startFor statements endFor)+
 	;
 
-stochasticNodeExpr returns [StochasticNode* stochasticNode]
-	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNode= $uvsne.univariateNode;}
-	| mvsne=mvStochasticNodeExpr {$stochasticNode= $mvsne.multivariateNode;}
+stochasticNodeExpr returns [StochasticNodeStatement* stochasticNodeStatement = new StochasticNodeStatement()]
+	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNodeStatement->node = $uvsne.univariateNode;}
+	| mvsne=mvStochasticNodeExpr 
 	;
 
 uvStochasticNodeExpr returns[UnivariateNode* univariateNode = new UnivariateNode()]
-	:uvNode {$univariateNode->nodename = $uvNode.name; $univariateNode->parameters = $uvNode.parameters;} 
+	:uvNode {$univariateNode->nodeid = $uvNode.nodeid; $univariateNode->indices = $uvNode.indices;} 
 	TILDE 
-	uvDistribution  {$univariateNode->distribution = $uvDistribution.uvdis;}
+	uvDistribution  
 	;
-mvStochasticNodeExpr returns[MultivariateNode* multivariateNode = new MultivariateNode()]
-	:mvNode {$multivariateNode->nodename = $mvNode.text;} TILDE mvDistribution {$multivariateNode->distribution = $mvDistribution.mvdis;}
+mvStochasticNodeExpr
+	:mvNode TILDE mvDistribution 
 	;
 	
 censor
@@ -122,46 +106,36 @@ upperWithOptionalLower
 	:  (uvNode|CONSTANTVALUE)? COMMA (uvNode|CONSTANTVALUE)
 	;
 
-logicalNodeExpr returns [LogicalNode* logicalNode = new LogicalNode()]
-@init{
-calculateNodeValue=false; 
-}
-@after{
-calculateNodeValue=true;
-}
+logicalNodeExpr 
 	: (uvNode | linkFunction) => 
-	(uvNode {$logicalNode->nodename = $uvNode.text; } 
-	| linkFunction { $logicalNode->nodename = $linkFunction.nodename; $logicalNode->functionname = $linkFunction.fname;}) 
-	LEFTPOINTER exprWithNodesFunctions { $logicalNode->expressionnodes = $exprWithNodesFunctions.enodes;}
-	|  mvNode LEFTPOINTER exprWithNodesFunctions  {$logicalNode->nodename = $mvNode.text; } 
+	(uvNode | linkFunction ) 
+	LEFTPOINTER exprWithNodesFunctions
+	|  mvNode LEFTPOINTER exprWithNodesFunctions  
 	;
 
-linkFunction returns[std::string fname, std::string nodename]
-	: LOGOPENBRACKET uvNode CLOSEBRACKET  {$nodename = $uvNode.text; $fname = "LOG";}
-	| LOGITOPENBRACKET uvNode CLOSEBRACKET {$nodename = $uvNode.text; $fname = "LOGIT";}
-	| CLOGLOGOPENBRACKET uvNode CLOSEBRACKET {$nodename = $uvNode.text; $fname = "CLOGLOG";}
-	| PROBITOPENBRACKET uvNode CLOSEBRACKET {$nodename = $uvNode.text; $fname = "PROBIT";}
+linkFunction
+	: LOGOPENBRACKET uvNode CLOSEBRACKET  
+	| LOGITOPENBRACKET uvNode CLOSEBRACKET 
+	| CLOGLOGOPENBRACKET uvNode CLOSEBRACKET 
+	| PROBITOPENBRACKET uvNode CLOSEBRACKET 
 	;
 
-exprWithNodesFunctions returns [std::vector<ExpressionNode*>  enodes]
-	: (ue1=unaryExpression {stringstream ss (stringstream::in | stringstream::out); ss<< $ue1.uexpvalue; $enodes.push_back(new ExpressionNode(ss.str(), NUMBER));}
-	| uvNode {$enodes.push_back(new ExpressionNode($uvNode.text, NODE));}
-	| OPENBRACKET MINUS ue2=unaryExpression  CLOSEBRACKET {stringstream ss (stringstream::in | stringstream::out); ss<< -$ue2.uexpvalue; $enodes.push_back(new ExpressionNode(ss.str(), NUMBER));}
-	| scalarFunctions {$enodes.push_back(new ExpressionNode($scalarFunctions.text, FUNCTION));}
-	| vectorFunctions {$enodes.push_back(new ExpressionNode($vectorFunctions.text, FUNCTION));}
-	| OPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET {$enodes.insert($enodes.end(),$ex1.enodes.begin(), $ex1.enodes.end());} ) 
-	((PLUS {$enodes.push_back(new ExpressionNode("+", OPERATOR));}|MINUS {$enodes.push_back(new ExpressionNode("-", OPERATOR));}
-	| MULT {$enodes.push_back(new ExpressionNode("*", OPERATOR));} |DIV {$enodes.push_back(new ExpressionNode("/", OPERATOR));}) 
-	ex2=exprWithNodesFunctions {$enodes.insert($enodes.end(), $ex2.enodes.begin(), $ex2.enodes.end());}
-	)?
+exprWithNodesFunctions
+	: (ue1=unaryExpression
+	| uvNode 
+	| OPENBRACKET MINUS ue2=unaryExpression  CLOSEBRACKET 
+	| scalarFunctions
+	| vectorFunctions 
+	| OPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET)
+	((PLUS |MINUS | MULT |DIV) ex2=exprWithNodesFunctions)?
 	;
 
-uvNode returns [std::string name, vector<int> parameters]
-	: NODENAME {$name = $NODENAME.text;}
+uvNode returns [std::string nodeid, vector<Expression*> indices]
+	: NODENAME {$nodeid = $NODENAME.text;}
 	(
-	OPENSQUAREBRACKET exp1=expression {$parameters.push_back(int ($exp1.expvalue));} 
+	OPENSQUAREBRACKET exp1=expression {$indices.push_back($exp1.exp);} 
 	(
-	COMMA exp2=expression {$parameters.push_back(int ($exp2.expvalue));}
+	COMMA exp2=expression {$indices.push_back($exp2.exp);}
 	)* 
 	 CLOSESQUAREBRACKET
 	 )?
@@ -170,14 +144,14 @@ mvNode
 	: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
 	;
 
-expression returns [float expvalue]
-	: (unaryExpression {$expvalue=$unaryExpression.uexpvalue;} 
-	| uvNode {if(calculateNodeValue) $expvalue = data->getData($uvNode.name, $uvNode.parameters);}
-	| OPENBRACKET e5=expression CLOSEBRACKET {$expvalue = $e5.expvalue;})
-	(PLUS e1=expression {$expvalue+=$e1.expvalue;}
-	|MINUS e2=expression {$expvalue-=$e2.expvalue;}
-	|MULT e3=expression {$expvalue*=$e3.expvalue;}
-	|DIV e4=expression {$expvalue/=$e4.expvalue;})?
+expression returns [Expression* exp = new Expression()]
+	: (unaryExpression {$exp->expvalue=$unaryExpression.uexpvalue; $exp->type=CONSTANT;} 
+	| uvNode {UnivariateNode* uvnode = new UnivariateNode(); uvnode->nodeid = $uvNode.nodeid; uvnode->indices = $uvNode.indices; $exp->uvnode=uvnode; $exp->type=NODE;}
+	| OPENBRACKET e5=expression CLOSEBRACKET {$exp->exp = $e5.exp; $exp->type=EXPRESSION;})
+	(PLUS e1=expression {$exp->op ='+'; $exp->children.push_back($e1.exp);}
+	|MINUS e2=expression {$exp->op ='-'; $exp->children.push_back($e2.exp);}
+	|MULT e3=expression {$exp->op ='*'; $exp->children.push_back($e3.exp);}
+	|DIV e4=expression {$exp->op ='/'; $exp->children.push_back($e4.exp);})?
 	;
 
 unaryExpression returns [float uexpvalue]
@@ -207,12 +181,12 @@ loopVariable
 	;
 /*uvNode cannot be stochastic. It should be from the data only*/
 loopBegin returns [int value]
-	: uvNode {$value = data->getData($uvNode.name, $uvNode.parameters);}
+	: uvNode
 	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}
 	;
 
 loopEnd returns [int value]
-	: uvNode  {$value = data->getData($uvNode.name, $uvNode.parameters);}
+	: uvNode  
 	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}
 	;
 
@@ -239,14 +213,14 @@ vectorFunctions
 	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
 	;
 	
-uvDistribution returns [UnivariateDistribution* uvdis = new UnivariateDistribution()]
-	: discreteUnivariate {$uvdis->name = $discreteUnivariate.name; $uvdis->parameters = $discreteUnivariate.parameters;}
-	| continuousUnivariate {$uvdis->name = $continuousUnivariate.name; $uvdis->parameters = $continuousUnivariate.parameters;}
+uvDistribution 
+	: discreteUnivariate
+	| continuousUnivariate
 	;
 
-mvDistribution returns [MultivariateDistribution* mvdis = new MultivariateDistribution()]
-	: discreteMultivariate {$mvdis->name = $discreteMultivariate.name; $mvdis->parameters = $discreteMultivariate.parameters;}
-	| continuousMultivariate {$mvdis->name = $continuousMultivariate.name; $mvdis->parameters = $continuousMultivariate.parameters;}
+mvDistribution
+	: discreteMultivariate 
+	| continuousMultivariate 
 	;
 
 discreteUnivariate returns [std::string name, std::list<string> parameters]

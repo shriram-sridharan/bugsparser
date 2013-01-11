@@ -6,41 +6,25 @@
 using namespace BUGS;
 using namespace BUGSData;
 
-void parseProgram(IData* mmdata)
+void parseProgram()
 {
 
     BUGSLexerTraits::InputStreamType input((ANTLR_UINT8*)"Test", ANTLR_ENC_8BIT);
     BUGSLexer lxr(&input);
     BUGSParserTraits::TokenStreamType tstream(ANTLR_SIZE_HINT, lxr.get_tokSource() );
     BUGSParser psr(&tstream);
-    cout << "Coming here" << endl;
-    Program program = psr.prog(mmdata);
+    Program program = psr.prog();
+    std::list<IStatement*>::iterator stit;
+    std::vector<Expression*>::iterator exit;
 
-    for(std::vector<Node*>::iterator it = program.nodes.begin();it != program.nodes.end();++it){
-        cout << endl << (*it)->nodename << " ";
-        vector<int> nodeparameters = (*it)->parameters;
-        for(std::vector<int>::iterator stit = nodeparameters.begin();stit != nodeparameters.end();++stit) {
-			cout << *stit << " ";
-		}
-
-        if(typeid(**it) == typeid(UnivariateNode)){
-			cout << ((UnivariateNode*)((*it)))->distribution->name << " ";
-			list<string> parameters = ((UnivariateNode*)((*it)))->distribution->parameters;
-			for(std::list<string>::iterator stit = parameters.begin();stit != parameters.end();++stit){
-				cout << *stit << " ";
-			}
-        }
-
-        if(typeid(**it) == typeid(LogicalNode)){
-			cout << ((LogicalNode*)(*it))->functionname << " ";
-			LogicalNode* ln = ((LogicalNode*)(*it));
-			for(std::vector<ExpressionNode* >::iterator stit = ln->expressionnodes.begin();stit != ln->expressionnodes.end();++stit){
-				cout << (*stit)->nodename << " ";
-			}
-			std::vector<Node*> pnodes = ln->getParentNodes(program.nodes);
-			for(std::vector<Node* >::iterator stit = pnodes.begin();stit != pnodes.end();++stit)
-				cout << (*stit)->nodename << " ";
-		}
+    for (stit = program.statements.begin(); stit!=program.statements.end(); stit++){
+    	if(typeid(**stit) == typeid(StochasticNodeStatement)){
+    		StochasticNodeStatement* stns = ((StochasticNodeStatement*) (*stit));
+    		if(typeid(*stns->node) == typeid(UnivariateNode)){
+    			UnivariateNode* uvnode = ((UnivariateNode*) (stns->node));
+    			cout << uvnode->toString();
+    		}
+    	}
     }
 
     cout << endl<< "Done Parsing" << endl;
@@ -81,25 +65,14 @@ IData* parseData() {
 	IData* mmdata = psr.data();
     testData(mmdata);
 
-	cout << "Done Parsing Data";
+	cout << "Done Parsing Data" << endl;
 	return mmdata;
 }
 
 int main(int argc, char* argv[])
     {
-	try{
-		IData* data = parseData();
-		parseProgram(data);
-	}
-	catch(std::string& ex){
-		cout << ex <<endl;
-	}
-	catch (const std::exception& ex) {
-		cout << "Exception" << ex.what() << endl;
-	}
-	catch(...){
-		cout << "Exception" << endl;
-	}
+	IData* data = parseData();
+	parseProgram();
     return 1;
     }
 
