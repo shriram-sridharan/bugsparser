@@ -22,7 +22,10 @@ void parseProgram()
     		StochasticNodeStatement* stns = ((StochasticNodeStatement*) (*stit));
     		if(typeid(*stns->node) == typeid(UnivariateNode)){
     			UnivariateNode* uvnode = ((UnivariateNode*) (stns->node));
-    			cout << uvnode->toString();
+    			cout << "Node=" + uvnode->toString();
+    			UnivariateDistribution* uvdis = (UnivariateDistribution*)(stns->distribution);
+    			cout << "Distribution=" + uvdis->toString();
+    			cout << endl;
     		}
     	}
     }

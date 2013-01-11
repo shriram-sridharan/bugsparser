@@ -60,6 +60,7 @@ using namespace std;
 #include "ModelClasses/Program.hpp"
 #include "ModelClasses/StochasticNodeStatement.hpp"
 #include "ModelClasses/UnivariateNode.hpp"
+#include "ModelClasses/UnivariateDistribution.hpp"
 #include "ModelClasses/Expression.hpp"
 }
 
@@ -70,7 +71,7 @@ prog returns [Program program]
 
 statements returns [list<IStatement* > stat]:  
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$stat.push_back($ste1.stochasticNodeStatement);}
-	| (mvNode TILDE) => ste2=stochasticNodeExpr {$stat.push_back($ste2.stochasticNodeStatement);}
+	| (mvNode TILDE) => ste2=stochasticNodeExpr 
 	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr 
 	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr 
 	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr 
@@ -78,14 +79,14 @@ statements returns [list<IStatement* > stat]:
 	;
 
 stochasticNodeExpr returns [StochasticNodeStatement* stochasticNodeStatement = new StochasticNodeStatement()]
-	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNodeStatement->node = $uvsne.univariateNode;}
+	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNodeStatement->node = $uvsne.uvnode; $stochasticNodeStatement->distribution = $uvsne.uvdistribution;}
 	| mvsne=mvStochasticNodeExpr 
 	;
 
-uvStochasticNodeExpr returns[UnivariateNode* univariateNode = new UnivariateNode()]
-	:uvNode {$univariateNode->nodeid = $uvNode.nodeid; $univariateNode->indices = $uvNode.indices;} 
+uvStochasticNodeExpr returns[UnivariateNode* uvnode, UnivariateDistribution* uvdistribution]
+	:uvNode {$uvnode = $uvNode.uvnode;} 
 	TILDE 
-	uvDistribution  
+	uvDistribution  {$uvdistribution = $uvDistribution.distribution;}
 	;
 mvStochasticNodeExpr
 	:mvNode TILDE mvDistribution 
@@ -130,12 +131,12 @@ exprWithNodesFunctions
 	((PLUS |MINUS | MULT |DIV) ex2=exprWithNodesFunctions)?
 	;
 
-uvNode returns [std::string nodeid, vector<Expression*> indices]
-	: NODENAME {$nodeid = $NODENAME.text;}
+uvNode returns [UnivariateNode* uvnode = new UnivariateNode()]
+	: NODENAME {$uvnode->nodeid = $NODENAME.text;}
 	(
-	OPENSQUAREBRACKET exp1=expression {$indices.push_back($exp1.exp);} 
+	OPENSQUAREBRACKET exp1=expression {$uvnode->indices.push_back($exp1.exp);} 
 	(
-	COMMA exp2=expression {$indices.push_back($exp2.exp);}
+	COMMA exp2=expression {$uvnode->indices.push_back($exp2.exp);}
 	)* 
 	 CLOSESQUAREBRACKET
 	 )?
@@ -146,7 +147,7 @@ mvNode
 
 expression returns [Expression* exp = new Expression()]
 	: (unaryExpression {$exp->expvalue=$unaryExpression.uexpvalue; $exp->type=CONSTANT;} 
-	| uvNode {UnivariateNode* uvnode = new UnivariateNode(); uvnode->nodeid = $uvNode.nodeid; uvnode->indices = $uvNode.indices; $exp->uvnode=uvnode; $exp->type=NODE;}
+	| uvNode {$exp->uvnode=$uvNode.uvnode; $exp->type=NODE;}
 	| OPENBRACKET e5=expression CLOSEBRACKET {$exp->exp = $e5.exp; $exp->type=EXPRESSION;})
 	(PLUS e1=expression {$exp->op ='+'; $exp->children.push_back($e1.exp);}
 	|MINUS e2=expression {$exp->op ='-'; $exp->children.push_back($e2.exp);}
@@ -213,9 +214,9 @@ vectorFunctions
 	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
 	;
 	
-uvDistribution 
-	: discreteUnivariate
-	| continuousUnivariate
+uvDistribution returns [UnivariateDistribution* distribution = new UnivariateDistribution()]
+	: discreteUnivariate {$distribution->name = $discreteUnivariate.name; $distribution->distributionParameters = $discreteUnivariate.parameters;}
+	| continuousUnivariate {$distribution->name = $continuousUnivariate.name; $distribution->distributionParameters = $continuousUnivariate.parameters;}
 	;
 
 mvDistribution
@@ -223,39 +224,39 @@ mvDistribution
 	| continuousMultivariate 
 	;
 
-discreteUnivariate returns [std::string name, std::list<string> parameters]
+discreteUnivariate returns [string name, vector<Expression* > parameters]
 	: bernoulli {$name="BERNOULLI"; $parameters=$bernoulli.parameters;}
 	;
 
-continuousUnivariate returns [std::string name, std::list<string> parameters]
+continuousUnivariate returns [std::string name, vector<Expression* > parameters]
 	: beta {$name="BETA"; $parameters=$beta.parameters;}
 	;
 
-discreteMultivariate returns [std::string name, std::list<string> parameters]
-	: multinomial {$name="MULTINOMIAL"; $parameters=$multinomial.parameters;}
+discreteMultivariate 
+	: multinomial 
 	;
 
-continuousMultivariate  returns [std::string name, std::list<string> parameters]
-	: dirichlet{$name="DIRICHLET"; $parameters=$dirichlet.parameters;}
+continuousMultivariate 
+	: dirichlet
 	;
 	
-distributionParameter 
-	: uvNode | CONSTANTINT | CONSTANTVALUE
+distributionParameter returns [Expression* exp = new Expression()]
+	: uvNode {$exp->uvnode=$uvNode.uvnode; $exp->type=NODE;}| unaryExpression {$exp->expvalue=$unaryExpression.uexpvalue; $exp->type=CONSTANT;}
 	;
 	
-bernoulli returns [std::list<string> parameters]
-	: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET {$parameters.push_back($distributionParameter.text);}
+bernoulli returns [vector<Expression* > parameters]
+	: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET {$parameters.push_back($distributionParameter.exp);}
 	;
 
-beta returns [std::list<string> parameters]
-	: BETAOPENBRACKET dp1=distributionParameter  COMMA dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.text); $parameters.push_back($dp2.text);}
+beta returns [vector<Expression* > parameters]
+	: BETAOPENBRACKET dp1=distributionParameter  COMMA dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.exp); $parameters.push_back($dp2.exp);}
 	;
 
-multinomial returns [std::list<string> parameters]
+multinomial 
 	: MUTLTINOMIALOPENBRACKET dp1=mvNode COMMA 
-	dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.text); $parameters.push_back($dp2.text);}
+	dp2=distributionParameter CLOSEBRACKET
 	;
 
-dirichlet returns [std::list<string> parameters]
-	: DIRICHLETOPENBRACKET mvNode CLOSEBRACKET {$parameters.push_back($mvNode.text);}
+dirichlet 
+	: DIRICHLETOPENBRACKET mvNode CLOSEBRACKET 
 	;
