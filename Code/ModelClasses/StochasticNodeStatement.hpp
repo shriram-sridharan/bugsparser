@@ -18,6 +18,7 @@ public:
 	virtual ~StochasticNodeStatement();
 	INode* node;
 	IDistribution* distribution;
+	string toString();
 };
 
 #endif /* STOCHASTICNODESTATEMENT_HPP_ */

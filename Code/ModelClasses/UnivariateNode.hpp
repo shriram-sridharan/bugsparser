@@ -18,6 +18,7 @@ class UnivariateNode : public INode {
 public:
 	UnivariateNode();
 	virtual ~UnivariateNode();
+	string nodeid;
 	vector<Expression* > indices;
 	string toString();
 };

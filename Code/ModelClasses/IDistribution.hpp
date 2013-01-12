@@ -14,6 +14,7 @@ class IDistribution {
 public :
 	virtual ~IDistribution() {};
 	string name;
+	virtual string toString() = 0;
 };
 
 #endif /* IDISTRIBUTION_HPP_ */

@@ -13,24 +13,16 @@ void parseProgram()
     BUGSLexer lxr(&input);
     BUGSParserTraits::TokenStreamType tstream(ANTLR_SIZE_HINT, lxr.get_tokSource() );
     BUGSParser psr(&tstream);
+    cout << "******************** Begin Parsing Program ****************** " << endl;
     Program program = psr.prog();
     std::list<IStatement*>::iterator stit;
     std::vector<Expression*>::iterator exit;
 
     for (stit = program.statements.begin(); stit!=program.statements.end(); stit++){
-    	if(typeid(**stit) == typeid(StochasticNodeStatement)){
-    		StochasticNodeStatement* stns = ((StochasticNodeStatement*) (*stit));
-    		if(typeid(*stns->node) == typeid(UnivariateNode)){
-    			UnivariateNode* uvnode = ((UnivariateNode*) (stns->node));
-    			cout << "Node=" + uvnode->toString();
-    			UnivariateDistribution* uvdis = (UnivariateDistribution*)(stns->distribution);
-    			cout << "Distribution=" + uvdis->toString();
-    			cout << endl;
-    		}
-    	}
+    	cout << (*stit)->toString();
     }
 
-    cout << endl<< "Done Parsing" << endl;
+    cout << "******************** End Parsing Program ****************** " << endl << endl;
 }
 
 void testData(IData *mmdata)
@@ -65,10 +57,11 @@ IData* parseData() {
 	BUGSDataParserTraits::TokenStreamType tstream(ANTLR_SIZE_HINT, lxr.get_tokSource() );
 	BUGSDataParser psr(&tstream);
 
+	cout << "******************** Begin Parsing Data ****************** " << endl;
 	IData* mmdata = psr.data();
     testData(mmdata);
 
-	cout << "Done Parsing Data" << endl;
+	cout << "******************** End Parsing Data ****************** " << endl << endl;
 	return mmdata;
 }
 

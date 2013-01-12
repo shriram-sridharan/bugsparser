@@ -15,3 +15,9 @@ LogicalNodeStatement::LogicalNodeStatement() {
 LogicalNodeStatement::~LogicalNodeStatement() {
 	// TODO Auto-generated destructor stub
 }
+
+string LogicalNodeStatement::toString(){
+	string retval = "*LogicalNode :  ";
+	retval = retval + " Name = " + this->logicalNode->toString() + "\n Expression = " + this->logicalnodeexp->toString();
+	return retval+"\n";
+}

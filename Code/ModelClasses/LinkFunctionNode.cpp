@@ -15,3 +15,9 @@ LinkFunctionNode::LinkFunctionNode() {
 LinkFunctionNode::~LinkFunctionNode() {
 	// TODO Auto-generated destructor stub
 }
+
+string LinkFunctionNode::toString(){
+	string retval = " ";
+	retval = retval + "LinkFunction = " + this->linkfunction + " Node= " + this->uvnode->toString();
+	return retval;
+}

@@ -9,12 +9,17 @@
 #define LOGICALNODESTATEMENT_H_
 
 #include "INode.hpp"
+#include "IStatement.hpp"
+#include "LogicalNodeExpression.hpp"
+#include <vector>
 
-class LogicalNodeStatement {
+class LogicalNodeStatement : public IStatement{
 public:
 	LogicalNodeStatement();
 	virtual ~LogicalNodeStatement();
 	INode* logicalNode;
+	LogicalNodeExpression* logicalnodeexp;
+	string toString();
 };
 
 #endif /* LOGICALNODESTATEMENT_H_ */

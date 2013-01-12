@@ -14,7 +14,7 @@ using namespace std;
 class INode {
 public:
 	virtual ~INode(){};
-	string nodeid;
+	virtual string toString() = 0;
 };
 
 #endif

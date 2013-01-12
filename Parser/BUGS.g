@@ -59,9 +59,18 @@ using namespace std;
 #include "BUGSLexer.hpp"
 #include "ModelClasses/Program.hpp"
 #include "ModelClasses/StochasticNodeStatement.hpp"
+#include "ModelClasses/LogicalNodeStatement.hpp"
+#include "ModelClasses/ForStatement.hpp"
+
 #include "ModelClasses/UnivariateNode.hpp"
+#include "ModelClasses/LinkFunctionNode.hpp"
+
 #include "ModelClasses/UnivariateDistribution.hpp"
+
 #include "ModelClasses/Expression.hpp"
+#include "ModelClasses/LogicalNodeExpression.hpp"
+
+#include "ModelClasses/ScalarFunction.hpp"
 }
 
 /* Parser Rules*/
@@ -72,10 +81,21 @@ prog returns [Program program]
 statements returns [list<IStatement* > stat]:  
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$stat.push_back($ste1.stochasticNodeStatement);}
 	| (mvNode TILDE) => ste2=stochasticNodeExpr 
-	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$stat.push_back($lne1.stochasticNodeStatement);}
+	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$stat.push_back($lne1.logicalNodeStatement);}
 	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr 
-	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr 
-	| sf=startFor statements endFor)+
+	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr  {$stat.push_back($lne3.logicalNodeStatement);}
+	| sf=startFor stats=statements endFor
+	{
+	ForStatement* forstat = new ForStatement();
+	forstat->loopvariable = $sf.loopvariable;
+	forstat->loopbegin = $sf.loopbegin;
+	forstat->loopend = $sf.loopend;
+	forstat->begintype = $sf.begintype;
+	forstat->endtype=$sf.endtype;
+	forstat->statements = $stats.stat;
+	$stat.push_back(forstat);
+	}
+	)+
 	;
 
 stochasticNodeExpr returns [StochasticNodeStatement* stochasticNodeStatement = new StochasticNodeStatement()]
@@ -93,7 +113,8 @@ mvStochasticNodeExpr
 	;
 	
 censor
-	 : (CENSORBEGINWITHC|CENSORBEGINWITHI) ( (uvNode|CONSTANTVALUE) =>lowerWithOptionalUpper  | upperWithOptionalLower )  CLOSEBRACKET
+	 : (CENSORBEGINWITHC|CENSORBEGINWITHI) 
+	 ( (uvNode|CONSTANTVALUE) =>lowerWithOptionalUpper  | upperWithOptionalLower )  CLOSEBRACKET
 	 ;
 truncation 
 	: TRUNCATIONBEGIN (  (uvNode|CONSTANTVALUE) => lowerWithOptionalUpper | upperWithOptionalLower )  CLOSEBRACKET
@@ -107,28 +128,33 @@ upperWithOptionalLower
 	:  (uvNode|CONSTANTVALUE)? COMMA (uvNode|CONSTANTVALUE)
 	;
 
-logicalNodeExpr 
+logicalNodeExpr returns [LogicalNodeStatement* logicalNodeStatement = new LogicalNodeStatement()]
 	: (uvNode | linkFunction) => 
-	(uvNode | linkFunction ) 
-	LEFTPOINTER exprWithNodesFunctions
+	(uvNode {$logicalNodeStatement->logicalNode = $uvNode.uvnode;}
+	| linkFunction {$logicalNodeStatement->logicalNode = $linkFunction.linkfunction;}) 
+	LEFTPOINTER ex1=exprWithNodesFunctions {$logicalNodeStatement->logicalnodeexp= $ex1.exp;}
 	|  mvNode LEFTPOINTER exprWithNodesFunctions  
 	;
 
-linkFunction
-	: LOGOPENBRACKET uvNode CLOSEBRACKET  
-	| LOGITOPENBRACKET uvNode CLOSEBRACKET 
-	| CLOGLOGOPENBRACKET uvNode CLOSEBRACKET 
-	| PROBITOPENBRACKET uvNode CLOSEBRACKET 
+linkFunction returns [LinkFunctionNode* linkfunction = new LinkFunctionNode()]
+	: LOGOPENBRACKET uvNode CLOSEBRACKET  {$linkfunction->linkfunction = "LOG"; $linkfunction->uvnode=$uvNode.uvnode;}
+	| LOGITOPENBRACKET uvNode CLOSEBRACKET {$linkfunction->linkfunction = "LOGIT"; $linkfunction->uvnode=$uvNode.uvnode;}
+	| CLOGLOGOPENBRACKET uvNode CLOSEBRACKET {$linkfunction->linkfunction = "CLOGLOG"; $linkfunction->uvnode=$uvNode.uvnode;}
+	| PROBITOPENBRACKET uvNode CLOSEBRACKET {$linkfunction->linkfunction = "PROBIT"; $linkfunction->uvnode=$uvNode.uvnode;}
 	;
 
-exprWithNodesFunctions
-	: (ue1=unaryExpression
-	| uvNode 
-	| OPENBRACKET MINUS ue2=unaryExpression  CLOSEBRACKET 
-	| scalarFunctions
+exprWithNodesFunctions returns [LogicalNodeExpression* exp = new LogicalNodeExpression()]
+	: (ue1=unaryExpression {$exp->expvalue = $ue1.uexpvalue; $exp->type=LCONSTANT;}
+	| uvNode {$exp->uvnode = $uvNode.uvnode;  $exp->type=LNODE;}
+	| OPENBRACKET MINUS ue2=unaryExpression  CLOSEBRACKET {$exp->expvalue = -$ue1.uexpvalue; $exp->type=LCONSTANT;}
+	| scalarFunctions {$exp->function = $scalarFunctions.function; $exp->type=LFUNCTION;}
 	| vectorFunctions 
-	| OPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET)
-	((PLUS |MINUS | MULT |DIV) ex2=exprWithNodesFunctions)?
+	| OPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET {$exp->exp = $ex1.exp; $exp->type=LEXPRESSION;})
+	((PLUS {$exp->op ='+';} 
+	|MINUS {$exp->op ='-';}
+	| MULT {$exp->op ='*';}
+	|DIV {$exp->op ='/';}) 
+	ex2=exprWithNodesFunctions {$exp->children.push_back($ex2.exp);})?
 	;
 
 uvNode returns [UnivariateNode* uvnode = new UnivariateNode()]
@@ -168,9 +194,13 @@ multiDimExpression
 	| expression (COLON expression)?
 	;
 
-startFor returns [std::string loopvariable, int loopbegin, int loopend]
+startFor returns [string loopvariable, LoopParam loopbegin, LoopParamType begintype, LoopParam loopend, LoopParamType endtype]
 	: FORSTART OPENBRACKET loopVariable IN loopBegin COLON loopEnd CLOSEBRACKET OPENBRACE 
-	{$loopvariable = $loopVariable.text; $loopbegin = $loopBegin.value; $loopend = $loopEnd.value;}
+	{$loopvariable = $loopVariable.text; 
+	$loopbegin = $loopBegin.loopbegin;
+	$loopend = $loopEnd.loopend;
+	$begintype = $loopBegin.type;
+	$endtype = $loopEnd.type;}
 	;
 
 endFor 
@@ -181,14 +211,14 @@ loopVariable
 	: NODENAME
 	;
 /*uvNode cannot be stochastic. It should be from the data only*/
-loopBegin returns [int value]
-	: uvNode
-	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}
+loopBegin returns [LoopParam loopbegin, LoopParamType type]
+	: uvNode {$loopbegin.uvnode = $uvNode.uvnode; $type=LOOPNODE;}
+	| CONSTANTINT {$loopbegin.constant = ::atoi($CONSTANTINT.text.c_str()); $type=LOOPINT;}
 	;
 
-loopEnd returns [int value]
-	: uvNode  
-	| CONSTANTINT {$value = ::atoi($CONSTANTINT.text.c_str());}
+loopEnd  returns [LoopParam loopend, LoopParamType type]
+	: uvNode  {$loopend.uvnode = $uvNode.uvnode; $type=LOOPNODE;}
+	| CONSTANTINT {$loopend.constant = ::atoi($CONSTANTINT.text.c_str()); $type=LOOPINT;}
 	;
 
 CONSTANTINT
@@ -206,8 +236,8 @@ CONSTANTVALUE
 
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| ';' | '\u000C' )+    { $channel = HIDDEN; skip();} ;
 
-scalarFunctions 
-	: ABSOPENBRACKET exprWithNodesFunctions CLOSEBRACKET
+scalarFunctions returns [ScalarFunction* function = new ScalarFunction()]
+	: ABSOPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET {$function->name="ABS"; $function->parameter=$ex1.exp;}
 	;
 
 vectorFunctions 
@@ -241,7 +271,8 @@ continuousMultivariate
 	;
 	
 distributionParameter returns [Expression* exp = new Expression()]
-	: uvNode {$exp->uvnode=$uvNode.uvnode; $exp->type=NODE;}| unaryExpression {$exp->expvalue=$unaryExpression.uexpvalue; $exp->type=CONSTANT;}
+	: uvNode {$exp->uvnode=$uvNode.uvnode; $exp->type=NODE;}
+	| unaryExpression {$exp->expvalue=$unaryExpression.uexpvalue; $exp->type=CONSTANT;}
 	;
 	
 bernoulli returns [vector<Expression* > parameters]

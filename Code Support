@@ -1,14 +1,11 @@
 To Do:
-Loop Variables map if outerloopvariable is in inner loop?
-Logical Node Expression and Parent Nodes as Node Pointers??
+Vector Functions
+Multivariate Node
 Delete function in destructors??
-Data passed into prog. Create Constructor instead??
 Code exiting without any information?? (Exception Handling??)
-Global variables?
 
 
 Support:
-Give Data And Init in the same file.
 Please put brackets for expressions [Does not follow BODMAS rule]
 Rectangular format for DATA === NOT SUPPORTED
 Comments not supported
@@ -19,7 +16,5 @@ Supporting Censor and Truncation?
 Distributions support?
 Functions support?
 
-New Code:
-Expression why pointers?
-Expression can use union??
+
 

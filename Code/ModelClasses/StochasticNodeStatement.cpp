@@ -15,3 +15,9 @@ StochasticNodeStatement::StochasticNodeStatement() {
 StochasticNodeStatement::~StochasticNodeStatement() {
 	// TODO Auto-generated destructor stub
 }
+
+string StochasticNodeStatement::toString(){
+	string retval = "*StochasticNode : ";
+	retval = retval + "Node = " + this->node->toString() + " Distribution= " + this->distribution->toString();
+	return retval + "\n";
+}

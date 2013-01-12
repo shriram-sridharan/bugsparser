@@ -12,12 +12,13 @@
 #include "UnivariateNode.hpp"
 using namespace std;
 
-class LinkFunctionNode : public INode{
+class LinkFunctionNode : public INode {
 public:
 	LinkFunctionNode();
 	virtual ~LinkFunctionNode();
 	string linkfunction;
-	UnivariateNode uvnode;
+	UnivariateNode* uvnode;
+	string toString();
 };
 
 #endif /* LINKFUNCTIONNODE_HPP_ */
