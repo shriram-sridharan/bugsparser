@@ -14,7 +14,10 @@
 using namespace std;
 
 enum ExpressionType { CONSTANT, NODE, EXPRESSION};
-
+/*
+ * Expression can be a float value or a node or an expression.
+ * If Expression contains an operator, then it should contain children
+ */
 class Expression {
 public:
 	Expression();

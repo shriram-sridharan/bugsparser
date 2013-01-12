@@ -72,7 +72,7 @@ prog returns [Program program]
 statements returns [list<IStatement* > stat]:  
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$stat.push_back($ste1.stochasticNodeStatement);}
 	| (mvNode TILDE) => ste2=stochasticNodeExpr 
-	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr 
+	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$stat.push_back($lne1.stochasticNodeStatement);}
 	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr 
 	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr 
 	| sf=startFor statements endFor)+
