@@ -63,11 +63,15 @@ using namespace std;
 #include "ModelClasses/ForStatement.hpp"
 
 #include "ModelClasses/UnivariateNode.hpp"
+#include "ModelClasses/MultivariateNode.hpp"
 #include "ModelClasses/LinkFunctionNode.hpp"
 
 #include "ModelClasses/UnivariateDistribution.hpp"
+#include "ModelClasses/MultivariateDistribution.hpp"
+#include "ModelClasses/MVDParameters.hpp"
 
 #include "ModelClasses/Expression.hpp"
+#include "ModelClasses/MultiDimExpression.hpp"
 #include "ModelClasses/LogicalNodeExpression.hpp"
 
 #include "ModelClasses/ScalarFunction.hpp"
@@ -80,7 +84,7 @@ prog returns [Program program]
 
 statements returns [list<IStatement* > stat]:  
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$stat.push_back($ste1.stochasticNodeStatement);}
-	| (mvNode TILDE) => ste2=stochasticNodeExpr 
+	| (mvNode TILDE) => ste2=stochasticNodeExpr {$stat.push_back($ste2.stochasticNodeStatement);}
 	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$stat.push_back($lne1.logicalNodeStatement);}
 	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr 
 	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr  {$stat.push_back($lne3.logicalNodeStatement);}
@@ -99,8 +103,10 @@ statements returns [list<IStatement* > stat]:
 	;
 
 stochasticNodeExpr returns [StochasticNodeStatement* stochasticNodeStatement = new StochasticNodeStatement()]
-	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? {$stochasticNodeStatement->node = $uvsne.uvnode; $stochasticNodeStatement->distribution = $uvsne.uvdistribution;}
-	| mvsne=mvStochasticNodeExpr 
+	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? 
+	{$stochasticNodeStatement->node = $uvsne.uvnode; $stochasticNodeStatement->distribution = $uvsne.uvdistribution;}
+	| mvsne=mvStochasticNodeExpr  
+	{$stochasticNodeStatement->node = $mvsne.mvnode; $stochasticNodeStatement->distribution = $mvsne.mvdistribution;}
 	;
 
 uvStochasticNodeExpr returns[UnivariateNode* uvnode, UnivariateDistribution* uvdistribution]
@@ -108,8 +114,10 @@ uvStochasticNodeExpr returns[UnivariateNode* uvnode, UnivariateDistribution* uvd
 	TILDE 
 	uvDistribution  {$uvdistribution = $uvDistribution.distribution;}
 	;
-mvStochasticNodeExpr
-	:mvNode TILDE mvDistribution 
+mvStochasticNodeExpr returns[MultivariateNode* mvnode, MultivariateDistribution* mvdistribution]
+	:mvNode {$mvnode = $mvNode.mvnode;} 
+	TILDE 
+	mvDistribution {$mvdistribution = $mvDistribution.distribution;}
 	;
 	
 censor
@@ -167,8 +175,9 @@ uvNode returns [UnivariateNode* uvnode = new UnivariateNode()]
 	 CLOSESQUAREBRACKET
 	 )?
 	;
-mvNode 
-	: NODENAME OPENSQUAREBRACKET multiIndices CLOSESQUAREBRACKET
+mvNode returns [MultivariateNode* mvnode = new MultivariateNode()]
+	: NODENAME OPENSQUAREBRACKET mi=multiIndices CLOSESQUAREBRACKET
+	{$mvnode->nodeid = $NODENAME.text; $mvnode->indices=$mi.indices;}
 	;
 
 expression returns [Expression* exp = new Expression()]
@@ -185,13 +194,16 @@ unaryExpression returns [float uexpvalue]
 	: CONSTANTINT  {$uexpvalue = ::atoi($CONSTANTINT.text.c_str());}
 	| CONSTANTVALUE {$uexpvalue = ::atof($CONSTANTVALUE.text.c_str());}
 	;
-multiIndices 
-	: multiDimExpression (COMMA multiDimExpression)*
+multiIndices returns [vector<MultiDimExpression* > indices]
+	: me1=multiDimExpression {$indices.push_back($me1.exp);}
+	 (COMMA me2=multiDimExpression {$indices.push_back($me2.exp);})*
 	;
 	
-multiDimExpression
-	: (OPENBRACKET expression COLON) => OPENBRACKET expression COLON expression CLOSEBRACKET
-	| expression (COLON expression)?
+multiDimExpression returns[MultiDimExpression* exp = new MultiDimExpression()]
+	: (OPENBRACKET expression COLON) => OPENBRACKET ex1=expression COLON ex2=expression CLOSEBRACKET
+	{$exp->colon=true; $exp->expbeforecolon=$ex1.exp; $exp->expaftercolon=$ex2.exp;}
+	| ex3=expression {$exp->colon=false; $exp->expbeforecolon=$ex3.exp;}
+	(COLON ex4=expression {$exp->colon=true; $exp->expaftercolon=$ex4.exp;})? 
 	;
 
 startFor returns [string loopvariable, LoopParam loopbegin, LoopParamType begintype, LoopParam loopend, LoopParamType endtype]
@@ -249,9 +261,9 @@ uvDistribution returns [UnivariateDistribution* distribution = new UnivariateDis
 	| continuousUnivariate {$distribution->name = $continuousUnivariate.name; $distribution->distributionParameters = $continuousUnivariate.parameters;}
 	;
 
-mvDistribution
-	: discreteMultivariate 
-	| continuousMultivariate 
+mvDistribution returns [MultivariateDistribution* distribution = new MultivariateDistribution()]
+	: discreteMultivariate {$distribution->name = $discreteMultivariate.name; $distribution->distributionParameters = $discreteMultivariate.parameters;}
+	| continuousMultivariate {$distribution->name = $continuousMultivariate.name; $distribution->distributionParameters = $continuousMultivariate.parameters;}
 	;
 
 discreteUnivariate returns [string name, vector<Expression* > parameters]
@@ -262,12 +274,12 @@ continuousUnivariate returns [std::string name, vector<Expression* > parameters]
 	: beta {$name="BETA"; $parameters=$beta.parameters;}
 	;
 
-discreteMultivariate 
-	: multinomial 
+discreteMultivariate returns [string name, vector<MVDParameters* > parameters]
+	: multinomial {$name="MULTINOMIAL"; $parameters=$multinomial.parameters;}
 	;
 
-continuousMultivariate 
-	: dirichlet
+continuousMultivariate returns [string name, vector<MVDParameters* > parameters]
+	: dirichlet {$name="DIRICHLET"; $parameters=$dirichlet.parameters;}
 	;
 	
 distributionParameter returns [Expression* exp = new Expression()]
@@ -283,11 +295,14 @@ beta returns [vector<Expression* > parameters]
 	: BETAOPENBRACKET dp1=distributionParameter  COMMA dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.exp); $parameters.push_back($dp2.exp);}
 	;
 
-multinomial 
+multinomial returns [vector<MVDParameters* > parameters]
 	: MUTLTINOMIALOPENBRACKET dp1=mvNode COMMA 
 	dp2=distributionParameter CLOSEBRACKET
+	{MVDParameters* param1 = new MVDParameters(); param1->type=MVNODE; param1->mvnode = $dp1.mvnode; $parameters.push_back(param1);
+	MVDParameters* param2  = new MVDParameters(); param2->type=MVDEXPRESSION; param1->exp = $dp2.exp; $parameters.push_back(param2);}
 	;
 
-dirichlet 
-	: DIRICHLETOPENBRACKET mvNode CLOSEBRACKET 
+dirichlet returns [vector<MVDParameters* > parameters]
+	: DIRICHLETOPENBRACKET dp1=mvNode CLOSEBRACKET 
+	{MVDParameters* param1 = new MVDParameters(); param1->type=MVNODE; param1->mvnode = $dp1.mvnode; $parameters.push_back(param1);}
 	;

@@ -18,6 +18,6 @@ StochasticNodeStatement::~StochasticNodeStatement() {
 
 string StochasticNodeStatement::toString(){
 	string retval = "*StochasticNode : ";
-	retval = retval + "Node = " + this->node->toString() + " Distribution= " + this->distribution->toString();
+	retval = retval + "Node = " + this->node->toString() + "\n Distribution= " + this->distribution->toString();
 	return retval + "\n";
 }

@@ -47,7 +47,6 @@ string Expression::toString() {
 		retval = retval + this->op + " " ;
 		for(vector<Expression*>::iterator it=this->children.begin(); it!=this->children.end(); ++it)
 				retval = retval + (*it)->toString();
-
 	}
 	return retval;
 }
