@@ -18,6 +18,15 @@ StochasticNodeStatement::~StochasticNodeStatement() {
 
 string StochasticNodeStatement::toString(){
 	string retval = "*StochasticNode : ";
-	retval = retval + "Node = " + this->node->toString() + "\n Distribution= " + this->distribution->toString();
+	retval = retval + "Node = " + this->node->toString();
+	if(this->limitationType == CENSOR){
+		retval = retval + " CENSOR ";
+		retval = retval + this->limitation->toString();
+	}
+	else if(this->limitationType == TRUNCATION){
+		retval = retval + " TRUNCATION ";
+		retval = retval + this->limitation->toString();
+	}
+	retval = retval + "\n Distribution= " + this->distribution->toString();
 	return retval + "\n";
 }

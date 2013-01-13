@@ -59,6 +59,7 @@ using namespace std;
 #include "BUGSLexer.hpp"
 #include "ModelClasses/Program.hpp"
 #include "ModelClasses/StochasticNodeStatement.hpp"
+#include "ModelClasses/StochasticNodeLimitation.hpp"
 #include "ModelClasses/LogicalNodeStatement.hpp"
 #include "ModelClasses/ForStatement.hpp"
 
@@ -86,7 +87,7 @@ statements returns [list<IStatement* > stat]:
 	((uvNode TILDE) => ste1=stochasticNodeExpr {$stat.push_back($ste1.stochasticNodeStatement);}
 	| (mvNode TILDE) => ste2=stochasticNodeExpr {$stat.push_back($ste2.stochasticNodeStatement);}
 	| (uvNode LEFTPOINTER) => lne1=logicalNodeExpr {$stat.push_back($lne1.logicalNodeStatement);}
-	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr 
+	| (mvNode LEFTPOINTER) => lne2=logicalNodeExpr {$stat.push_back($lne2.logicalNodeStatement);}
 	| (linkFunction LEFTPOINTER) =>  lne3=logicalNodeExpr  {$stat.push_back($lne3.logicalNodeStatement);}
 	| sf=startFor stats=statements endFor
 	{
@@ -103,8 +104,12 @@ statements returns [list<IStatement* > stat]:
 	;
 
 stochasticNodeExpr returns [StochasticNodeStatement* stochasticNodeStatement = new StochasticNodeStatement()]
-	: (uvNode) => uvsne=uvStochasticNodeExpr (censor | truncation)? 
-	{$stochasticNodeStatement->node = $uvsne.uvnode; $stochasticNodeStatement->distribution = $uvsne.uvdistribution;}
+	: (uvNode) => uvsne=uvStochasticNodeExpr 
+	{$stochasticNodeStatement->node = $uvsne.uvnode; 
+	$stochasticNodeStatement->distribution = $uvsne.uvdistribution;
+	$stochasticNodeStatement->limitationType=NOLIMITATION;}
+	 (censor {$stochasticNodeStatement->limitationType=CENSOR; $stochasticNodeStatement->limitation=$censor.limitation;}
+	 | truncation {$stochasticNodeStatement->limitationType=TRUNCATION; $stochasticNodeStatement->limitation=$truncation.limitation;})? 
 	| mvsne=mvStochasticNodeExpr  
 	{$stochasticNodeStatement->node = $mvsne.mvnode; $stochasticNodeStatement->distribution = $mvsne.mvdistribution;}
 	;
@@ -120,20 +125,55 @@ mvStochasticNodeExpr returns[MultivariateNode* mvnode, MultivariateDistribution*
 	mvDistribution {$mvdistribution = $mvDistribution.distribution;}
 	;
 	
-censor
+censor returns [StochasticNodeLimitation* limitation = new StochasticNodeLimitation()]
 	 : (CENSORBEGINWITHC|CENSORBEGINWITHI) 
-	 ( (uvNode|CONSTANTVALUE) =>lowerWithOptionalUpper  | upperWithOptionalLower )  CLOSEBRACKET
+	 ( (uvNode|CONSTANTVALUE) =>
+	 l=lowerWithOptionalUpper  
+	 {$limitation->optional=$l.optional; 
+	 $limitation->lowerlimit=$l.lowerlimit;
+	 $limitation->upperlimit=$l.upperlimit;
+	 $limitation->lowerlimittype=$l.lowerlimittype;
+	 $limitation->upperlimittype=$l.upperlimittype;}
+	 | u=upperWithOptionalLower
+	 {$limitation->optional=$u.optional; 
+	 $limitation->lowerlimit=$u.lowerlimit;
+	 $limitation->upperlimit=$u.upperlimit;
+	 $limitation->lowerlimittype=$u.lowerlimittype;
+	 $limitation->upperlimittype=$u.upperlimittype;} )  CLOSEBRACKET
 	 ;
-truncation 
-	: TRUNCATIONBEGIN (  (uvNode|CONSTANTVALUE) => lowerWithOptionalUpper | upperWithOptionalLower )  CLOSEBRACKET
+truncation returns [StochasticNodeLimitation* limitation = new StochasticNodeLimitation()]
+	: TRUNCATIONBEGIN (  (uvNode|CONSTANTVALUE) =>
+	 l=lowerWithOptionalUpper 
+	 {$limitation->optional=$l.optional; 
+	 $limitation->lowerlimit=$l.lowerlimit;
+	 $limitation->upperlimit=$l.upperlimit;
+	 $limitation->lowerlimittype=$l.lowerlimittype;
+	 $limitation->upperlimittype=$l.upperlimittype;}
+	 | u=upperWithOptionalLower 
+	 {$limitation->optional=$u.optional; 
+	 $limitation->lowerlimit=$u.lowerlimit;
+	 $limitation->upperlimit=$u.upperlimit;
+	 $limitation->lowerlimittype=$u.lowerlimittype;
+	 $limitation->upperlimittype=$u.upperlimittype;})  CLOSEBRACKET
 	;
 	
-lowerWithOptionalUpper 
-	:  (uvNode|CONSTANTVALUE) COMMA (uvNode|CONSTANTVALUE)?
+lowerWithOptionalUpper returns[OptionalComponent optional = UPPER,LimitationData* lowerlimit = new LimitationData(),
+	LimitationDataType lowerlimittype, LimitationData* upperlimit = new LimitationData(), LimitationDataType upperlimittype]
+	:  (u1=uvNode {$lowerlimit->uvnode=$u1.uvnode; $lowerlimittype=LIMITNODE;}
+	|c1=CONSTANTVALUE {$lowerlimit->constant=::atoi($c1.text.c_str());  $lowerlimittype=LIMITCONSTANT;}) 
+	COMMA 
+	(u2=uvNode {$lowerlimit->uvnode=$u2.uvnode; $lowerlimittype=LIMITNODE; $optional = NOOPTIONAL;}
+	|c2=CONSTANTVALUE {$lowerlimit->constant=::atoi($c2.text.c_str());  $lowerlimittype=LIMITCONSTANT;  $optional = NOOPTIONAL;}
+	)?
 	;
 	
-upperWithOptionalLower 
-	:  (uvNode|CONSTANTVALUE)? COMMA (uvNode|CONSTANTVALUE)
+upperWithOptionalLower returns[OptionalComponent optional = LOWER,LimitationData* lowerlimit = new LimitationData(),
+	LimitationDataType lowerlimittype, LimitationData* upperlimit = new LimitationData(), LimitationDataType upperlimittype]
+	:  (u1=uvNode {$lowerlimit->uvnode=$u1.uvnode; $lowerlimittype=LIMITNODE; $optional = NOOPTIONAL;}
+	|c1=CONSTANTVALUE {$lowerlimit->constant=::atoi($c1.text.c_str());  $lowerlimittype=LIMITCONSTANT;  $optional = NOOPTIONAL;})? 
+	COMMA 
+	(u2=uvNode {$lowerlimit->uvnode=$u2.uvnode; $lowerlimittype=LIMITNODE;}
+	|c2=CONSTANTVALUE {$lowerlimit->constant=::atoi($c2.text.c_str());  $lowerlimittype=LIMITCONSTANT;})
 	;
 
 logicalNodeExpr returns [LogicalNodeStatement* logicalNodeStatement = new LogicalNodeStatement()]
@@ -141,7 +181,9 @@ logicalNodeExpr returns [LogicalNodeStatement* logicalNodeStatement = new Logica
 	(uvNode {$logicalNodeStatement->logicalNode = $uvNode.uvnode;}
 	| linkFunction {$logicalNodeStatement->logicalNode = $linkFunction.linkfunction;}) 
 	LEFTPOINTER ex1=exprWithNodesFunctions {$logicalNodeStatement->logicalnodeexp= $ex1.exp;}
-	|  mvNode LEFTPOINTER exprWithNodesFunctions  
+	|  mvNode {$logicalNodeStatement->logicalNode = $mvNode.mvnode;}
+	LEFTPOINTER 
+	ex2=exprWithNodesFunctions  {$logicalNodeStatement->logicalnodeexp= $ex2.exp;}
 	;
 
 linkFunction returns [LinkFunctionNode* linkfunction = new LinkFunctionNode()]

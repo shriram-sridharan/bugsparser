@@ -11,6 +11,9 @@
 #include "IStatement.hpp"
 #include "INode.hpp"
 #include "IDistribution.hpp"
+#include "StochasticNodeLimitation.hpp"
+
+enum StochasticNodeLimitationType {NOLIMITATION, CENSOR, TRUNCATION};
 
 class StochasticNodeStatement : public IStatement {
 public:
@@ -18,6 +21,8 @@ public:
 	virtual ~StochasticNodeStatement();
 	INode* node;
 	IDistribution* distribution;
+	StochasticNodeLimitationType limitationType;
+	StochasticNodeLimitation* limitation;
 	string toString();
 };
 
