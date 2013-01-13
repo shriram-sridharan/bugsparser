@@ -9,7 +9,6 @@
 #include "UnivariateNode.hpp"
 #include "ScalarFunction.hpp"
 #include <sstream>
-#include <typeinfo>
 
 LogicalNodeExpression::LogicalNodeExpression() {
 	// TODO Auto-generated constructor stub
@@ -29,25 +28,11 @@ string LogicalNodeExpression::toString(){
 			retval = retval + "Constant " + ss.str() + " ";
 		}
 		else if(this->type == LNODE)
-		{
-			retval = retval + "Node " ;
-			if(typeid(*this->uvnode) == typeid(UnivariateNode)){
-				retval = retval + ((UnivariateNode*)this->uvnode)->toString();
-			}
-		}
+			retval = retval + "Node " + this->uvnode->toString();
 		else if(this->type == LFUNCTION)
-		{
-			retval = retval + "Function " ;
-			if(typeid(*this->function) == typeid(ScalarFunction)){
-				retval = retval + ((ScalarFunction*)this->function)->toString();
-			}
-		}
+			retval = retval + "Function " + this->function->toString();
 		else
-		{
-			retval = retval + "Expression " ;
-			retval = retval + this->exp->toString();
-		}
-
+			retval = retval + "Expression " + this->exp->toString() ;
 		if(!this->op.empty()){
 			retval = retval + this->op + " " ;
 			for(vector<LogicalNodeExpression*>::iterator it=this->children.begin(); it!=this->children.end(); ++it)

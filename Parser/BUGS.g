@@ -76,6 +76,7 @@ using namespace std;
 #include "ModelClasses/LogicalNodeExpression.hpp"
 
 #include "ModelClasses/ScalarFunction.hpp"
+#include "ModelClasses/VectorFunction.hpp"
 }
 
 /* Parser Rules*/
@@ -131,49 +132,34 @@ censor returns [StochasticNodeLimitation* limitation = new StochasticNodeLimitat
 	 l=lowerWithOptionalUpper  
 	 {$limitation->optional=$l.optional; 
 	 $limitation->lowerlimit=$l.lowerlimit;
-	 $limitation->upperlimit=$l.upperlimit;
-	 $limitation->lowerlimittype=$l.lowerlimittype;
-	 $limitation->upperlimittype=$l.upperlimittype;}
+	 $limitation->upperlimit=$l.upperlimit;}
 	 | u=upperWithOptionalLower
 	 {$limitation->optional=$u.optional; 
 	 $limitation->lowerlimit=$u.lowerlimit;
-	 $limitation->upperlimit=$u.upperlimit;
-	 $limitation->lowerlimittype=$u.lowerlimittype;
-	 $limitation->upperlimittype=$u.upperlimittype;} )  CLOSEBRACKET
+	 $limitation->upperlimit=$u.upperlimit;} )  CLOSEBRACKET
 	 ;
 truncation returns [StochasticNodeLimitation* limitation = new StochasticNodeLimitation()]
 	: TRUNCATIONBEGIN (  (uvNode|CONSTANTVALUE) =>
 	 l=lowerWithOptionalUpper 
 	 {$limitation->optional=$l.optional; 
 	 $limitation->lowerlimit=$l.lowerlimit;
-	 $limitation->upperlimit=$l.upperlimit;
-	 $limitation->lowerlimittype=$l.lowerlimittype;
-	 $limitation->upperlimittype=$l.upperlimittype;}
+	 $limitation->upperlimit=$l.upperlimit;}
 	 | u=upperWithOptionalLower 
 	 {$limitation->optional=$u.optional; 
 	 $limitation->lowerlimit=$u.lowerlimit;
-	 $limitation->upperlimit=$u.upperlimit;
-	 $limitation->lowerlimittype=$u.lowerlimittype;
-	 $limitation->upperlimittype=$u.upperlimittype;})  CLOSEBRACKET
+	 $limitation->upperlimit=$u.upperlimit;})  CLOSEBRACKET
 	;
 	
-lowerWithOptionalUpper returns[OptionalComponent optional = UPPER,LimitationData* lowerlimit = new LimitationData(),
-	LimitationDataType lowerlimittype, LimitationData* upperlimit = new LimitationData(), LimitationDataType upperlimittype]
-	:  (u1=uvNode {$lowerlimit->uvnode=$u1.uvnode; $lowerlimittype=LIMITNODE;}
-	|c1=CONSTANTVALUE {$lowerlimit->constant=::atoi($c1.text.c_str());  $lowerlimittype=LIMITCONSTANT;}) 
+lowerWithOptionalUpper returns[OptionalComponent optional = UPPER, Expression* lowerlimit, Expression* upperlimit]
+	:  (dp1=distributionParameter {$lowerlimit = $dp1.exp;}) 
 	COMMA 
-	(u2=uvNode {$lowerlimit->uvnode=$u2.uvnode; $lowerlimittype=LIMITNODE; $optional = NOOPTIONAL;}
-	|c2=CONSTANTVALUE {$lowerlimit->constant=::atoi($c2.text.c_str());  $lowerlimittype=LIMITCONSTANT;  $optional = NOOPTIONAL;}
-	)?
+	 ( dp2=distributionParameter {$upperlimit = $dp2.exp;$optional = NOOPTIONAL;})?
 	;
 	
-upperWithOptionalLower returns[OptionalComponent optional = LOWER,LimitationData* lowerlimit = new LimitationData(),
-	LimitationDataType lowerlimittype, LimitationData* upperlimit = new LimitationData(), LimitationDataType upperlimittype]
-	:  (u1=uvNode {$lowerlimit->uvnode=$u1.uvnode; $lowerlimittype=LIMITNODE; $optional = NOOPTIONAL;}
-	|c1=CONSTANTVALUE {$lowerlimit->constant=::atoi($c1.text.c_str());  $lowerlimittype=LIMITCONSTANT;  $optional = NOOPTIONAL;})? 
+upperWithOptionalLower returns[OptionalComponent optional = LOWER, Expression* lowerlimit, Expression* upperlimit]
+	:  (dp1=distributionParameter {$lowerlimit = $dp1.exp; $optional = NOOPTIONAL;})? 
 	COMMA 
-	(u2=uvNode {$lowerlimit->uvnode=$u2.uvnode; $lowerlimittype=LIMITNODE;}
-	|c2=CONSTANTVALUE {$lowerlimit->constant=::atoi($c2.text.c_str());  $lowerlimittype=LIMITCONSTANT;})
+	(dp2=distributionParameter {$upperlimit = $dp2.exp;})
 	;
 
 logicalNodeExpr returns [LogicalNodeStatement* logicalNodeStatement = new LogicalNodeStatement()]
@@ -198,7 +184,7 @@ exprWithNodesFunctions returns [LogicalNodeExpression* exp = new LogicalNodeExpr
 	| uvNode {$exp->uvnode = $uvNode.uvnode;  $exp->type=LNODE;}
 	| OPENBRACKET MINUS ue2=unaryExpression  CLOSEBRACKET {$exp->expvalue = -$ue1.uexpvalue; $exp->type=LCONSTANT;}
 	| scalarFunctions {$exp->function = $scalarFunctions.function; $exp->type=LFUNCTION;}
-	| vectorFunctions 
+	| vectorFunctions {$exp->function = $vectorFunctions.function; $exp->type=LFUNCTION;}
 	| OPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET {$exp->exp = $ex1.exp; $exp->type=LEXPRESSION;})
 	((PLUS {$exp->op ='+';} 
 	|MINUS {$exp->op ='-';}
@@ -294,8 +280,8 @@ scalarFunctions returns [ScalarFunction* function = new ScalarFunction()]
 	: ABSOPENBRACKET ex1=exprWithNodesFunctions CLOSEBRACKET {$function->name="ABS"; $function->parameter=$ex1.exp;}
 	;
 
-vectorFunctions 
-	: INVERSEOPENBRACKET mvNode CLOSEBRACKET
+vectorFunctions returns [VectorFunction* function = new VectorFunction()]
+	: INVERSEOPENBRACKET mvNode CLOSEBRACKET {$function->name="INVERSE"; $function->mvnode=$mvNode.mvnode;}
 	;
 	
 uvDistribution returns [UnivariateDistribution* distribution = new UnivariateDistribution()]

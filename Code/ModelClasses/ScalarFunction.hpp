@@ -17,7 +17,6 @@ public:
 	virtual ~ScalarFunction();
 	string name;
 	LogicalNodeExpression* parameter;
-
 	string toString();
 };
 

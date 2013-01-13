@@ -1,26 +1,4 @@
-  model
-   {
-   mu ~ dbeta(0.0, 1.0E-6) C(0.0,0.0)
-      for( k in 1 : P ) {
-         for( i in 1 : N ) {
-            Y[i , k] ~ dbeta(m[i , k], tau1)
-            m[i , k] <- mu + sign[T[i , k]] * phi / 2 + sign[k] * pi / 2 + delta[i]
-            T[i , k] <- group[i] * (k - 1.5) + 1.5
-         }
-      }
-      for( i in 1 : N ) {
-         delta[i] ~ dbeta(0.0, tau2)
-      }
-      tau1 ~ dbeta(0.001, 0.001) sigma1 <- 1 / abs(tau1)
-      tau2 ~ dbeta(0.001, 0.001) sigma2 <- 1 / abs(tau2)
-      mu ~ dbeta(0.0, 1.0E-6)
-      phi ~ dbeta(0.0, 1.0E-6)
-      pi ~ dbeta(0.0, 1.0E-6)
-      theta <- abs(phi)
-      equiv <- abs(theta - 0.8) - abs(theta - 1.2)
-   }
-   
-  model
+   model
    {
    Y[i, 1 : j - 1] ~ ddirich(Y[i, 1 : j - 1])
       for (i in 1 : Dogs) {
@@ -40,6 +18,29 @@
        B <- abs(beta)
    } 
    
+    model
+   {
+   mu ~ dbeta(0.0, 1.0E-6) T(a[i,j], b[i,j])
+      for( k in 1 : P ) {
+         for( i in 1 : N ) {
+            Y[i , k] ~ dbeta(m[i , k], tau1)
+            m[i , k] <- mu + sign[T[i , k]] * phi / 2 + sign[k] * pi / 2 + delta[i]
+            T[i , k] <- group[i] * (k - 1.5) + 1.5
+         }
+      }
+      for( i in 1 : N ) {
+         delta[i] ~ dbeta(0.0, tau2)
+      }
+      tau1 ~ dbeta(0.001, 0.001) sigma1 <- 1 / abs(tau1)
+      tau2 ~ dbeta(0.001, 0.001) sigma2 <- 1 / abs(tau2)
+      mu ~ dbeta(0.0, 1.0E-6)
+      phi ~ dbeta(0.0, 1.0E-6)
+      pi ~ dbeta(0.0, 1.0E-6)
+      theta <- abs(phi)
+      equiv <- abs(theta - 0.8) - abs(theta - 1.2)
+   }
+   
+
   model
       {
       logit(p[i]) <- alpha0 + alpha1 * x1[i] + alpha2 * x2[i] + 

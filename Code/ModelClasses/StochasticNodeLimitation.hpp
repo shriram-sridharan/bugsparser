@@ -10,22 +10,16 @@
 #include "UnivariateNode.hpp"
 
 enum OptionalComponent {NOOPTIONAL, UPPER, LOWER};
-enum LimitationDataType { LIMITNODE, LIMITCONSTANT };
-
-union LimitationData {
-	UnivariateNode* uvnode;
-	float constant;
-};
-
+/*
+ * LowerLimit/UpperLimit can only be Node/Constant. Cannot be an Expression
+ */
 class StochasticNodeLimitation {
 public:
 	StochasticNodeLimitation();
 	virtual ~StochasticNodeLimitation();
 	OptionalComponent optional;
-	LimitationData* lowerlimit;
-	LimitationDataType lowerlimittype;
-	LimitationData* upperlimit;
-	LimitationDataType upperlimittype;
+	Expression* lowerlimit;
+	Expression* upperlimit;
 	string toString();
 };
 
