@@ -12,6 +12,7 @@ tokens {
 	INVERSEOPENBRACKET = 'inverse(';
 
 	BERNOULLIOPENBRACKET = 'dbern(';
+	BINOMIALOPENBRACKET='dbin(';
 	BETAOPENBRACKET = 'dbeta(';
 	MUTLTINOMIALOPENBRACKET = 'dmulti(';
 	DIRICHLETOPENBRACKET = 'ddirich(';
@@ -296,6 +297,7 @@ mvDistribution returns [MultivariateDistribution* distribution = new Multivariat
 
 discreteUnivariate returns [string name, vector<Expression* > parameters]
 	: bernoulli {$name="BERNOULLI"; $parameters=$bernoulli.parameters;}
+	| binomial {$name="BINOMIAL"; $parameters=$binomial.parameters;}
 	;
 
 continuousUnivariate returns [std::string name, vector<Expression* > parameters]
@@ -317,6 +319,10 @@ distributionParameter returns [Expression* exp = new Expression()]
 	
 bernoulli returns [vector<Expression* > parameters]
 	: BERNOULLIOPENBRACKET distributionParameter CLOSEBRACKET {$parameters.push_back($distributionParameter.exp);}
+	;
+
+binomial returns [vector<Expression* > parameters]
+	: BINOMIALOPENBRACKET dp1=distributionParameter COMMA dp2=distributionParameter CLOSEBRACKET {$parameters.push_back($dp1.exp); $parameters.push_back($dp2.exp);}
 	;
 
 beta returns [vector<Expression* > parameters]
