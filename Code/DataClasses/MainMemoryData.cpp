@@ -17,8 +17,12 @@ MainMemoryData::~MainMemoryData() {
 }
 
 float MainMemoryData::getData(std::string variablename, std::vector<int> indices){
-	if(indices.size() == 0)
-		return scalars[variablename];
+	if(indices.size() == 0){
+		if(scalars.find(variablename)!=scalars.end())
+			return scalars[variablename];
+		else
+			return temporaryvalues[variablename];
+	}
 
 	if(indices.size() == 1)
 	{

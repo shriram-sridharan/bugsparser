@@ -1,8 +1,11 @@
   model
       {
          for( i in 1 : N ) {
-            r[i] ~ dbin(0.5,n[i])
-		    
+         	for(j in 1:1) {
+            r[i*j] ~ dbin(p[i*j],n[i*j])
+            p[i*j] ~ dbern(0.5)
+            n[i*j] ~ dbin(0.5, N)
+            }
          }
       }
   model
