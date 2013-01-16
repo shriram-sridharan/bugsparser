@@ -67,12 +67,18 @@ IData* parseData() {
 	return mmdata;
 }
 
+struct Edge{
+		int vid;
+		int fid;
+	};
+
 void parseEvaluatedProgram(list<IFinalNode*> finalnodes)
 {
     std::list<IFinalNode*>::iterator it;
     map<string, int> queryvariables;
-    map<int, int> evidencevariables;
+    map<float, int> evidencevariables;
     map<string, int> factors;
+    vector<Edge> edges;
     int variableid = 0;
     int factorid = 0;
 
@@ -80,22 +86,25 @@ void parseEvaluatedProgram(list<IFinalNode*> finalnodes)
     for(it = finalnodes.begin();it != finalnodes.end();++it){
         StochasticNode *stochasticNode = (StochasticNode*)((*it));
 
-        map<string,int>::iterator it = queryvariables.find(stochasticNode->nodename);
-        if(it == queryvariables.end()) {
+        map<string,int>::iterator vit = queryvariables.find(stochasticNode->nodename);
+        if(vit == queryvariables.end()) {
         	queryvariables[stochasticNode->nodename] = variableid;
         	++variableid;
-        	cout << " QVariable : " <<stochasticNode->nodename<< ":" << queryvariables[stochasticNode->nodename] << endl;
+//        	cout << " QVariable : " <<stochasticNode->nodename<< ":" << queryvariables[stochasticNode->nodename] << endl;
         }
-//        cout << stochasticNode->nodename << " " << queryvariables[stochasticNode->nodename] << " ";
 
         map<string,int>::iterator fit = factors.find(stochasticNode->distributionname);
         if(fit == factors.end()) {
         	factors[stochasticNode->distributionname] = factorid;
         	++factorid;
-        	cout << " Factor : " << stochasticNode->distributionname << ":" << factors[stochasticNode->distributionname] << endl;
+//        	cout << " Factor : " << stochasticNode->distributionname << ":" << factors[stochasticNode->distributionname] << endl;
         }
-//        cout << stochasticNode->distributionname << " " << factors[stochasticNode->distributionname] << " ";
-        cout << " Edge : " << queryvariables[stochasticNode->nodename] << ":" << factors[stochasticNode->distributionname] << endl;
+        Edge edge;
+        edge.fid = factors[stochasticNode->distributionname];
+        edge.vid = queryvariables[stochasticNode->nodename];
+        edges.push_back(edge);
+
+//        cout << " Edge : " << queryvariables[stochasticNode->nodename] << ":" << factors[stochasticNode->distributionname] << endl;
 
         vector<DistParams*> distparams = stochasticNode->distributionparameters;
         if(distparams.size() != 0){
@@ -105,24 +114,49 @@ void parseEvaluatedProgram(list<IFinalNode*> finalnodes)
                 	if(queryvariables.find((*dit)->nodename) == queryvariables.end()){
                 		queryvariables[(*dit)->nodename] = variableid;
                 		++variableid;
-                		cout << " QVariable : " <<(*dit)->nodename<< ":" << queryvariables[(*dit)->nodename] << endl;
+//                		cout << " QVariable : " <<(*dit)->nodename<< ":" << queryvariables[(*dit)->nodename] << endl;
                 	}
-                	cout << " Edge : " << queryvariables[(*dit)->nodename] << ":" << factors[stochasticNode->distributionname] << endl;
-//                    cout << (*dit)->nodename << " id = " << queryvariables[(*dit)->nodename] << " ";
+                	Edge edge1;
+                	edge1.fid = factors[stochasticNode->distributionname];
+                	edge1.vid = queryvariables[(*dit)->nodename];
+					edges.push_back(edge1);
+
+//                	cout << " Edge : " << queryvariables[(*dit)->nodename] << ":" << factors[stochasticNode->distributionname] << endl;
                 }
                 else {
                 	if(evidencevariables.find((*dit)->value) == evidencevariables.end()){
                 		evidencevariables[(*dit)->value] = variableid;
                 		++variableid;
-                		cout << " EVariable : " <<(*dit)->value<< ":" << evidencevariables[(*dit)->value] << endl;
+//                		cout << " EVariable : " <<(*dit)->value<< ":" << evidencevariables[(*dit)->value] << endl;
                 	}
-                	cout << " Edge : " << evidencevariables[(*dit)->value] << ":" << factors[stochasticNode->distributionname] <<endl;
-//                    cout << (*dit)->value << " id = " << evidencevariables[(*dit)->value] << " ";
+                	Edge edge2;
+					edge2.fid = factors[stochasticNode->distributionname];
+					edge2.vid = evidencevariables[(*dit)->value];
+					edges.push_back(edge2);
+
+//                	cout << " Edge : " << evidencevariables[(*dit)->value] << ":" << factors[stochasticNode->distributionname] <<endl;
                 }
             }
-            cout << endl;
         }
     }
+    std::map<string,int>::iterator dit;
+    cout << "Variables : " << endl;
+    for(dit=queryvariables.begin(); dit!=queryvariables.end();++dit)
+    	cout << dit->first << " " << dit->second <<endl;
+
+    std::map<float,int>::iterator eit;
+    for(eit=evidencevariables.begin(); eit!=evidencevariables.end();++eit)
+    	cout << eit->first << " " << eit->second <<endl;
+
+    cout << endl << "Factors : " << endl;
+    for(dit=factors.begin(); dit!=factors.end();++dit)
+    	cout << dit->first << " " << dit->second <<endl;
+
+    cout << endl << "Edges : " << endl;
+    std::vector<Edge>::iterator edgeit;
+	for(edgeit=edges.begin(); edgeit!=edges.end();++edgeit)
+		cout << edgeit->vid << " " << edgeit->fid <<endl; //duplicate edges
+
     cout << "*****************Evaluated Values End ********************" << endl;
 }
 
