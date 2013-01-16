@@ -21,3 +21,7 @@ string LinkFunctionNode::toString(){
 	retval = retval + "LinkFunction = " + this->linkfunction + " Node= " + this->uvnode->toString();
 	return retval;
 }
+
+string LinkFunctionNode::eval(IData* data){
+	return "";
+}

@@ -11,6 +11,7 @@
 #include "INode.hpp"
 #include <string>
 #include <vector>
+#include "../DataClasses/IData.hpp"
 using namespace std;
 
 enum ExpressionType { CONSTANT, NODE, EXPRESSION};
@@ -19,6 +20,8 @@ enum ExpressionType { CONSTANT, NODE, EXPRESSION};
  * If Expression contains an operator, then it should contain children
  */
 class Expression {
+private:
+	float operate(float previousvalue, string op, float newvalue);
 public:
 	Expression();
 	virtual ~Expression();
@@ -28,7 +31,7 @@ public:
 	Expression* exp;
 	ExpressionType type;
 	vector<Expression*> children;
-
+	float eval(IData* data);
 	string toString();
 };
 

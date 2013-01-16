@@ -11,12 +11,15 @@ using namespace std;
 
 #include <list>
 #include "IStatement.hpp"
+#include "../DataClasses/IData.hpp"
+#include "../FinalClasses/IFinalNode.hpp"
 
 class Program {
 public:
 	Program();
 	virtual ~Program();
-	list<IStatement*> statements;
+	list<IStatement* > statements;
+	list<IFinalNode* > eval(IData* data);
 };
 
 #endif /* PROGRAM_HPP_ */

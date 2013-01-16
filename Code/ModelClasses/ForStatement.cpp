@@ -44,3 +44,8 @@ string ForStatement::toString(){
 
 	return retval + "ForStatmentEnd \n";
 }
+
+list<IFinalNode* > ForStatement::eval(IData* data){
+	list<IFinalNode* > finalnodes;
+	return finalnodes;
+}

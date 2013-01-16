@@ -23,6 +23,7 @@ public:
 	IDistribution* distribution;
 	StochasticNodeLimitationType limitationType;
 	StochasticNodeLimitation* limitation;
+	list<IFinalNode* > eval(IData* data);
 	string toString();
 };
 

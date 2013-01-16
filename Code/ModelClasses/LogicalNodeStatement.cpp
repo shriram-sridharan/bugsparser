@@ -21,3 +21,8 @@ string LogicalNodeStatement::toString(){
 	retval = retval + " Name = " + this->logicalNode->toString() + "\n Expression = " + this->logicalnodeexp->toString();
 	return retval+"\n";
 }
+
+list<IFinalNode* > LogicalNodeStatement::eval(IData* data){
+	list<IFinalNode* > finalnodes;
+	return finalnodes;
+}

@@ -25,3 +25,11 @@ string UnivariateNode::toString(){
 	}
 	return retval;
 }
+
+string UnivariateNode::eval(IData* data){
+	string nodename = this->nodeid;
+	for(vector<Expression*>::iterator it=this->indices.begin(); it!=this->indices.end(); ++it){
+		nodename = nodename + (*it)->eval(data) ;
+	}
+	return nodename;
+}

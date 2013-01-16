@@ -19,6 +19,7 @@ public:
 	virtual ~LogicalNodeStatement();
 	INode* logicalNode;
 	LogicalNodeExpression* logicalnodeexp;
+	list<IFinalNode* > eval(IData* data);
 	string toString();
 };
 

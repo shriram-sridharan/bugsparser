@@ -19,6 +19,7 @@ public:
 	virtual ~MultivariateNode();
 	string nodeid;
 	vector<MultiDimExpression* > indices;
+	string eval(IData* data);
 	string toString();
 };
 

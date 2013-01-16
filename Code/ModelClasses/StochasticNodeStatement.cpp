@@ -6,6 +6,7 @@
  */
 
 #include "StochasticNodeStatement.hpp"
+#include "../FinalClasses/StochasticNode.hpp"
 
 StochasticNodeStatement::StochasticNodeStatement() {
 	// TODO Auto-generated constructor stub
@@ -29,4 +30,11 @@ string StochasticNodeStatement::toString(){
 	}
 	retval = retval + "\n Distribution= " + this->distribution->toString();
 	return retval + "\n";
+}
+
+list<IFinalNode* > StochasticNodeStatement::eval(IData* data){
+	list<IFinalNode* > finalnodes;
+	StochasticNode* stochasticNode = new StochasticNode();
+	stochasticNode->nodename=this->node->eval(data);
+	return finalnodes;
 }

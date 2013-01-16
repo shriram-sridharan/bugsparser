@@ -25,3 +25,7 @@ string MultivariateNode::toString(){
 
 	return retval;
 }
+
+string MultivariateNode::eval(IData* data){
+	return "";
+}

@@ -27,6 +27,7 @@ public:
 	LoopParamType begintype;
 	LoopParamType endtype;
 	list<IStatement* > statements;
+	list<IFinalNode* > eval(IData* data);
 	string toString();
 };
 

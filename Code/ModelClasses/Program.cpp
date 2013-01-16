@@ -18,3 +18,15 @@ Program::~Program() {
 		delete *it;
 	}
 }
+
+list<IFinalNode* > Program::eval(IData* data){
+	list<IFinalNode* > finalnodes;
+	std::list<IStatement*>::iterator it;
+	for(it = this->statements.begin(); it!=this->statements.end(); ++it){
+		if((*it)->eval(data).size() != 0){
+			list<IFinalNode* > evaluatednodes = (*it)->eval(data);
+			finalnodes.insert(finalnodes.end(), evaluatednodes.begin(), evaluatednodes.end());
+		}
+	}
+	return finalnodes;
+}

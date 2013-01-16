@@ -20,6 +20,7 @@ public:
 	virtual ~UnivariateNode();
 	string nodeid;
 	vector<Expression* > indices;
+	string eval(IData* data);
 	string toString();
 };
 
