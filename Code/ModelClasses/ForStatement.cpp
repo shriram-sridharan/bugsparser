@@ -63,7 +63,6 @@ list<IFinalNode* > ForStatement::eval(IData* data){
 
 	data->put(this->loopvariable, loopbegin);
 	while(data->getData(loopvariable, vector<int>()) <= loopend) {
-		cout << "LoopValue = " << data->getData(loopvariable, vector<int>()) << endl;
 		for (std::list<IStatement*>::iterator stit = this->statements.begin(); stit!=this->statements.end(); stit++){
 			list<IFinalNode* > evalnodes = (*stit)->eval(data);
 			finalnodes.insert(finalnodes.end(), evalnodes.begin(), evalnodes.end());

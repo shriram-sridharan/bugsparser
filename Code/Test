@@ -1,12 +1,20 @@
   model
       {
+      for( i in 1 : N ) {
+      	 p[i] ~ dbeta(1.0, 1.0)
+         r[i] ~ dbin(p[i], n[i])
+      }
+      }
+      
+  model
+      {
          for( i in 1 : 2 ) {
-            r[i] ~ dbin(p[i],n[i])
+            r[i] ~ dbin(p[i],n1[i])
             p[i] ~ dbern(0.5)
-            n[i] ~ dbin(p2[i], N)
-            p2[i] ~ dbern(0.9)
+            n1[i] ~ dbin(0.5, n[i])
          }
       }
+      
   model
       {
             r[n[1]-2] ~ dbin(p[1],n[1])
