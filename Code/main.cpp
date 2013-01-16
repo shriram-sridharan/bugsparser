@@ -67,32 +67,71 @@ IData* parseData() {
 	return mmdata;
 }
 
+void parseEvaluatedProgram(list<IFinalNode*> finalnodes)
+{
+    std::list<IFinalNode*>::iterator it;
+    map<string, int> queryvariables;
+    map<int, int> evidencevariables;
+    map<string, int> factors;
+    int variableid = 0;
+    int factorid = 0;
+
+    cout << "*****************Evaluated Values Begin ********************" << endl;
+    for(it = finalnodes.begin();it != finalnodes.end();++it){
+        StochasticNode *stochasticNode = (StochasticNode*)((*it));
+
+        map<string,int>::iterator it = queryvariables.find(stochasticNode->nodename);
+        if(it == queryvariables.end()) {
+        	queryvariables[stochasticNode->nodename] = variableid;
+        	++variableid;
+        	cout << " QVariable : " <<stochasticNode->nodename<< ":" << queryvariables[stochasticNode->nodename] << endl;
+        }
+//        cout << stochasticNode->nodename << " " << queryvariables[stochasticNode->nodename] << " ";
+
+        map<string,int>::iterator fit = factors.find(stochasticNode->distributionname);
+        if(fit == factors.end()) {
+        	factors[stochasticNode->distributionname] = factorid;
+        	++factorid;
+        	cout << " Factor : " << stochasticNode->distributionname << ":" << factors[stochasticNode->distributionname] << endl;
+        }
+//        cout << stochasticNode->distributionname << " " << factors[stochasticNode->distributionname] << " ";
+        cout << " Edge : " << queryvariables[stochasticNode->nodename] << ":" << factors[stochasticNode->distributionname] << endl;
+
+        vector<DistParams*> distparams = stochasticNode->distributionparameters;
+        if(distparams.size() != 0){
+            std::vector<DistParams*>::iterator dit;
+            for(dit = distparams.begin();dit != distparams.end();++dit){
+                if((*dit)->type == DISTNODE) {
+                	if(queryvariables.find((*dit)->nodename) == queryvariables.end()){
+                		queryvariables[(*dit)->nodename] = variableid;
+                		++variableid;
+                		cout << " QVariable : " <<(*dit)->nodename<< ":" << queryvariables[(*dit)->nodename] << endl;
+                	}
+                	cout << " Edge : " << queryvariables[(*dit)->nodename] << ":" << factors[stochasticNode->distributionname] << endl;
+//                    cout << (*dit)->nodename << " id = " << queryvariables[(*dit)->nodename] << " ";
+                }
+                else {
+                	if(evidencevariables.find((*dit)->value) == evidencevariables.end()){
+                		evidencevariables[(*dit)->value] = variableid;
+                		++variableid;
+                		cout << " EVariable : " <<(*dit)->value<< ":" << evidencevariables[(*dit)->value] << endl;
+                	}
+                	cout << " Edge : " << evidencevariables[(*dit)->value] << ":" << factors[stochasticNode->distributionname] <<endl;
+//                    cout << (*dit)->value << " id = " << evidencevariables[(*dit)->value] << " ";
+                }
+            }
+            cout << endl;
+        }
+    }
+    cout << "*****************Evaluated Values End ********************" << endl;
+}
+
 int main(int argc, char* argv[])
     {
 	IData* data = parseData();
 	Program prog = parseProgram();
-
-	std::list<IFinalNode*>::iterator it;
 	list<IFinalNode*> finalnodes = prog.eval(data);
-
-	cout << "*****************Evaluated Values Begin ********************" << endl;
-	for(it = finalnodes.begin(); it!=finalnodes.end(); ++it){
-		StochasticNode* stochasticNode = (StochasticNode*)(*it);
-		cout << stochasticNode->nodename << " ";
-		cout << stochasticNode->distributionname << " ";
-		vector<DistParams* > distparams = stochasticNode->distributionparameters;
-		if(distparams.size()!=0) {
-			std::vector<DistParams*>::iterator dit;
-			for(dit = distparams.begin(); dit!=distparams.end(); ++dit){
-				if((*dit)->type == DISTNODE)
-					cout << (*dit)->nodename << " ";
-				else
-					cout << (*dit)->value << " ";
-			}
-			cout << endl;
-		}
-	}
-	cout <<  "*****************Evaluated Values End ********************" << endl;
+    parseEvaluatedProgram(finalnodes);
     return 1;
     }
 
