@@ -22,8 +22,11 @@ public:
 	map<std::string, float> scalars;
 	map<std::string, vector<float> > vectors;
 	map<std::string, BugsArray* > array;
+	map<std::string, int > temporaryvalues;
 
 	float getData(std::string variablename, vector<int> indices);
+	bool contains(std::string variablename);
+	void put(std::string variablename, int value);
 };
 
 #endif /* MAINMEMORYDATA_HPP_ */

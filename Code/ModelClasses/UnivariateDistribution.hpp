@@ -17,6 +17,7 @@ public:
 	UnivariateDistribution();
 	virtual ~UnivariateDistribution();
 	vector<Expression* > distributionParameters;
+	vector<DistParams* > evaluateParameters(IData* data);
 	string toString();
 };
 

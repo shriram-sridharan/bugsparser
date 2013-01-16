@@ -32,9 +32,13 @@ string StochasticNodeStatement::toString(){
 	return retval + "\n";
 }
 
+
 list<IFinalNode* > StochasticNodeStatement::eval(IData* data){
 	list<IFinalNode* > finalnodes;
 	StochasticNode* stochasticNode = new StochasticNode();
-	stochasticNode->nodename=this->node->eval(data);
+	stochasticNode->nodename = this->node->getNodeid(data);
+	stochasticNode->distributionname = this->distribution->name;
+	stochasticNode->distributionparameters = this->distribution->evaluateParameters(data);
+	finalnodes.push_back(stochasticNode);
 	return finalnodes;
 }

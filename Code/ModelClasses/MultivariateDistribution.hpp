@@ -16,6 +16,7 @@ public:
 	MultivariateDistribution();
 	virtual ~MultivariateDistribution();
 	vector<MVDParameters* > distributionParameters;
+	vector<DistParams* > evaluateParameters(IData* data);
 	string toString();
 };
 

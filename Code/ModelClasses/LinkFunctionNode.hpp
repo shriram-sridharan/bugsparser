@@ -18,7 +18,8 @@ public:
 	virtual ~LinkFunctionNode();
 	string linkfunction;
 	UnivariateNode* uvnode;
-	string eval(IData* data);
+	string getNodeid(IData* data);
+	float eval(IData* data);
 	string toString();
 };
 

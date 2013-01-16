@@ -24,3 +24,11 @@ string UnivariateDistribution::toString() {
 		}
 	return retval;
 }
+
+vector<DistParams* > UnivariateDistribution::evaluateParameters(IData* data){
+	vector<DistParams* > distparams;
+	for(vector<Expression*>::iterator it=this->distributionParameters.begin(); it!=this->distributionParameters.end(); ++it){
+		distparams.push_back((*it)->evalDistParams(data));
+	}
+	return distparams;
+}

@@ -11,14 +11,11 @@
 #include <string>
 #include <vector>
 #include "IFinalNode.hpp"
+#include "DistParams.hpp"
 using namespace std;
 
-class StochasticNode : IFinalNode {
+class StochasticNode : public IFinalNode {
 public:
-	union DistParams {
-		StochasticNode* node;
-		float value;
-	};
 	StochasticNode();
 	virtual ~StochasticNode();
 	string nodename;

@@ -47,5 +47,25 @@ string ForStatement::toString(){
 
 list<IFinalNode* > ForStatement::eval(IData* data){
 	list<IFinalNode* > finalnodes;
+	int loopbegin;
+	int loopend;
+	if(this->begintype == LOOPNODE)
+		loopbegin = this->loopbegin.uvnode->eval(data);
+	else
+		loopbegin = this->loopbegin.constant;
+
+	if(this->endtype == LOOPNODE)
+		loopend = this->loopend.uvnode->eval(data);
+	else
+		loopend = this->loopend.constant;
+
+	data->put(this->loopvariable, loopbegin);
+	while(data->getData(loopvariable, vector<int>()) <= loopend) {
+		for (std::list<IStatement*>::iterator stit = this->statements.begin(); stit!=this->statements.end(); stit++){
+			list<IFinalNode* > evalnodes = (*stit)->eval(data);
+			finalnodes.insert(finalnodes.end(), evalnodes.begin(), evalnodes.end());
+		}
+		data->put(this->loopvariable, data->getData(loopvariable, vector<int>()) + 1);
+	}
 	return finalnodes;
 }

@@ -65,7 +65,7 @@ float Expression::eval(IData* data) {
 	if(!this->op.empty()){
 		float value;
 		for(vector<Expression*>::iterator it=this->children.begin(); it!=this->children.end(); ++it){
-				value = this->operate(value, (*it)->op, (*it)->eval(data));
+			value = this->operate(value, (*it)->op, (*it)->eval(data));
 		}
 		previousvalue = this->operate(previousvalue, this->op, value);
 	}
@@ -82,4 +82,27 @@ float Expression::operate(float previousvalue, string op, float newvalue){
 	if(op=="/")
 		return previousvalue/newvalue;
 	return newvalue;
+}
+
+DistParams* Expression::evalDistParams(IData* data){
+	DistParams* distparams = new DistParams();
+	if(this->type == CONSTANT) {
+		distparams->value = this->expvalue;
+		distparams->type = DISTCONSTANT;
+	}
+	else if(this->type == NODE){
+		if(typeid(*this->uvnode) == typeid(UnivariateNode))
+			distparams = ((UnivariateNode*)this->uvnode)->evalAsDistParam(data);
+	}
+	else
+		distparams = this->exp->evalDistParams(data);
+
+	if(!this->op.empty()){
+		float value;
+		for(vector<Expression*>::iterator it=this->children.begin(); it!=this->children.end(); ++it){
+			value = this->operate(value, (*it)->op, (*it)->eval(data));
+		}
+		distparams->value = this->operate(distparams->value, this->op, value);
+	}
+	return distparams;
 }

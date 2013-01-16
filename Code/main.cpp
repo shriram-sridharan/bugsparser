@@ -1,12 +1,13 @@
 #include "BUGSParser.hpp"
 #include "BUGSDataParser.hpp"
+#include "FinalClasses/StochasticNode.hpp"
 #include <iterator>
 #include <typeinfo>
 
 using namespace BUGS;
 using namespace BUGSData;
 
-void parseProgram()
+Program parseProgram()
 {
 
     BUGSLexerTraits::InputStreamType input((ANTLR_UINT8*)"Test", ANTLR_ENC_8BIT);
@@ -23,6 +24,7 @@ void parseProgram()
     }
 
     cout << "******************** End Parsing Program ****************** " << endl << endl;
+    return program;
 }
 
 void testData(IData *mmdata)
@@ -68,7 +70,29 @@ IData* parseData() {
 int main(int argc, char* argv[])
     {
 	IData* data = parseData();
-	parseProgram();
+	Program prog = parseProgram();
+
+	std::list<IFinalNode*>::iterator it;
+	list<IFinalNode*> finalnodes = prog.eval(data);
+
+	cout << "*****************Evaluated Values Begin ********************" << endl;
+	for(it = finalnodes.begin(); it!=finalnodes.end(); ++it){
+		StochasticNode* stochasticNode = (StochasticNode*)(*it);
+		cout << stochasticNode->nodename << " ";
+		cout << stochasticNode->distributionname << " ";
+		vector<DistParams* > distparams = stochasticNode->distributionparameters;
+		if(distparams.size()!=0) {
+			std::vector<DistParams*>::iterator dit;
+			for(dit = distparams.begin(); dit!=distparams.end(); ++dit){
+				if((*dit)->type == DISTNODE)
+					cout << (*dit)->nodename << " ";
+				else
+					cout << (*dit)->value << " ";
+			}
+			cout << endl;
+		}
+	}
+	cout <<  "*****************Evaluated Values End ********************" << endl;
     return 1;
     }
 

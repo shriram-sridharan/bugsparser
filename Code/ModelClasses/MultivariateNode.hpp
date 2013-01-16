@@ -19,7 +19,8 @@ public:
 	virtual ~MultivariateNode();
 	string nodeid;
 	vector<MultiDimExpression* > indices;
-	string eval(IData* data);
+	float eval(IData* data);
+	string getNodeid(IData* data);
 	string toString();
 };
 

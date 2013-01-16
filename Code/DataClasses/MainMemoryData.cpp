@@ -29,3 +29,13 @@ float MainMemoryData::getData(std::string variablename, std::vector<int> indices
 
 	return array[variablename]->getData(indices);
 }
+
+bool MainMemoryData::contains(std::string variablename){
+	if(scalars.find(variablename)!=scalars.end() || vectors.find(variablename)!=vectors.end() || array.find(variablename)!=array.end())
+		return true;
+	return false;
+}
+
+void MainMemoryData::put(std::string variablename, int value){
+	temporaryvalues[variablename] = value;
+}

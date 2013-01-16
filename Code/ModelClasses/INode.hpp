@@ -16,7 +16,8 @@ class INode {
 public:
 	virtual ~INode(){};
 	virtual string toString() = 0;
-	virtual string eval(IData* data) = 0;
+	virtual string getNodeid(IData* data) = 0;
+	virtual float eval(IData* data) = 0;
 };
 
 #endif

@@ -13,6 +13,7 @@ using namespace std;
 #include <string>
 #include "Expression.hpp"
 #include "INode.hpp"
+#include "../FinalClasses/StochasticNode.hpp"
 
 class UnivariateNode : public INode {
 public:
@@ -20,7 +21,10 @@ public:
 	virtual ~UnivariateNode();
 	string nodeid;
 	vector<Expression* > indices;
-	string eval(IData* data);
+
+	string getNodeid(IData* data);
+	float eval(IData* data);
+	DistParams* evalAsDistParam(IData* data);
 	string toString();
 };
 

@@ -29,3 +29,7 @@ string MultivariateDistribution::toString() {
 	return retval;
 }
 
+vector<DistParams* > MultivariateDistribution::evaluateParameters(IData* data){
+	return vector<DistParams*>();
+}
+

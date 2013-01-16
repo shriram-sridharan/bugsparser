@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "../DataClasses/IData.hpp"
+#include "../FinalClasses/StochasticNode.hpp"
 using namespace std;
 
 enum ExpressionType { CONSTANT, NODE, EXPRESSION};
@@ -31,6 +32,8 @@ public:
 	Expression* exp;
 	ExpressionType type;
 	vector<Expression*> children;
+
+	DistParams* evalDistParams(IData* data);
 	float eval(IData* data);
 	string toString();
 };

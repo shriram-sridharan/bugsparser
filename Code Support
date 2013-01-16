@@ -1,4 +1,6 @@
 To Do:
+Expression evaluation -- Check correctness 
+Refactor distparam
 Delete function in destructors??
 Code exiting without any information?? (Exception Handling??)
 

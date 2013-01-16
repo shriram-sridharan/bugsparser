@@ -22,6 +22,10 @@ string LinkFunctionNode::toString(){
 	return retval;
 }
 
-string LinkFunctionNode::eval(IData* data){
+float LinkFunctionNode::eval(IData* data){
+	return 0;
+}
+
+string LinkFunctionNode::getNodeid(IData* data){
 	return "";
 }

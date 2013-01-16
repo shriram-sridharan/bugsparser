@@ -26,6 +26,10 @@ string MultivariateNode::toString(){
 	return retval;
 }
 
-string MultivariateNode::eval(IData* data){
-	return "";
+float MultivariateNode::eval(IData* data){
+	return 0;
+}
+
+string MultivariateNode::getNodeid(IData* data){
+	return this->nodeid;
 }
