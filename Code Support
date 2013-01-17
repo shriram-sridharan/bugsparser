@@ -1,12 +1,11 @@
 To Do:
 what about inits??
-Expression evaluation -- Check correctness 
 Delete function in destructors??
 Code exiting without any information?? (Exception Handling??)
 
 
 Support:
-Please put brackets for expressions [Does not follow BODMAS rule]
+Expression evaluation : from right to left. Use BRACKETS
 Rectangular format for DATA === NOT SUPPORTED
 Comments not supported
 
