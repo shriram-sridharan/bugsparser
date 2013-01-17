@@ -63,11 +63,11 @@ float Expression::eval(IData* data) {
 		previousvalue = this->exp->eval(data);
 
 	if(!this->op.empty()){
-		float value;
+		string curoperator = this->op;
 		for(vector<Expression*>::iterator it=this->children.begin(); it!=this->children.end(); ++it){
-			value = this->operate(value, (*it)->op, (*it)->eval(data));
+			previousvalue = this->operate(previousvalue, curoperator, (*it)->eval(data));
+			curoperator = (*it)->op;
 		}
-		previousvalue = this->operate(previousvalue, this->op, value);
 	}
 	return previousvalue;
 }
@@ -98,11 +98,11 @@ DistParams* Expression::evalDistParams(IData* data){
 		distparams = this->exp->evalDistParams(data);
 
 	if(!this->op.empty()){
-		float value;
+		string curoperator = this->op;
 		for(vector<Expression*>::iterator it=this->children.begin(); it!=this->children.end(); ++it){
-			value = this->operate(value, (*it)->op, (*it)->eval(data));
+			distparams->value = this->operate(distparams->value, curoperator, (*it)->eval(data));
+			curoperator = (*it)->op;
 		}
-		distparams->value = this->operate(distparams->value, this->op, value);
 	}
 	return distparams;
 }
